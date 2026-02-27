@@ -1,0 +1,31 @@
+{
+  "sectionLabel": "Visual Gallery",
+  "title": "See QX in every context",
+  "images": [
+    {
+      "image": "packshot.jpg",
+      "alt": "QX desk packshot on white background – full product view",
+      "category": "Packshot"
+    },
+    {
+      "image": "hero-office.jpg",
+      "alt": "QX desks in open-plan office with natural lighting and workers",
+      "category": "Office"
+    },
+    {
+      "image": "office-arrangement.jpg",
+      "alt": "QX executive desk in private office with monitor arm setup",
+      "category": "Executive"
+    },
+    {
+      "image": "desk-detail.jpg",
+      "alt": "Close-up of QX desk edge showing oak grain and steel joint detail",
+      "category": "Detail"
+    },
+    {
+      "image": "office-lifestyle.jpg",
+      "alt": "Modern conference room with QX conference table and chairs",
+      "category": "Conference"
+    }
+  ]
+}

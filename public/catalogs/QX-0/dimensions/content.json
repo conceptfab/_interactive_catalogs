@@ -1,0 +1,25 @@
+{
+  "sectionLabel": "Technical Data",
+  "title": "Dimensions & specifications",
+  "specs": [
+    { "label": "Width", "value": "1200 – 2000 mm" },
+    { "label": "Depth", "value": "600 – 900 mm" },
+    { "label": "Height range (electric)", "value": "650 – 1300 mm" },
+    { "label": "Height range (manual)", "value": "720 – 1180 mm" },
+    { "label": "Load capacity", "value": "80 – 120 kg" },
+    { "label": "Weight (frame)", "value": "28 – 42 kg" },
+    { "label": "Desktop thickness", "value": "25 mm" },
+    { "label": "Adjustment speed", "value": "38 mm/s" }
+  ],
+  "certifications": [
+    "EN 527-1:2011 Office furniture — Work tables",
+    "EN 527-2:2016 Safety requirements",
+    "GS Mark (Geprüfte Sicherheit)",
+    "ISO 14001 Environmental Management"
+  ],
+  "dimensionDiagram": {
+    "width": "1600 mm",
+    "depth": "800 mm",
+    "heightRange": "650–1300 mm"
+  }
+}

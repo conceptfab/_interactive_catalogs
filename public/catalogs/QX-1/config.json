@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "QX-1 Series | METRO",
+    "description": "QX Series. Work, elevated. Minimalist design meets dynamic motion. Engineered for those who move fast.",
+    "brandName": "METRO",
+    "collectionName": "QX-1 Series",
+    "theme": "qx1"
+  },
+  "sections": [
+    { "id": "cover", "label": "Cover" },
+    { "id": "overview", "label": "Overview" },
+    { "id": "gallery", "label": "Looks" },
+    { "id": "variants", "label": "Config" },
+    { "id": "dimensions", "label": "Specs" },
+    { "id": "materials", "label": "Build" },
+    { "id": "features", "label": "Tech Specs" },
+    { "id": "assembly", "label": "Setup" }
+  ]
+}

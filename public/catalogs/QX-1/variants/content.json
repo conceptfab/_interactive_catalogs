@@ -1,0 +1,40 @@
+{
+  "sectionLabel": "Config",
+  "title": "Your setup. Your rules.",
+  "desktopColors": [
+    { "name": "Natural Oak", "code": "#c9a96e", "ral": "Similar to RAL 1001" },
+    { "name": "Walnut Dark", "code": "#5c3a21", "ral": "Similar to RAL 8007" },
+    { "name": "White", "code": "#f2f0ec", "ral": "RAL 9010" },
+    { "name": "Light Grey", "code": "#c8c5be", "ral": "RAL 7035" },
+    { "name": "Anthracite", "code": "#3a3a3c", "ral": "RAL 7016" }
+  ],
+  "frameColors": [
+    { "name": "Black", "code": "#1a1a1a" },
+    { "name": "Silver", "code": "#b0b0b0" },
+    { "name": "White", "code": "#f0f0f0" }
+  ],
+  "sizes": [
+    { "label": "1200 × 600", "desc": "Focus" },
+    { "label": "1400 × 700", "desc": "Core" },
+    { "label": "1600 × 800", "desc": "Pro" },
+    { "label": "1800 × 800", "desc": "Max" },
+    { "label": "2000 × 900", "desc": "Corner" }
+  ],
+  "previewImage": "packshot.jpg",
+  "comparisonBasicLabel": "QX Core",
+  "comparisonPremiumLabel": "QX Pro",
+  "comparisonTable": [
+    {
+      "feature": "Lift system",
+      "basic": "Smooth crank",
+      "premium": "Electric dual-motor"
+    },
+    { "feature": "Digital memory", "basic": "—", "premium": "4 smart presets" },
+    {
+      "feature": "Cable routing",
+      "basic": "Clean tray",
+      "premium": "Stealth spine + tray"
+    },
+    { "feature": "Max payload", "basic": "80 kg", "premium": "120 kg" }
+  ]
+}

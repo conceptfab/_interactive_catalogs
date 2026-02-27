@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sora:wght@300..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base: #f8f8f8 = 0 0% 97.25% */
+    --background: 0 0% 97.25%;
+
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 97.25%;
+
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 0 0% 92%;
+    /* WCAG AA: ≥4.5:1 on background #f8f8f8 → ~38% lightness */
+    --muted-foreground: 0 0% 38%;
+
+    --accent: 0 0% 8%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 8%;
+
+    --radius: 0.375rem;
+
+    --sidebar-background: 0 0% 95%;
+    --sidebar-foreground: 0 0% 26%;
+    --sidebar-primary: 0 0% 8%;
+    --sidebar-primary-foreground: 0 0% 97%;
+    --sidebar-accent: 0 0% 92%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 0 0% 50%;
+
+    /* Custom catalog tokens – pochodne od #f8f8f8 */
+    /* WCAG AA: tekst na ciemnym tle – ≥4.5:1 na #151515 */
+    --on-dark: 0 0% 98%;
+    --on-dark-muted: 0 0% 72%;
+    --on-dark-subtle: 0 0% 62%;
+    --surface: 0 0% 95%;
+    --surface-elevated: 0 0% 100%;
+    --hero-overlay: 0 0% 15%;
+    --warm: 0 0% 45%;
+    --warm-light: 0 0% 93%;
+    --success: 0 0% 45%;
+    --info: 0 0% 55%;
+
+    --font-display: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --section-padding: clamp(3rem, 6vw, 6rem);
+  }
+
+  .dark {
+    /* on-dark: w dark mode bg-primary jest jasny – tekst ma być ciemny */
+    --on-dark: 220 20% 16%;
+    --on-dark-muted: 220 15% 35%;
+    --on-dark-subtle: 220 10% 45%;
+    --background: 220 25% 8%;
+    --foreground: 40 20% 95%;
+    --card: 220 20% 12%;
+    --card-foreground: 40 20% 95%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 40 20% 95%;
+    --primary: 40 20% 95%;
+    --primary-foreground: 220 20% 16%;
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 40 20% 95%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 30 60% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 30 60% 52%;
+    --surface: 220 20% 11%;
+    --surface-elevated: 220 20% 14%;
+    --hero-overlay: 220 25% 6%;
+    --warm-light: 30 20% 18%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Skip link for WCAG */
+.skip-link {
+  @apply absolute -top-10 left-4 z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-md;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  @apply top-4;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus indicators WCAG */
+:focus-visible {
+  outline: 3px solid hsl(var(--accent));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+/* QX-2 dedicated visual direction: minimalist + youthful tech feel */
+.catalog-qx2 {
+  --background: 220 14% 96%;
+  --foreground: 220 10% 11%;
+  --surface: 220 11% 92%;
+  --surface-elevated: 0 0% 100%;
+  --muted: 220 10% 88%;
+  --muted-foreground: 220 8% 33%;
+  --border: 220 9% 80%;
+  --primary: 220 10% 12%;
+  --primary-foreground: 0 0% 97%;
+  --accent: 220 7% 23%;
+  --accent-foreground: 0 0% 98%;
+  --hero-overlay: 220 12% 9%;
+  --radius: 1rem;
+  position: relative;
+  overflow: clip;
+}
+
+.catalog-qx2::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70rem 40rem at 10% -10%, hsl(220 7% 26% / 0.12), transparent 60%),
+    radial-gradient(55rem 30rem at 100% 15%, hsl(220 7% 40% / 0.08), transparent 60%),
+    linear-gradient(180deg, hsl(220 12% 98%), hsl(220 13% 94%));
+}
+
+.catalog-qx2 .skip-link {
+  border-radius: 999px;
+}
+
+.catalog-qx2 nav {
+  backdrop-filter: blur(12px);
+}
+
+.catalog-qx2 nav .font-display {
+  font-family: 'Sora', var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.catalog-qx2 section {
+  position: relative;
+}
+
+.catalog-qx2 #cover {
+  min-height: 92svh;
+}
+
+.catalog-qx2 #cover .hero-overlay-layer {
+  background:
+    linear-gradient(180deg, hsl(var(--hero-overlay) / 0.28) 0%, hsl(var(--hero-overlay) / 0.76) 100%) !important;
+}
+
+.catalog-qx2 #cover h1 {
+  font-family: 'Sora', var(--font-display);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.catalog-qx2 #cover p,
+.catalog-qx2 #cover button {
+  font-family: 'Inter', var(--font-body);
+}
+
+.catalog-qx2 .section-padding {
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.catalog-qx2 #overview,
+.catalog-qx2 #variants,
+.catalog-qx2 #materials {
+  background: transparent !important;
+}
+
+.catalog-qx2 #gallery,
+.catalog-qx2 #dimensions,
+.catalog-qx2 #features {
+  background: hsl(0 0% 100% / 0.62) !important;
+}
+
+.catalog-qx2 #assembly {
+  background:
+    radial-gradient(45rem 22rem at 0% 0%, hsl(0 0% 100% / 0.08), transparent 65%),
+    linear-gradient(165deg, hsl(220 12% 14%) 0%, hsl(220 10% 8%) 100%) !important;
+}
+
+.catalog-qx2 h1,
+.catalog-qx2 h2,
+.catalog-qx2 h3,
+.catalog-qx2 h4 {
+  font-family: 'Sora', var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.catalog-qx2 .rounded-lg {
+  border-radius: 1rem;
+}
+
+.catalog-qx2 .border {
+  border-color: hsl(var(--border) / 0.85);
+}
+
+.catalog-qx2 .shadow-md,
+.catalog-qx2 .shadow-sm {
+  box-shadow: 0 12px 32px hsl(224 28% 15% / 0.08);
+}
+
+.catalog-qx2 button {
+  transition: all 220ms ease;
+}
+
+.catalog-qx2 button:hover {
+  transform: translateY(-1px);
+}
+
+.catalog-qx2 #gallery .group {
+  border: 1px solid hsl(var(--border) / 0.7);
+  box-shadow: 0 10px 24px hsl(224 28% 15% / 0.07);
+}
+
+.catalog-qx2 #features [role='tabpanel'],
+.catalog-qx2 #dimensions .lg\:col-span-3,
+.catalog-qx2 #assembly .rounded-lg {
+  backdrop-filter: blur(6px);
+}
+
+.catalog-qx2 #overview .bg-surface,
+.catalog-qx2 #variants .bg-surface,
+.catalog-qx2 #features .bg-surface-elevated,
+.catalog-qx2 #dimensions .bg-surface-elevated {
+  background: hsl(0 0% 100% / 0.75) !important;
+}

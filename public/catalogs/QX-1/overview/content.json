@@ -1,0 +1,35 @@
+{
+  "sectionLabel": "Overview",
+  "title": "Flow state.",
+  "titleLine2": "Activated.",
+  "paragraphs": [
+    "Scandinavian minimal. German precision. QX adapts to your rhythm, not the other way around. Sustainably built and engineered to break the mold.",
+    "Build it your way. Infinite modularity, integrated cable routing, zero clutter. The ultimate setup for creators, coders, and visionaries."
+  ],
+  "packshotImage": "packshot.jpg",
+  "packshotImageAlt": "QX desk system product shot – L-shaped oak desktop with black steel frame on white background",
+  "packshotCaption": "QX-2000L — Natural Oak / Black",
+  "features": [
+    {
+      "icon": "puzzle",
+      "title": "Modular Core",
+      "desc": "Infinite configs for any space"
+    },
+    {
+      "icon": "zap",
+      "title": "Smart Lift",
+      "desc": "Electric motion with memory presets"
+    },
+    {
+      "icon": "ruler",
+      "title": "Right Sized",
+      "desc": "1200mm to 2000mm widths"
+    },
+    {
+      "icon": "shield",
+      "title": "10-Year Trust",
+      "desc": "Premium build. Made to last."
+    }
+  ],
+  "quickLinkLabels": ["Models", "Specs", "Materials", "Tech"]
+}

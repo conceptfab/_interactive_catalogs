@@ -1,0 +1,18 @@
+{
+  "brandLabel": "",
+  "collectionName": "QX Series",
+  "tagline": "Engineered for motion.",
+  "taglineLine2": "Your workspace, liberated.",
+  "ctaLabel": "Discover QX",
+  "heroImage": "hero-office.jpg",
+  "heroImageAlt": "QX desk system in a modern open-space office with people working",
+  "slider": {
+    "autoAdvance": true,
+    "interval": 4000,
+    "pauseOnHover": true,
+    "transitionMs": 800,
+    "showArrows": false,
+    "showDots": true,
+    "initialSlide": 0
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "sectionLabel": "Functionality",
+  "title": "Features & ergonomics",
+  "items": [
+    {
+      "icon": "arrow-up-down",
+      "title": "Height Adjustment",
+      "desc": "Dual-motor electric system with anti-collision sensor. Smooth 38mm/s travel speed, 4 memory presets on LED touchpad. Manual crank option available for QX Basic.",
+      "badge": "Electric / Manual"
+    },
+    {
+      "icon": "cable",
+      "title": "Cable Management",
+      "desc": "Integrated cable spine runs full desk length. Removable cable tray with brush grommet openings. Power socket modules available for desktop mounting.",
+      "badge": "Integrated"
+    },
+    {
+      "icon": "wrench",
+      "title": "Tool-Free Assembly",
+      "desc": "Pre-assembled frame with click-lock connections. Desktop attachment with 6 screws only. Full setup in under 20 minutes by one person.",
+      "badge": "< 20 min"
+    },
+    {
+      "icon": "layout-grid",
+      "title": "Modular Expansion",
+      "desc": "Add return desks, screen dividers, CPU holders, monitor arms, and under-desk storage. All accessories use universal T-slot mounting system.",
+      "badge": "30+ Accessories"
+    },
+    {
+      "icon": "monitor-smartphone",
+      "title": "Smart Integration",
+      "desc": "Optional Bluetooth module connects to Metro Desk App. Track sitting/standing time, receive reminders, and sync height presets across devices.",
+      "badge": "Optional"
+    },
+    {
+      "icon": "armchair",
+      "title": "Ergonomic Design",
+      "desc": "Designed with occupational therapists to promote active sitting/standing cycles. Curved front edge reduces forearm pressure. Meets EN 527 ergonomic requirements.",
+      "badge": "EN 527"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "sectionLabel": "Looks",
+  "title": "Fits everywhere.",
+  "images": [
+    {
+      "image": "packshot.jpg",
+      "alt": "QX desk packshot on white background",
+      "category": "Studio"
+    },
+    {
+      "image": "hero-office.jpg",
+      "alt": "QX desks in bright open-plan office",
+      "category": "Space"
+    },
+    {
+      "image": "office-arrangement.jpg",
+      "alt": "QX executive desk setup",
+      "category": "Pro"
+    },
+    {
+      "image": "desk-detail.jpg",
+      "alt": "Close-up of QX desk oak and steel",
+      "category": "Zoom"
+    },
+    {
+      "image": "office-lifestyle.jpg",
+      "alt": "Modern QX conference setup",
+      "category": "Team"
+    }
+  ]
+}

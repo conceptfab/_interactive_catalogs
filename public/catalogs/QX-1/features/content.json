@@ -1,0 +1,42 @@
+{
+  "sectionLabel": "Tech Specs",
+  "title": "Built for speed.",
+  "items": [
+    {
+      "icon": "arrow-up-down",
+      "title": "Smart Motion",
+      "desc": "Dual-motor electric lift. Smooth, silent 38mm/s travel. 4 memory presets on LED touch interface. Anti-collision tech included.",
+      "badge": "Electric"
+    },
+    {
+      "icon": "cable",
+      "title": "Zero Clutter",
+      "desc": "Integrated power routing via central spine. Hidden cable tray with brush grommets. Clean desk, clear mind.",
+      "badge": "Integrated"
+    },
+    {
+      "icon": "wrench",
+      "title": "Snap & Go",
+      "desc": "Click-lock frame connections. Just 6 screws for the top. Full setup perfectly in under 20 minutes.",
+      "badge": "< 20 min"
+    },
+    {
+      "icon": "layout-grid",
+      "title": "Infinite Setup",
+      "desc": "Add monitor arms, acoustic panels, CPU mounts. Everything connects via universal T-slot.",
+      "badge": "30+ Add-ons"
+    },
+    {
+      "icon": "monitor-smartphone",
+      "title": "App Connected",
+      "desc": "Sync with Metro App via Bluetooth. Track standing habits, get wellness nudges, sync presets across the grid.",
+      "badge": "Smart"
+    },
+    {
+      "icon": "armchair",
+      "title": "Pure Ergonomics",
+      "desc": "EN 527 certified. Curved edge reduces wrist fatigue. Designed to keep you moving throughout the day.",
+      "badge": "Pro Ergo"
+    }
+  ]
+}
