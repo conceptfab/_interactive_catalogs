@@ -51,11 +51,10 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                   role="tab"
                   aria-selected={activeFeature === i}
                   onClick={() => setActiveFeature(i)}
-                  className={`w-full text-left px-6 py-5 flex items-center gap-4 transition-all min-h-[44px] rounded-none ${
-                    activeFeature === i
+                  className={`w-full text-left px-6 py-5 flex items-center gap-4 transition-all min-h-[44px] rounded-xl ${activeFeature === i
                       ? 'bg-foreground text-background shadow-lg scale-105'
                       : 'hover:bg-muted text-foreground'
-                  }`}
+                    }`}
                 >
                   <Icon
                     size={24}
@@ -66,11 +65,10 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                     }
                   />
                   <span
-                    className={`font-display text-lg font-bold ${
-                      activeFeature === i
+                    className={`font-display text-lg font-bold ${activeFeature === i
                         ? 'text-background'
                         : 'text-foreground'
-                    }`}
+                      }`}
                   >
                     {renderQxText(f.title)}
                   </span>
@@ -85,7 +83,7 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
             role="tabpanel"
-            className="lg:col-span-2 bg-transparent p-8 lg:p-12 flex flex-col justify-center rounded-none"
+            className="lg:col-span-2 bg-transparent p-8 lg:p-12 flex flex-col justify-center rounded-xl"
           >
             {(() => {
               const f = data.items[activeFeature];
@@ -112,7 +110,7 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
               );
             })()}
 
-            <div className="mt-12 bg-muted/50 p-8 rounded-none">
+            <div className="mt-12 bg-muted/50 p-8 rounded-xl">
               <div className="flex items-center justify-center h-40">
                 <motion.div
                   className="w-48 h-3 bg-border rounded-full relative"
