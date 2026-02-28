@@ -39,6 +39,74 @@ export interface HeroSliderConfig {
   initialSlide?: number;
 }
 
+export type HeroDescriptionPosition =
+  | 'bottom-center'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-center'
+  | 'top-left'
+  | 'top-right';
+
+export interface HeroDescriptionStyleConfig {
+  /** Turn slide descriptions on/off for this catalog */
+  enabled?: boolean;
+  /** Placement preset for the description label */
+  position?: HeroDescriptionPosition;
+  /** Distance from top or bottom edge (in px) */
+  offsetPx?: number;
+  /** Text color (CSS color value) */
+  textColor?: string;
+  /** Label background (CSS color value) */
+  backgroundColor?: string;
+  /** Backdrop blur (in px) */
+  backdropBlurPx?: number;
+  /** Horizontal padding (in px) */
+  paddingX?: number;
+  /** Vertical padding (in px) */
+  paddingY?: number;
+  /** Corner radius (in px) */
+  borderRadiusPx?: number;
+  /** Font size (in px) */
+  fontSizePx?: number;
+  /** Font weight */
+  fontWeight?: number;
+  /** Letter spacing in em units */
+  letterSpacingEm?: number;
+  /** Max width, e.g. 90vw or 520px */
+  maxWidth?: string;
+  /** Text alignment */
+  textAlign?: 'left' | 'center' | 'right';
+  /** Uppercase transform toggle */
+  uppercase?: boolean;
+}
+
+export interface HeroSlide {
+  /** Resolved image URL */
+  src: string;
+  /** Accessible slide alt text */
+  alt: string;
+  /** Optional visible caption/description */
+  description?: string;
+}
+
+export interface HeroSlideDefinition {
+  /** Relative path inside hero folder, e.g. hero_00.jpg */
+  image: string;
+  /** Optional alt override for the slide */
+  alt?: string;
+  /** Optional visible caption/description for the slide */
+  description?: string;
+}
+
+export interface HeroSliderFile {
+  /** Slider settings stored in hero/slider.json */
+  settings?: HeroSliderConfig;
+  /** Description label style stored in hero/slider.json */
+  descriptionStyle?: HeroDescriptionStyleConfig;
+  /** Explicit list of slides for the hero carousel */
+  slides?: HeroSlideDefinition[];
+}
+
 export interface HeroData {
   brandLabel: string;
   collectionName: string;
@@ -47,10 +115,14 @@ export interface HeroData {
   ctaLabel: string;
   heroImage: string;
   heroImageAlt: string;
+  /** Explicit hero slides resolved from hero/slider.json */
+  heroSlides?: HeroSlide[];
   /** Auto-discovered hero_NN.jpg images for slider */
   heroImages?: string[];
-  /** Slider options (applies when heroImages is used) */
+  /** Slider options loaded from hero/slider.json (or legacy hero content) */
   slider?: HeroSliderConfig;
+  /** Description label style loaded from hero/slider.json */
+  descriptionStyle?: HeroDescriptionStyleConfig;
 }
 
 export interface OverviewFeature {

@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import type { SectionConfig } from '@/types/catalog';
+import { renderQxText } from './renderQxText';
 
 const DEFAULT_SECTIONS: SectionConfig[] = [
   { id: 'cover', label: 'Cover' },
@@ -57,9 +58,8 @@ const CatalogNav = ({
           alt={`${brandLabel} logo`}
           width={160}
           height={48}
-          className={`h-9 w-auto object-contain ${
-            scrolled || isOpen ? 'mix-blend-difference invert' : ''
-          }`}
+          className={`h-9 w-auto object-contain ${scrolled || isOpen ? 'mix-blend-difference invert' : ''
+            }`}
         />
       );
     }
@@ -124,22 +124,22 @@ const CatalogNav = ({
             <div className="bg-transparent shadow-[0_8px_22px_hsl(220_10%_10%/0.06)]">
               <div className="flex items-center gap-2 p-1.5">
                 {backToCatalogListHref ? (
-                <a
-                  href={backToCatalogListHref}
-                  className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
-                  aria-label="Back to catalog list"
-                >
-                  {renderBrand('h-6 w-auto object-contain')}
-                </a>
-              ) : (
-                <button
-                  onClick={() => scrollTo('cover')}
-                  className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
-                  aria-label={`${brandLabel} - back to top`}
-                >
-                  {renderBrand('h-6 w-auto object-contain')}
-                </button>
-              )}
+                  <a
+                    href={backToCatalogListHref}
+                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
+                    aria-label="Back to catalog list"
+                  >
+                    {renderBrand('h-6 w-auto object-contain')}
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => scrollTo('cover')}
+                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
+                    aria-label={`${brandLabel} - back to top`}
+                  >
+                    {renderBrand('h-6 w-auto object-contain')}
+                  </button>
+                )}
 
                 <ul
                   className="hidden lg:flex items-center gap-1 flex-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -149,11 +149,10 @@ const CatalogNav = ({
                     <li key={section.id}>
                       <button
                         onClick={() => scrollTo(section.id)}
-                        className={`px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${
-                          activeSection === section.id
-                            ? 'border-accent text-foreground'
-                            : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
-                        }`}
+                        className={`px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${activeSection === section.id
+                          ? 'border-accent text-foreground'
+                          : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                          }`}
                         aria-current={
                           activeSection === section.id ? 'true' : undefined
                         }
@@ -162,7 +161,7 @@ const CatalogNav = ({
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                         <span className="font-display font-medium">
-                          {section.label}
+                          {renderQxText(section.label)}
                         </span>
                       </button>
                     </li>
@@ -195,17 +194,16 @@ const CatalogNav = ({
                   <li key={section.id}>
                     <button
                       onClick={() => scrollTo(section.id)}
-                      className={`w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${
-                        activeSection === section.id
-                          ? 'border-accent text-foreground'
-                          : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
-                      }`}
+                      className={`w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${activeSection === section.id
+                        ? 'border-accent text-foreground'
+                        : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                        }`}
                     >
                       <span className="font-mono text-[10px] opacity-70">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                       <span className="font-display font-medium">
-                        {section.label}
+                        {renderQxText(section.label)}
                       </span>
                     </button>
                   </li>
@@ -224,16 +222,20 @@ const CatalogNav = ({
         <nav
           role="navigation"
           aria-label="Catalog sections"
-          className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
-            scrolled || isOpen ? 'bg-transparent py-4' : 'bg-transparent py-6'
-          }`}
+          className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled || isOpen ? 'py-3' : 'py-5'
+            }`}
         >
           <div className="max-w-7xl mx-auto px-6 sm:px-8">
-            <div className="flex items-center justify-between">
+            <div
+              className={`flex items-center justify-between gap-3 rounded-sm border px-4 sm:px-5 py-2 backdrop-blur-xl transition-all duration-300 ${scrolled || isOpen
+                ? 'bg-background/90 border-border shadow-[0_14px_36px_hsl(0_0%_8%/0.16)]'
+                : 'bg-background/70 border-border/50 shadow-[0_8px_24px_hsl(0_0%_8%/0.08)]'
+                }`}
+            >
               {backToCatalogListHref ? (
                 <a
                   href={backToCatalogListHref}
-                  className="font-display font-medium text-2xl tracking-wide"
+                  className="inline-flex items-center min-h-[44px] shrink-0"
                   aria-label="Back to catalog list"
                 >
                   {renderQx1Brand()}
@@ -241,7 +243,7 @@ const CatalogNav = ({
               ) : (
                 <button
                   onClick={() => scrollTo('cover')}
-                  className="font-display font-medium text-2xl tracking-wide"
+                  className="inline-flex items-center min-h-[44px] shrink-0"
                   aria-label={`${brandLabel} - back to top`}
                 >
                   {renderQx1Brand()}
@@ -250,11 +252,16 @@ const CatalogNav = ({
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-3 bg-foreground text-background rounded-full hover:scale-105 transition-transform shadow-xl flex items-center justify-center min-h-[50px] min-w-[50px]"
+                className="inline-flex items-center gap-2 min-h-[46px] rounded-full bg-foreground text-background px-3 py-2 hover:scale-[1.03] transition-transform shadow-lg shrink-0"
                 aria-expanded={isOpen}
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                <span className="hidden sm:inline text-[11px] font-body uppercase tracking-[0.24em]">
+                  {isOpen ? 'Close' : 'Menu'}
+                </span>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-background/15">
+                  {isOpen ? <X size={20} /> : <Menu size={20} />}
+                </span>
               </button>
             </div>
           </div>
@@ -263,35 +270,57 @@ const CatalogNav = ({
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, clipPath: 'circle(0% at 100% 0%)' }}
-              animate={{ opacity: 1, clipPath: 'circle(150% at 100% 0%)' }}
-              exit={{ opacity: 0, clipPath: 'circle(0% at 100% 0%)' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl flex flex-col justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="fixed inset-0 z-50 bg-[hsl(var(--background)/0.92)] backdrop-blur-2xl"
             >
-              <div className="max-w-7xl mx-auto w-full px-6 sm:px-8">
-                <ul className="flex flex-col gap-6 md:gap-8" role="list">
+              <motion.div
+                initial={{ opacity: 0, y: 32 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 32 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-7xl mx-auto h-full w-full px-6 sm:px-8 pt-28 pb-10"
+              >
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-b border-border/70 pb-4">
+                  <p className="font-display text-3xl leading-tight text-foreground">
+                    {renderQxText('QX-1 Workspace System')}
+                  </p>
+                  <p className="font-body text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {renderQxText('METRO Collection / QX-1')}
+                  </p>
+                </div>
+
+                <ul className="grid content-start gap-3 sm:gap-4" role="list">
                   {visibleSections.map((section, idx) => (
                     <motion.li
                       key={section.id}
-                      initial={{ opacity: 0, y: 50 }}
+                      initial={{ opacity: 0, y: 36 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
+                      transition={{ delay: 0.08 + idx * 0.05, duration: 0.35 }}
                     >
                       <button
                         onClick={() => scrollTo(section.id)}
-                        className={`text-4xl md:text-6xl font-display font-light tracking-wide transition-colors text-left ${
-                          activeSection === section.id
-                            ? 'text-accent'
-                            : 'text-foreground hover:text-accent/70'
-                        }`}
+                        className={`w-full min-h-[56px] inline-flex items-baseline gap-4 text-left transition-colors ${activeSection === section.id
+                          ? 'text-accent'
+                          : 'text-foreground hover:text-accent/75'
+                          }`}
+                        aria-current={
+                          activeSection === section.id ? 'true' : undefined
+                        }
                       >
-                        {section.label}
+                        <span className="font-mono text-xs text-muted-foreground">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="font-display leading-[0.92] tracking-[-0.02em] text-[clamp(2rem,6vw,4.5rem)]">
+                          {renderQxText(section.label)}
+                        </span>
                       </button>
                     </motion.li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -304,18 +333,17 @@ const CatalogNav = ({
       <nav
         role="navigation"
         aria-label="Catalog sections"
-        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
-          scrolled || isOpen
-            ? 'bg-background/95 backdrop-blur-md border-b border-border py-3'
-            : 'bg-transparent py-4'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled || isOpen
+          ? 'bg-white/30 backdrop-blur-xl border-b border-slate-200/50 py-3 shadow-sm'
+          : 'bg-white py-4 shadow-none'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           <div className="flex items-center justify-between">
             {backToCatalogListHref ? (
               <a
                 href={backToCatalogListHref}
-                className="font-display font-black text-xl tracking-tighter text-foreground"
+                className="font-display font-black text-xl tracking-tighter text-slate-900"
                 aria-label="Back to catalog list"
               >
                 {renderBrand('h-7 w-auto object-contain')}
@@ -323,7 +351,7 @@ const CatalogNav = ({
             ) : (
               <button
                 onClick={() => scrollTo('cover')}
-                className="font-display font-black text-xl tracking-tighter text-foreground"
+                className="font-display font-black text-xl tracking-tighter text-slate-900"
                 aria-label={`${brandLabel} - back to top`}
               >
                 {renderBrand('h-7 w-auto object-contain')}
@@ -338,16 +366,15 @@ const CatalogNav = ({
                 <li key={section.id}>
                   <button
                     onClick={() => scrollTo(section.id)}
-                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
-                      activeSection === section.id
-                        ? 'border-foreground text-foreground'
-                        : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
-                    }`}
+                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${activeSection === section.id
+                      ? 'border-slate-900 text-slate-900'
+                      : 'border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-200'
+                      }`}
                     aria-current={
                       activeSection === section.id ? 'true' : undefined
                     }
                   >
-                    {section.label}
+                    {renderQxText(section.label)}
                   </button>
                 </li>
               ))}
@@ -355,7 +382,7 @@ const CatalogNav = ({
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden ml-4 p-2 text-foreground hover:bg-muted rounded-md transition-colors"
+              className="lg:hidden ml-4 p-2 text-slate-900 hover:bg-slate-100 rounded-md transition-colors"
               aria-expanded={isOpen}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
@@ -371,20 +398,19 @@ const CatalogNav = ({
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden fixed top-[72px] left-0 right-0 z-[59] border-b border-border bg-background shadow-xl"
+            className="lg:hidden fixed top-[72px] left-0 right-0 z-[59] border-b border-slate-200 bg-white shadow-xl"
           >
             <ul className="flex flex-col p-4" role="list">
               {visibleSections.map((section) => (
                 <li key={section.id}>
                   <button
                     onClick={() => scrollTo(section.id)}
-                    className={`w-full p-4 text-left text-base font-medium transition-colors ${
-                      activeSection === section.id
-                        ? 'text-foreground bg-muted/50 rounded-md'
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
+                    className={`w-full p-4 text-left text-base font-medium transition-colors ${activeSection === section.id
+                      ? 'text-slate-900 bg-slate-50 rounded-md'
+                      : 'text-slate-500 hover:text-slate-900'
+                      }`}
                   >
-                    {section.label}
+                    {renderQxText(section.label)}
                   </button>
                 </li>
               ))}

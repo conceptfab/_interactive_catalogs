@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { FeaturesData } from '@/types/catalog';
 import { getIcon } from '@/lib/icon-map';
+import { renderQxText } from './renderQxText';
 
 interface FeaturesSectionProps {
   data: FeaturesData;
@@ -25,14 +26,14 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
           className="text-center mb-12"
         >
           <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            {data.sectionLabel}
+            {renderQxText(data.sectionLabel)}
           </p>
           <h2
             id="features-title"
             className="font-display font-bold text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
           >
-            {data.title}
+            {renderQxText(data.title)}
           </h2>
         </motion.div>
 
@@ -71,7 +72,7 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                         : 'text-foreground'
                     }`}
                   >
-                    {f.title}
+                    {renderQxText(f.title)}
                   </span>
                 </button>
               );
@@ -97,15 +98,15 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                     </div>
                     <div>
                       <h3 className="font-display font-bold text-foreground text-xl">
-                        {f.title}
+                        {renderQxText(f.title)}
                       </h3>
                       <span className="text-xs font-medium text-accent bg-warm-light px-2 py-0.5 rounded">
-                        {f.badge}
+                        {renderQxText(f.badge)}
                       </span>
                     </div>
                   </div>
                   <p className="text-muted-foreground leading-relaxed text-base">
-                    {f.desc}
+                    {renderQxText(f.desc)}
                   </p>
                 </>
               );

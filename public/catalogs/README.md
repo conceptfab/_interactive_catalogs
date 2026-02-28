@@ -1,28 +1,31 @@
-# Szablon katalogów – struktura treści
+# Szablon katalogow - struktura tresci
 
-Nazwa folderu głównego = nazwa kolekcji (np. QX, QS, TS).
+Nazwa folderu glownego = nazwa kolekcji (np. QX, QS, TS).
 
 ## Plik konfiguracyjny globalny
 
-`public/config.json` – ustawienia dla całej aplikacji:
+`public/config.json` - ustawienia dla calej aplikacji:
 
-- `brandName` – nazwa marki w nawigacji
-- `siteTitle` – tytuł na stronie głównej
-- `siteSubtitle` – podtytuł na stronie głównej
-- `footerText` – tekst w stopce
-- `catalogListTitle` – nagłówek listy katalogów
+- `brandName` - nazwa marki w nawigacji
+- `siteTitle` - tytul na stronie glownej
+- `siteSubtitle` - podtytul na stronie glownej
+- `footerText` - tekst w stopce
+- `catalogListTitle` - naglowek listy katalogow
 
 ## Struktura
 
-```
-config.json                 ← konfiguracja globalna (w public/)
+```text
+config.json                 <- konfiguracja globalna (w public/)
 catalogs/
-  index.json              ← lista katalogów (dodaj nowy ID do tablicy)
-  QX/                     ← folder = nazwa kolekcji
-    config.json           ← definicje globalne (meta, sections)
+  index.json                <- lista katalogow (dodaj nowy ID do tablicy)
+  QX/                       <- folder = nazwa kolekcji
+    config.json             <- definicje globalne (meta, sections)
     hero/
       content.json
-      hero-office.jpg
+      slider.json           <- nowy plik: ustawienia slidera + opisy slajdow
+      hero_00.jpg
+      hero_01.jpg
+      ...
     overview/
       content.json
       packshot.jpg
@@ -47,42 +50,87 @@ catalogs/
 
 ## Dodawanie nowego katalogu
 
-1. Skopiuj folder `QX` i zmień nazwę na nazwę kolekcji (np. `QS`).
-2. Edytuj `config.json` – meta, sections.
-3. Edytuj pliki `content.json` w każdej sekcji.
-4. Podmień obrazy w podfolderach (nazwy plików zgodne z content.json).
-5. Dodaj `"QS"` do tablicy `catalogs` w `index.json`.
+1. Skopiuj folder `QX` i zmien nazwe na nazwe kolekcji (np. `QS`).
+2. Edytuj `config.json` - meta, sections.
+3. Edytuj pliki `content.json` w kazdej sekcji.
+4. Podmien obrazy w podfolderach (nazwy plikow zgodne z `content.json`).
+5. Dodaj nowy identyfikator do tablicy `catalogs` w `index.json`.
 
-## Hero – slider
+## Hero - nowy model slidera per katalog
 
-W folderze `hero/` możesz dodać pliki `hero_00.jpg`, `hero_01.jpg`, `hero_02.jpg` itd. – aplikacja wykryje je automatycznie i utworzy slider.
+W kazdym folderze `QX-*/hero/` konfigurujesz slider osobno przez `slider.json`.
 
-Opcje slidera w `hero/content.json`:
+### `hero/content.json`
+
+Trzyma tylko tresci sekcji hero (bez ustawien slidera):
 
 ```json
-"slider": {
-  "autoAdvance": true,
-  "interval": 5000,
-  "pauseOnHover": true,
-  "transitionMs": 500,
-  "showArrows": true,
-  "showDots": true,
-  "initialSlide": 0
+{
+  "brandLabel": "",
+  "collectionName": "QX Series",
+  "tagline": "Modular desk system engineered for the modern workspace.",
+  "taglineLine2": "Where precision meets flexibility.",
+  "ctaLabel": "Explore Collection",
+  "heroImage": "hero-office.jpg",
+  "heroImageAlt": "QX desk system in a modern open-space office with people working"
 }
 ```
 
-- `autoAdvance` – automatyczne przewijanie (domyślnie `true`)
-- `interval` – odstęp między slajdami w ms (domyślnie `5000`)
-- `pauseOnHover` – pauza przy najechaniu myszką (domyślnie `true`)
-- `transitionMs` – czas animacji przejścia w ms (domyślnie `500`)
-- `showArrows` – pokazuj strzałki prev/next (domyślnie `true`)
-- `showDots` – pokazuj wskaźniki (kropki) (domyślnie `true`)
-- `initialSlide` – indeks początkowego slajdu, 0-based (domyślnie `0`)
+### `hero/slider.json`
 
-## Ścieżki do obrazów
+Trzyma ustawienia slidera, definicje slajdow (kolejnosc + opisy) oraz styl opisu tylko dla tego katalogu:
 
-W `content.json` używaj nazw plików względnych do folderu sekcji:
+```json
+{
+  "settings": {
+    "autoAdvance": true,
+    "interval": 5000,
+    "pauseOnHover": true,
+    "transitionMs": 900,
+    "showArrows": true,
+    "showDots": true,
+    "initialSlide": 0
+  },
+  "slides": [
+    {
+      "image": "hero_00.jpg",
+      "alt": "Accessible alt text",
+      "description": "Visible description/caption for this slide"
+    },
+    {
+      "image": "hero_01.jpg"
+    }
+  ],
+  "descriptionStyle": {
+    "enabled": true,
+    "position": "bottom-left",
+    "offsetPx": 34,
+    "textColor": "#F4ECE4",
+    "backgroundColor": "rgba(17,15,13,0.55)",
+    "backdropBlurPx": 8,
+    "paddingX": 18,
+    "paddingY": 10,
+    "borderRadiusPx": 14,
+    "fontSizePx": 14,
+    "fontWeight": 600,
+    "letterSpacingEm": 0.02,
+    "maxWidth": "520px",
+    "textAlign": "left",
+    "uppercase": false
+  }
+}
+```
 
-- `hero/hero-office.jpg` → w hero/content.json: `"heroImage": "hero-office.jpg"`
-- `hero/hero_00.jpg`, `hero_01.jpg`, … – automatycznie wykrywane dla slidera
-- `gallery/packshot.jpg` → w gallery/content.json: `"image": "packshot.jpg"` (w obiekcie images)
+- `slides` definiuje kolejnosc slajdow.
+- `alt` jest opcjonalny (fallback do `heroImageAlt`).
+- `description` jest opcjonalny i moze byc wyswietlany na hero.
+- `descriptionStyle` dziala per katalog `QX-*` (zmiana w jednym `slider.json` nie zmienia innych).
+- Jesli `slider.json` nie istnieje, aplikacja fallbackuje do auto-detekcji `hero_00.jpg`, `hero_01.jpg`, itd.
+
+## Sciezki do obrazow
+
+W `content.json` uzywaj nazw plikow wzglednych do folderu sekcji:
+
+- `hero/hero-office.jpg` -> w `hero/content.json`: `"heroImage": "hero-office.jpg"`
+- `hero/hero_00.jpg`, `hero_01.jpg`, ... -> automatycznie wykrywane fallbackowo
+- `gallery/packshot.jpg` -> w `gallery/content.json`: `"image": "packshot.jpg"` (w obiekcie images)

@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import type { OverviewData } from '@/types/catalog';
 import { getIcon } from '@/lib/icon-map';
+import { renderQxText } from './renderQxText';
 
 interface OverviewSectionProps {
   data: OverviewData;
@@ -26,24 +27,24 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-              {data.sectionLabel}
+              {renderQxText(data.sectionLabel)}
             </p>
             <h2
               id="overview-title"
               className="font-display font-bold text-foreground leading-tight"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
             >
-              {data.title}
+              {renderQxText(data.title)}
               {data.titleLine2 && (
                 <>
                   <br />
-                  {data.titleLine2}
+                  {renderQxText(data.titleLine2)}
                 </>
               )}
             </h2>
             <div className="mt-6 space-y-4 text-muted-foreground font-body text-base leading-relaxed max-w-lg">
               {data.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+                <p key={i}>{renderQxText(p)}</p>
               ))}
             </div>
 
@@ -58,7 +59,7 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
                   }
                   className="px-6 py-3 bg-foreground text-background rounded-full text-sm font-bold tracking-wide hover:scale-105 transition-transform min-h-[44px]"
                 >
-                  {label}
+                  {renderQxText(label)}
                 </button>
               ))}
             </div>
@@ -80,7 +81,7 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
                 />
               </div>
               <figcaption className="mt-6 text-center text-sm font-medium tracking-wide text-muted-foreground uppercase">
-                {data.packshotCaption}
+                {renderQxText(data.packshotCaption)}
               </figcaption>
             </figure>
           </motion.div>
@@ -101,10 +102,10 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
                   <Icon size={24} />
                 </div>
                 <h3 className="font-display font-black text-foreground text-xl mb-2">
-                  {f.title}
+                  {renderQxText(f.title)}
                 </h3>
                 <p className="text-muted-foreground text-base leading-relaxed">
-                  {f.desc}
+                  {renderQxText(f.desc)}
                 </p>
               </motion.div>
             );

@@ -4,16 +4,16 @@
     "description": "QX Series – Modular desk system engineered for the modern workspace.",
     "brandName": "METRO",
     "collectionName": "QX Series",
-    "theme": "qx0"
+    "theme": "qx1"
   },
   "sections": [
-    { "id": "cover", "label": "Cover" },
+    { "id": "cover", "label": "Intro" },
     { "id": "overview", "label": "Overview" },
-    { "id": "gallery", "label": "Gallery" },
-    { "id": "variants", "label": "Variants" },
-    { "id": "dimensions", "label": "Dimensions" },
+    { "id": "gallery", "label": "Scenes" },
+    { "id": "variants", "label": "Config" },
+    { "id": "dimensions", "label": "Specs" },
     { "id": "materials", "label": "Materials" },
-    { "id": "features", "label": "Features" },
-    { "id": "assembly", "label": "Assembly" }
+    { "id": "features", "label": "Ergonomics" },
+    { "id": "assembly", "label": "Order" }
   ]
 }

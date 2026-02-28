@@ -86,7 +86,9 @@ export default function CatalogPage() {
       : catalog.meta.theme === 'qx1'
         ? 'qx1'
         : 'default';
-  const isQx0 = catalogId?.toUpperCase() === 'QX-0';
+  const normalizedCatalogId = catalogId?.toUpperCase();
+  const isQx0 = normalizedCatalogId === 'QX-0';
+  const isQx1 = normalizedCatalogId === 'QX-1';
 
   return (
     <div className={themeClassName}>
@@ -99,7 +101,13 @@ export default function CatalogPage() {
         brandLabel={(
           globalConfig?.brandName ?? catalog.hero.brandLabel
         ).toUpperCase()}
-        brandLogoSrc={isQx0 ? '/catalogs/QX-0/metro_logo.svg' : undefined}
+        brandLogoSrc={
+          isQx0
+            ? '/catalogs/QX-0/metro_logo.svg'
+            : isQx1
+              ? '/catalogs/QX-1/metro_logo.svg'
+              : undefined
+        }
         backToCatalogListHref="/"
         variant={navVariant}
       />

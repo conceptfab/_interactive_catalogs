@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Award, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import type { DimensionsData } from '@/types/catalog';
+import { renderQxText } from './renderQxText';
 
 interface DimensionsSectionProps {
   data: DimensionsData;
@@ -25,14 +26,14 @@ const DimensionsSection = ({ data }: DimensionsSectionProps) => {
           className="text-center mb-12"
         >
           <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            {data.sectionLabel}
+            {renderQxText(data.sectionLabel)}
           </p>
           <h2
             id="dimensions-title"
             className="font-display font-bold text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
           >
-            {data.title}
+            {renderQxText(data.title)}
           </h2>
         </motion.div>
 
@@ -67,9 +68,11 @@ const DimensionsSection = ({ data }: DimensionsSectionProps) => {
                   key={s.label}
                   className="py-2 flex justify-between gap-4 border-b border-border/50"
                 >
-                  <dt className="text-muted-foreground text-base">{s.label}</dt>
+                  <dt className="text-muted-foreground text-base">
+                    {renderQxText(s.label)}
+                  </dt>
                   <dd className="text-foreground text-base font-bold text-right">
-                    {s.value}
+                    {renderQxText(s.value)}
                   </dd>
                 </div>
               ))}
@@ -90,7 +93,7 @@ const DimensionsSection = ({ data }: DimensionsSectionProps) => {
                       size={16}
                       className="text-success mt-0.5 shrink-0"
                     />
-                    {c}
+                    {renderQxText(c)}
                   </li>
                 ))}
               </ul>

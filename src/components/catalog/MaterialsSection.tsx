@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { MaterialsData } from '@/types/catalog';
+import { renderQxText } from './renderQxText';
 
 interface MaterialsSectionProps {
   data: MaterialsData;
@@ -23,14 +24,14 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
           className="text-center mb-12"
         >
           <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            {data.sectionLabel}
+            {renderQxText(data.sectionLabel)}
           </p>
           <h2
             id="materials-title"
             className="font-display font-bold text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
           >
-            {data.title}
+            {renderQxText(data.title)}
           </h2>
         </motion.div>
 
@@ -50,7 +51,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
               />
             </figure>
             <p className="text-sm text-muted-foreground text-center px-4">
-              {data.detailImageCaption}
+              {renderQxText(data.detailImageCaption)}
             </p>
           </motion.div>
 
@@ -63,13 +64,13 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
             {data.materials.map((m) => (
               <div key={m.name} className="border-l-2 border-accent pl-6">
                 <h3 className="font-display font-semibold text-foreground text-lg">
-                  {m.name}
+                  {renderQxText(m.name)}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mt-1">
-                  {m.desc}
+                  {renderQxText(m.desc)}
                 </p>
                 <p className="text-xs text-accent font-medium mt-2">
-                  {m.specs}
+                  {renderQxText(m.specs)}
                 </p>
               </div>
             ))}
@@ -88,7 +89,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                       aria-label={`${s.name} colour swatch`}
                     />
                     <p className="text-xs text-muted-foreground mt-2">
-                      {s.name}
+                      {renderQxText(s.name)}
                     </p>
                   </div>
                 ))}

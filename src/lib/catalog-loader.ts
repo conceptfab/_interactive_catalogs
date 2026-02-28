@@ -1,6 +1,8 @@
 import type {
   CatalogData,
   HeroData,
+  HeroSliderFile,
+  HeroSlide,
   OverviewData,
   GalleryData,
   VariantsData,
@@ -86,6 +88,35 @@ async function discoverHeroImages(heroBaseUrl: string): Promise<string[]> {
   return found;
 }
 
+function defaultHeroSlideAlt(baseAlt: string, index: number, total: number): string {
+  return index === 0 ? baseAlt : `${baseAlt} - slide ${index + 1} of ${total}`;
+}
+
+function normalizeHeroSlides(
+  slides: HeroSliderFile['slides'] | undefined,
+  heroBase: string,
+  fallbackAlt: string,
+): HeroSlide[] | undefined {
+  if (!slides || slides.length === 0) return undefined;
+
+  const normalized: HeroSlide[] = [];
+  for (let index = 0; index < slides.length; index++) {
+    const slide = slides[index];
+    const src = resolveImage(heroBase, slide.image);
+    if (!src) continue;
+
+    normalized.push({
+      src,
+      alt:
+        slide.alt?.trim() ||
+        defaultHeroSlideAlt(fallbackAlt, index, slides.length),
+      ...(slide.description ? { description: slide.description } : {}),
+    });
+  }
+
+  return normalized.length > 0 ? normalized : undefined;
+}
+
 interface CatalogIndex {
   catalogs: string[];
 }
@@ -139,6 +170,7 @@ export async function loadCatalog(
 
   const [
     hero,
+    heroSliderFile,
     overview,
     gallery,
     variants,
@@ -148,6 +180,7 @@ export async function loadCatalog(
     assembly,
   ] = await Promise.all([
     fetchJson<HeroData>(`${base}/hero/content.json`),
+    fetchJson<HeroSliderFile>(`${base}/hero/slider.json`),
     fetchJson<OverviewData>(`${base}/overview/content.json`),
     fetchJson<RawGalleryData>(`${base}/gallery/content.json`),
     fetchJson<VariantsData>(`${base}/variants/content.json`),
@@ -171,7 +204,31 @@ export async function loadCatalog(
   }
 
   const heroBase = `${base}/hero`;
-  const heroImages = await discoverHeroImages(heroBase);
+  const configuredSlides = normalizeHeroSlides(
+    heroSliderFile?.slides,
+    heroBase,
+    hero.heroImageAlt,
+  );
+
+  let heroSlides = configuredSlides;
+  if (!heroSlides || heroSlides.length === 0) {
+    const discoveredImages = await discoverHeroImages(heroBase);
+    if (discoveredImages.length > 0) {
+      heroSlides = discoveredImages.map((src, index, all) => ({
+        src,
+        alt: defaultHeroSlideAlt(hero.heroImageAlt, index, all.length),
+      }));
+    }
+  }
+
+  const sliderConfig = {
+    ...(hero.slider ?? {}),
+    ...(heroSliderFile?.settings ?? {}),
+  };
+  const descriptionStyle = {
+    ...(hero.descriptionStyle ?? {}),
+    ...(heroSliderFile?.descriptionStyle ?? {}),
+  };
 
   return {
     id: catalogId,
@@ -180,7 +237,16 @@ export async function loadCatalog(
     hero: {
       ...hero,
       heroImage: resolveImage(heroBase, hero.heroImage),
-      heroImages: heroImages.length > 0 ? heroImages : undefined,
+      heroSlides,
+      heroImages: heroSlides?.map((slide) => slide.src),
+      slider:
+        Object.keys(sliderConfig).length > 0
+          ? sliderConfig
+          : undefined,
+      descriptionStyle:
+        Object.keys(descriptionStyle).length > 0
+          ? descriptionStyle
+          : undefined,
     },
     overview: {
       ...overview,

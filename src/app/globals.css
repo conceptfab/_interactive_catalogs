@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sora:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Sora:wght@300..800&family=Outfit:wght@300..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -63,6 +63,7 @@
 
     --font-display: 'Inter', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --font-qx: 'Sora', sans-serif;
 
     --section-padding: clamp(3rem, 6vw, 6rem);
   }
@@ -110,10 +111,12 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
   }
+
   h1,
   h2,
   h3,
@@ -129,8 +132,16 @@
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
   }
+
   .text-balance {
     text-wrap: balance;
+  }
+
+  .catalog-qx1 .qx-word {
+    font-family: var(--font-qx);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 }
 
@@ -139,6 +150,7 @@
   @apply absolute -top-10 left-4 z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-md;
   transition: top 0.2s;
 }
+
 .skip-link:focus {
   @apply top-4;
 }
@@ -152,6 +164,7 @@ html {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
@@ -172,9 +185,11 @@ html {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: hsl(var(--muted));
 }
+
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--muted-foreground) / 0.3);
   border-radius: 3px;
@@ -198,6 +213,172 @@ html {
 
 .catalog-qx0 #overview .rounded-2xl {
   border-radius: 0.25rem !important;
+}
+
+/* QX-1 dedicated visual direction: editorial + industrial warm neutral look */
+.catalog-qx1 {
+  --background: 42 27% 95%;
+  --foreground: 220 16% 13%;
+  --surface: 42 23% 90%;
+  --surface-elevated: 0 0% 100%;
+  --muted: 35 22% 86%;
+  --muted-foreground: 215 9% 32%;
+  /* Increased lightness for better readability on dark overlays */
+  --on-dark-muted: 0 0% 90%;
+  --on-dark-subtle: 0 0% 75%;
+  --border: 30 14% 74%;
+  --primary: 220 14% 12%;
+  --primary-foreground: 45 25% 96%;
+  --accent: 16 70% 43%;
+  --accent-foreground: 0 0% 98%;
+  --hero-overlay: 220 16% 11%;
+  --warm-light: 38 36% 87%;
+  --success: 145 24% 38%;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --radius: 1.1rem;
+  position: relative;
+  overflow: clip;
+}
+
+.catalog-qx1 .qx-giant {
+  color: hsl(var(--primary-foreground));
+  text-shadow: 0 20px 60px hsl(var(--hero-overlay) / 0.4);
+  overflow: visible;
+}
+
+.catalog-qx1::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(75rem 40rem at -10% -5%, hsl(18 74% 44% / 0.12), transparent 62%),
+    radial-gradient(55rem 32rem at 108% 20%, hsl(210 18% 24% / 0.12), transparent 64%),
+    linear-gradient(180deg, hsl(42 30% 97%), hsl(38 26% 93%));
+}
+
+.catalog-qx1::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 68%, hsl(18 70% 42% / 0.04) 68% 71%, transparent 71% 100%),
+    linear-gradient(20deg, transparent 0 18%, hsl(215 13% 20% / 0.05) 18% 21%, transparent 21% 100%);
+}
+
+.catalog-qx1 .skip-link {
+  border-radius: 999px;
+}
+
+.catalog-qx1 h1,
+.catalog-qx1 h2,
+.catalog-qx1 h3,
+.catalog-qx1 h4,
+.catalog-qx1 nav .font-display {
+  font-family: 'Outfit', var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.catalog-qx1 p,
+.catalog-qx1 li,
+.catalog-qx1 button,
+.catalog-qx1 dt,
+.catalog-qx1 dd,
+.catalog-qx1 span {
+  font-family: 'Manrope', var(--font-body);
+}
+
+.catalog-qx1 .section-padding {
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.catalog-qx1 .btn-premium {
+  @apply relative overflow-hidden transition-all duration-300;
+  backdrop-filter: blur(8px);
+  background: hsl(var(--accent) / 0.85);
+  border: 1px solid hsl(var(--accent-foreground) / 0.2);
+  letter-spacing: 0.15em;
+  box-shadow: 0 8px 32px -8px hsl(var(--accent) / 0.5);
+}
+
+.catalog-qx1 .btn-premium:hover {
+  @apply -translate-y-1;
+  background: hsl(var(--accent));
+  box-shadow: 0 12px 40px -8px hsl(var(--accent) / 0.6);
+  border-color: hsl(var(--accent-foreground) / 0.4);
+}
+
+.catalog-qx1 .btn-premium::before {
+  content: '';
+  @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  transition: transform 0.6s ease-in-out;
+}
+
+.catalog-qx1 .btn-premium:hover::before {
+  @apply translate-x-full;
+}
+
+.catalog-qx1 section {
+  position: relative;
+}
+
+.catalog-qx1 #cover {
+  min-height: 96svh;
+}
+
+.catalog-qx1 #cover .hero-overlay-layer {
+  background:
+    linear-gradient(180deg, hsl(var(--hero-overlay) / 0.24) 0%, hsl(var(--hero-overlay) / 0.78) 100%) !important;
+}
+
+.catalog-qx1 #cover h1 {
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+}
+
+.catalog-qx1 #cover button {
+  border-radius: 999px;
+}
+
+.catalog-qx1 #overview,
+.catalog-qx1 #variants,
+.catalog-qx1 #materials {
+  background: transparent !important;
+}
+
+.catalog-qx1 #gallery,
+.catalog-qx1 #dimensions,
+.catalog-qx1 #features {
+  background: hsl(0 0% 100% / 0.62) !important;
+}
+
+.catalog-qx1 #assembly {
+  background:
+    radial-gradient(50rem 30rem at 100% 100%, hsl(18 70% 52% / 0.05), transparent 60%),
+    linear-gradient(135deg, hsl(42 27% 98%) 0%, hsl(38 23% 94%) 100%) !important;
+  color: hsl(var(--foreground));
+}
+
+.catalog-qx1 #assembly .rounded-none {
+  border-radius: 1.25rem !important;
+}
+
+.catalog-qx1 .step-card {
+  @apply relative p-8 transition-all duration-500 border border-border/40;
+  background: hsl(0 0% 100% / 0.5);
+  backdrop-filter: blur(12px);
+}
+
+.catalog-qx1 .step-card:hover {
+  @apply -translate-y-2;
+  background: hsl(0 0% 100% / 0.8);
+  border-color: hsl(var(--accent) / 0.3);
+  box-shadow: 0 20px 40px -12px hsl(var(--hero-overlay) / 0.08);
 }
 
 /* QX-2 dedicated visual direction: minimalist + youthful tech feel */

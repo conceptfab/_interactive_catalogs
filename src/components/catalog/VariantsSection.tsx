@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { VariantsData } from '@/types/catalog';
+import { renderQxText } from './renderQxText';
 
 interface VariantsSectionProps {
   data: VariantsData;
@@ -29,14 +30,14 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
           className="text-center mb-12"
         >
           <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            {data.sectionLabel}
+            {renderQxText(data.sectionLabel)}
           </p>
           <h2
             id="variants-title"
             className="font-display font-bold text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
           >
-            {data.title}
+            {renderQxText(data.title)}
           </h2>
         </motion.div>
 
@@ -65,12 +66,12 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
             </div>
             <div className="mt-6 text-center" aria-live="polite">
               <p className="font-display font-semibold text-foreground text-lg">
-                {data.sizes[selectedSize].label.replace(' × ', '')}
+                {renderQxText(data.sizes[selectedSize].label)}
               </p>
               <p className="text-sm text-muted-foreground">
-                {data.desktopColors[selectedColor].name} /{' '}
-                {data.frameColors[selectedFrame].name} Frame /{' '}
-                {data.sizes[selectedSize].label} mm
+                {renderQxText(data.desktopColors[selectedColor].name)} /{' '}
+                {renderQxText(data.frameColors[selectedFrame].name)} Frame /{' '}
+                {renderQxText(data.sizes[selectedSize].label)} mm
               </p>
             </div>
           </motion.div>
@@ -86,8 +87,8 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                 Desktop Finish
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Select your desktop colour –{' '}
-                {data.desktopColors[selectedColor].name}
+                Select your desktop colour -{' '}
+                {renderQxText(data.desktopColors[selectedColor].name)}
                 {data.desktopColors[selectedColor].ral &&
                   ` (${data.desktopColors[selectedColor].ral})`}
               </p>
@@ -120,7 +121,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                 Frame Colour
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                {data.frameColors[selectedFrame].name}
+                {renderQxText(data.frameColors[selectedFrame].name)}
               </p>
               <div
                 className="flex gap-3"
@@ -148,7 +149,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
 
             <div>
               <h3 className="font-display font-semibold text-foreground mb-4">
-                Desk Size (W × D mm)
+                Desk Size
               </h3>
               <div
                 className="grid grid-cols-2 sm:grid-cols-3 gap-3"
@@ -168,9 +169,9 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                     }`}
                   >
                     <span className="font-display font-bold text-base block">
-                      {s.label}
+                      {renderQxText(s.label)}
                     </span>
-                    <span className="text-xs">{s.desc}</span>
+                    <span className="text-xs">{renderQxText(s.desc)}</span>
                   </button>
                 ))}
               </div>
@@ -188,10 +189,10 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                         Feature
                       </th>
                       <th className="text-left py-3 px-4 font-semibold text-foreground">
-                        {basicLabel}
+                        {renderQxText(basicLabel)}
                       </th>
                       <th className="text-left py-3 pl-4 font-semibold text-foreground">
-                        {premiumLabel}
+                        {renderQxText(premiumLabel)}
                       </th>
                     </tr>
                   </thead>
@@ -201,10 +202,10 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                         key={row.feature}
                         className="border-b border-border/50 last:border-0"
                       >
-                        <td className="py-3 pr-4">{row.feature}</td>
-                        <td className="py-3 px-4">{row.basic}</td>
+                        <td className="py-3 pr-4">{renderQxText(row.feature)}</td>
+                        <td className="py-3 px-4">{renderQxText(row.basic)}</td>
                         <td className="py-3 pl-4 text-foreground font-medium">
-                          {row.premium}
+                          {renderQxText(row.premium)}
                         </td>
                       </tr>
                     ))}

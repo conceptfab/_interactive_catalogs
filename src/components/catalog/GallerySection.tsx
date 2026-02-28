@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { GalleryData } from '@/types/catalog';
+import { renderQxText } from './renderQxText';
 
 interface GallerySectionProps {
   data: GalleryData;
@@ -35,14 +36,14 @@ const GallerySection = ({ data }: GallerySectionProps) => {
           className="text-center mb-12"
         >
           <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            {data.sectionLabel}
+            {renderQxText(data.sectionLabel)}
           </p>
           <h2
             id="gallery-title"
             className="font-display font-bold text-foreground"
             style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
           >
-            {data.title}
+            {renderQxText(data.title)}
           </h2>
         </motion.div>
 
@@ -72,7 +73,7 @@ const GallerySection = ({ data }: GallerySectionProps) => {
                 />
               </div>
               <span className="absolute bottom-3 left-3 bg-card/90 backdrop-blur-sm text-card-foreground text-xs font-medium px-3 py-1">
-                {img.category}
+                {renderQxText(img.category)}
               </span>
             </motion.button>
           ))}
@@ -128,12 +129,9 @@ const GallerySection = ({ data }: GallerySectionProps) => {
               className="max-w-full max-h-[85vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
             />
-            <p
-              className="absolute bottom-6 text-on-dark-muted text-sm"
-              aria-live="polite"
-            >
-              {lightboxIndex + 1} / {data.images.length} —{' '}
-              {data.images[lightboxIndex].category}
+            <p className="absolute bottom-6 text-on-dark-muted text-sm" aria-live="polite">
+              {lightboxIndex + 1} / {data.images.length} -{' '}
+              {renderQxText(data.images[lightboxIndex].category)}
             </p>
           </motion.div>
         )}

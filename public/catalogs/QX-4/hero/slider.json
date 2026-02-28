@@ -1,0 +1,50 @@
+{
+    "settings":  {
+                     "autoAdvance":  true,
+                     "interval":  5000,
+                     "pauseOnHover":  true,
+                     "transitionMs":  900,
+                     "showArrows":  true,
+                     "showDots":  true,
+                     "initialSlide":  0
+                 },
+    "slides":  [
+                   {
+                       "image":  "hero_00.jpg",
+                       "alt":  "QX desk system in a modern open-space office with people working",
+                       "description":  "Slide 01: Open-space layout with collaborative desks."
+                   },
+                   {
+                       "image":  "hero_01.jpg",
+                       "alt":  "QX desk with ergonomic chairs in a bright office interior",
+                       "description":  "Slide 02: Focus zone optimized for ergonomic work."
+                   },
+                   {
+                       "image":  "hero_02.jpg",
+                       "alt":  "QX modular desks arranged in a contemporary workspace",
+                       "description":  "Slide 03: Modular arrangement for team scalability."
+                   },
+                   {
+                       "image":  "hero_03.jpg",
+                       "alt":  "QX workstation detail in modern office environment",
+                       "description":  "Slide 04: Product detail highlighting finishes and precision."
+                   }
+               ],
+    "descriptionStyle":  {
+                             "enabled":  true,
+                             "position":  "bottom-right",
+                             "offsetPx":  36,
+                             "textColor":  "#FFE7CF",
+                             "backgroundColor":  "rgba(40,16,8,0.55)",
+                             "backdropBlurPx":  7,
+                             "paddingX":  16,
+                             "paddingY":  9,
+                             "borderRadiusPx":  12,
+                             "fontSizePx":  13,
+                             "fontWeight":  600,
+                             "letterSpacingEm":  0.03,
+                             "maxWidth":  "480px",
+                             "textAlign":  "right",
+                             "uppercase":  false
+                         }
+}

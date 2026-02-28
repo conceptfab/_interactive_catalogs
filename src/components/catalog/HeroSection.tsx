@@ -1,7 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
-import type { HeroData } from '@/types/catalog';
+import type {
+  HeroData,
+  HeroSlide,
+  HeroDescriptionPosition,
+  HeroDescriptionStyleConfig,
+} from '@/types/catalog';
+import { renderQxText } from './renderQxText';
 
 interface HeroSectionProps {
   data: HeroData;
@@ -17,18 +23,89 @@ const DEFAULT_SLIDER = {
   initialSlide: 0,
 };
 
+const DEFAULT_DESCRIPTION_STYLE: Required<HeroDescriptionStyleConfig> = {
+  enabled: true,
+  position: 'bottom-center',
+  offsetPx: 40,
+  textColor: 'hsl(var(--on-dark-muted))',
+  backgroundColor: 'rgba(0, 0, 0, 0.35)',
+  backdropBlurPx: 6,
+  paddingX: 16,
+  paddingY: 8,
+  borderRadiusPx: 9999,
+  fontSizePx: 13,
+  fontWeight: 500,
+  letterSpacingEm: 0.04,
+  maxWidth: '90vw',
+  textAlign: 'center',
+  uppercase: false,
+};
+
+function descriptionPositionClasses(position: HeroDescriptionPosition): string {
+  switch (position) {
+    case 'bottom-left':
+      return 'left-6';
+    case 'bottom-right':
+      return 'right-6';
+    case 'top-left':
+      return 'left-6';
+    case 'top-right':
+      return 'right-6';
+    case 'top-center':
+      return 'left-1/2 -translate-x-1/2';
+    case 'bottom-center':
+    default:
+      return 'left-1/2 -translate-x-1/2';
+  }
+}
+
 const HeroSection = ({ data }: HeroSectionProps) => {
   const slider = { ...DEFAULT_SLIDER, ...data.slider };
-  const images = data.heroImages ?? [];
-  const hasSlider = images.length > 0;
-  const displayImages = hasSlider ? images : [data.heroImage];
+  const fallbackSlides: HeroSlide[] = (data.heroImages ?? []).map(
+    (src, index, all) => ({
+      src,
+      alt:
+        index === 0
+          ? data.heroImageAlt
+          : `${data.heroImageAlt} - slide ${index + 1} of ${all.length}`,
+    }),
+  );
+  const configuredSlides: HeroSlide[] = data.heroSlides ?? fallbackSlides;
+  const hasSlider = configuredSlides.length > 0;
+  const displaySlides: HeroSlide[] = hasSlider
+    ? configuredSlides
+    : [{ src: data.heroImage, alt: data.heroImageAlt }];
   const initialIdx = Math.min(
     Math.max(0, slider.initialSlide ?? 0),
-    displayImages.length - 1,
+    displaySlides.length - 1,
   );
   const [currentIndex, setCurrentIndex] = useState(initialIdx);
   const [isHovered, setIsHovered] = useState(false);
-  const alt = data.heroImageAlt;
+  const descriptionStyle = {
+    ...DEFAULT_DESCRIPTION_STYLE,
+    ...data.descriptionStyle,
+  };
+  const descriptionPosClass = descriptionPositionClasses(
+    descriptionStyle.position,
+  );
+  const isTopDescription = descriptionStyle.position.startsWith('top');
+  const descriptionInlineStyle: CSSProperties = {
+    color: descriptionStyle.textColor,
+    backgroundColor: descriptionStyle.backgroundColor,
+    backdropFilter: `blur(${descriptionStyle.backdropBlurPx}px)`,
+    WebkitBackdropFilter: `blur(${descriptionStyle.backdropBlurPx}px)`,
+    padding: `${descriptionStyle.paddingY}px ${descriptionStyle.paddingX}px`,
+    borderRadius: `${descriptionStyle.borderRadiusPx}px`,
+    fontSize: `${descriptionStyle.fontSizePx}px`,
+    fontWeight: descriptionStyle.fontWeight,
+    letterSpacing: `${descriptionStyle.letterSpacingEm}em`,
+    maxWidth: descriptionStyle.maxWidth,
+    textAlign: descriptionStyle.textAlign,
+    textTransform: descriptionStyle.uppercase ? 'uppercase' : 'none',
+    ...(isTopDescription
+      ? { top: `${descriptionStyle.offsetPx}px` }
+      : { bottom: `${descriptionStyle.offsetPx}px` }),
+  };
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -36,36 +113,32 @@ const HeroSection = ({ data }: HeroSectionProps) => {
   const goTo = useCallback(
     (index: number) => {
       setCurrentIndex(
-        ((index % displayImages.length) + displayImages.length) %
-          displayImages.length,
+        ((index % displaySlides.length) + displaySlides.length) %
+        displaySlides.length,
       );
     },
-    [displayImages.length],
+    [displaySlides.length],
   );
 
-  const goPrev = useCallback(
-    () => goTo(currentIndex - 1),
-    [currentIndex, goTo],
-  );
-  const goNext = useCallback(
-    () => goTo(currentIndex + 1),
-    [currentIndex, goTo],
-  );
+  const goPrev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo]);
+  const goNext = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
 
   useEffect(() => {
     if (
       !hasSlider ||
-      displayImages.length <= 1 ||
+      displaySlides.length <= 1 ||
       prefersReducedMotion ||
       !slider.autoAdvance ||
       (slider.pauseOnHover && isHovered)
-    )
+    ) {
       return;
+    }
+
     const t = setInterval(goNext, slider.interval);
     return () => clearInterval(t);
   }, [
     hasSlider,
-    displayImages.length,
+    displaySlides.length,
     prefersReducedMotion,
     slider.autoAdvance,
     slider.interval,
@@ -111,15 +184,11 @@ const HeroSection = ({ data }: HeroSectionProps) => {
         aria-roledescription={hasSlider ? 'Image carousel' : undefined}
         aria-live={hasSlider ? 'polite' : undefined}
       >
-        {displayImages.map((src, i) => (
+        {displaySlides.map((slide, i) => (
           <img
-            key={src}
-            src={src}
-            alt={
-              i === 0
-                ? alt
-                : `${alt} — slide ${i + 1} of ${displayImages.length}`
-            }
+            key={`${slide.src}-${i}`}
+            src={slide.src}
+            alt={slide.alt}
             className="absolute inset-0 w-full h-full object-cover transition-opacity ease-out"
             style={{
               transitionDuration: `${slider.transitionMs}ms`,
@@ -133,7 +202,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
         <div className="hero-overlay-layer absolute inset-0 bg-[hsl(var(--hero-overlay)/0.65)] z-[2]" />
       </div>
 
-      {hasSlider && displayImages.length > 1 && (
+      {hasSlider && displaySlides.length > 1 && (
         <>
           {slider.showArrows && (
             <>
@@ -170,7 +239,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
               role="tablist"
               aria-label="Slide indicators"
             >
-              {displayImages.map((_, i) => (
+              {displaySlides.map((_, i) => (
                 <button
                   key={i}
                   type="button"
@@ -181,15 +250,27 @@ const HeroSection = ({ data }: HeroSectionProps) => {
                   className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2"
                 >
                   <span
-                    className={`block w-2 h-2 rounded-full transition-colors ${
-                      i === currentIndex ? 'bg-accent' : 'bg-on-dark-muted/60'
-                    }`}
+                    className={`block w-2 h-2 rounded-full transition-colors ${i === currentIndex ? 'bg-accent' : 'bg-on-dark-muted/60'
+                      }`}
                   />
                 </button>
               ))}
             </motion.div>
           )}
         </>
+      )}
+
+      {descriptionStyle.enabled && displaySlides[currentIndex]?.description && (
+        <motion.p
+          key={`slide-description-${currentIndex}`}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`absolute z-20 ${descriptionPosClass}`}
+          style={descriptionInlineStyle}
+          aria-live="polite"
+        >
+          {displaySlides[currentIndex].description}
+        </motion.p>
       )}
 
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -206,23 +287,43 @@ const HeroSection = ({ data }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="font-display font-bold text-primary-foreground leading-[0.95]"
-          style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
+          className="font-display font-bold text-primary-foreground leading-[0.8] flex flex-col items-center overflow-visible"
         >
-          {data.collectionName}
+          {data.collectionName.toLowerCase().includes('qx series') ? (
+            <>
+              <span
+                className="block text-[clamp(8rem,25vw,22rem)] tracking-tighter qx-giant py-4"
+                style={{ lineHeight: '0.9', fontFamily: "'Sora', sans-serif", fontWeight: 600 }}
+              >
+                QX
+              </span>
+              <span
+                className="block text-[clamp(1.5rem,4vw,3.5rem)] uppercase tracking-[0.5em] mt-2 opacity-90 font-light"
+              >
+                Series
+              </span>
+            </>
+          ) : (
+            <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
+              {renderQxText(data.collectionName)}
+            </span>
+          )}
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="text-on-dark-muted font-body text-lg md:text-xl mt-6 max-w-2xl mx-auto text-balance"
+          className="text-white/90 font-body text-lg md:text-xl mt-8 max-w-2xl mx-auto text-balance leading-relaxed"
+          style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
         >
-          {data.tagline}
+          {renderQxText(data.tagline)}
           {data.taglineLine2 && (
             <>
               <br className="hidden md:block" />
-              {data.taglineLine2}
+              <span className="opacity-80 font-light text-base md:text-lg block mt-2">
+                {renderQxText(data.taglineLine2)}
+              </span>
             </>
           )}
         </motion.p>
@@ -231,7 +332,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-10"
+          className="mt-12"
         >
           <button
             onClick={() =>
@@ -239,9 +340,10 @@ const HeroSection = ({ data }: HeroSectionProps) => {
                 .getElementById('overview')
                 ?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-8 py-4 rounded-md font-display font-semibold text-sm uppercase tracking-wider hover:opacity-90 transition-opacity min-h-[44px]"
+            className="btn-premium inline-flex items-center gap-3 bg-accent text-accent-foreground px-10 py-5 rounded-full font-display font-bold text-sm uppercase tracking-widest hover:opacity-100 min-h-[44px]"
           >
-            {data.ctaLabel}
+            <span>{data.ctaLabel}</span>
+            <ArrowDown size={18} className="animate-bounce" />
           </button>
         </motion.div>
       </div>
