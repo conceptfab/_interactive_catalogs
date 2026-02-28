@@ -29,10 +29,13 @@ function normalizeSlides(data: HeroData): HeroSlide[] {
   return padded;
 }
 
-function resolveHeroTitle(rawTitle: string | undefined, variant: 'qx3' | 'qx4') {
+function resolveHeroTitle(
+  rawTitle: string | undefined,
+  variant: 'qx3' | 'qx4',
+) {
   const cleaned = rawTitle?.trim();
   if (!cleaned || cleaned.toLowerCase() === 'qx series') {
-    return variant === 'qx3' ? 'QX-3 Dark Precision' : 'QX-4 Blush Warm';
+    return variant === 'qx3' ? 'QX-3 Dark Precision' : 'QX';
   }
   return cleaned;
 }
@@ -58,7 +61,9 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
   useEffect(() => {
     setMainIndex(0);
     setQx4ThumbOffset(1);
-    setQx4ThumbIndices([0, 1, 2].map((slot) => thumbIndex(slides.length, 0, slot)));
+    setQx4ThumbIndices(
+      [0, 1, 2].map((slot) => thumbIndex(slides.length, 0, slot)),
+    );
   }, [slides.length]);
 
   useEffect(() => {
@@ -96,7 +101,9 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
   useEffect(() => {
     if (variant !== 'qx4') return;
     setQx4ThumbIndices(
-      [0, 1, 2].map((slot) => (mainIndex + qx4ThumbOffset + slot) % slides.length),
+      [0, 1, 2].map(
+        (slot) => (mainIndex + qx4ThumbOffset + slot) % slides.length,
+      ),
     );
   }, [mainIndex, qx4ThumbOffset, slides.length, variant]);
 
@@ -151,7 +158,9 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
             </AnimatePresence>
 
             <div className="absolute left-4 top-4 z-[3] flex gap-2 text-[10px] uppercase tracking-[0.24em] text-on-dark-muted sm:left-8 sm:top-8">
-              <span className="border border-border/70 bg-background/40 px-3 py-1 text-primary-foreground">QX-3</span>
+              <span className="border border-border/70 bg-background/40 px-3 py-1 text-primary-foreground">
+                QX-3
+              </span>
               <span className="border border-border/70 bg-background/40 px-3 py-1">
                 Frame {pad2(mainIndex + 1)}
               </span>
@@ -164,7 +173,11 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
                 </h1>
                 <p className="max-w-2xl text-sm text-on-dark-muted sm:text-base">
                   <span className="block">{renderQxText(qx3TaglineLine1)}</span>
-                  {qx3TaglineLine2 ? <span className="block">{renderQxText(qx3TaglineLine2)}</span> : null}
+                  {qx3TaglineLine2 ? (
+                    <span className="block">
+                      {renderQxText(qx3TaglineLine2)}
+                    </span>
+                  ) : null}
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <button
@@ -186,10 +199,15 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
 
           <div
             className="grid grid-cols-1 gap-[2px] lg:min-h-[100svh]"
-            style={{ gridTemplateRows: `repeat(${qx3PreviewSlides.length}, minmax(0, 1fr))` }}
+            style={{
+              gridTemplateRows: `repeat(${qx3PreviewSlides.length}, minmax(0, 1fr))`,
+            }}
           >
             {qx3PreviewSlides.map(({ slide, keyIndex }, slot) => (
-              <div key={`qx3-preview-${slot}`} className="qx3-preview relative min-h-[18svh] overflow-hidden">
+              <div
+                key={`qx3-preview-${slot}`}
+                className="qx3-preview relative min-h-[18svh] overflow-hidden"
+              >
                 <img
                   key={`qx3-preview-image-${slot}-${keyIndex}`}
                   src={slide.src}
@@ -258,7 +276,10 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
               </p>
 
               {mainSlide.description && (
-                <p className="mt-4 text-xs uppercase tracking-[0.16em] text-accent/90" aria-live="polite">
+                <p
+                  className="mt-4 text-xs uppercase tracking-[0.16em] text-accent/90"
+                  aria-live="polite"
+                >
                   {renderQxText(mainSlide.description)}
                 </p>
               )}
@@ -279,7 +300,10 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
         {[0, 1, 2].map((slot) => {
           const slide = slides[qx4ThumbIndices[slot] % slides.length];
           return (
-            <div key={`thumb-slot-${slot}`} className="hero-thumb relative min-h-[20svh] overflow-hidden">
+            <div
+              key={`thumb-slot-${slot}`}
+              className="hero-thumb relative min-h-[20svh] overflow-hidden"
+            >
               <AnimatePresence mode="sync">
                 <motion.img
                   key={`thumb-${slot}-${qx4ThumbIndices[slot]}`}

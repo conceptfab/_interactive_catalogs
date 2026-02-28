@@ -22,7 +22,10 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
       className="section-padding relative overflow-hidden"
       aria-labelledby="assembly-title"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        ref={ref}
+      >
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -34,7 +37,10 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
           <h2
             id="assembly-title"
             className="font-display font-bold text-foreground"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.03em' }}
+            style={{
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              letterSpacing: '-0.03em',
+            }}
           >
             {renderQxText(data.title)}
           </h2>
@@ -49,8 +55,7 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
               transition={{ delay: 0.1 + i * 0.1 }}
               className={`step-card ${i % 2 === 1 ? 'lg:translate-y-12' : ''}`}
             >
-
-              <div className="flex items-start gap-6 group">
+              <div className="flex items-start gap-6 group p-6 lg:p-10">
                 <div className="step-number font-display font-medium text-foreground/20 text-6xl leading-none transition-colors group-hover:text-accent/40 shrink-0">
                   {s.step}
                 </div>
@@ -80,7 +85,8 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
                 Product Codes
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Use these unique codes when placing your order or specifying modules for your workspace.
+                Use these unique codes when placing your order or specifying
+                modules for your workspace.
               </p>
             </div>
             <div className="lg:w-2/3 w-full">
@@ -98,10 +104,7 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
                   </thead>
                   <tbody className="divide-y divide-border/20">
                     {data.orderCodes.map((o) => (
-                      <tr
-                        key={o.code}
-                        className="group transition-colors"
-                      >
+                      <tr key={o.code} className="group transition-colors">
                         <td className="py-4 pr-4">
                           <span className="font-mono text-xs font-bold px-2 py-1 bg-foreground/5 rounded-md text-foreground group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
                             {o.code}

@@ -345,7 +345,7 @@ const CatalogNav = ({
             <div
               className={`flex items-center justify-between gap-3 border px-3 sm:px-4 py-2 backdrop-blur-2xl transition-colors ${
                 scrolled || isOpen
-                  ? 'bg-[hsl(20_18%_99%/0.94)] border-[hsl(15_20%_82%/0.95)] shadow-[0_14px_34px_hsl(340_30%_40%/0.12)]'
+                  ? 'bg-[hsl(20_18%_99%/0.94)] border-[hsl(15_20%_82%/0.95)] shadow-[0_14px_34px_hsl(25_30%_40%/0.12)]'
                   : 'bg-[hsl(20_18%_99%/0.82)] border-[hsl(15_20%_82%/0.7)]'
               }`}
             >
@@ -384,9 +384,6 @@ const CatalogNav = ({
                         activeSection === section.id ? 'true' : undefined
                       }
                     >
-                      <span className="font-mono text-[10px] opacity-70">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
                       <span className="font-display font-medium">
                         {renderQxText(section.label)}
                       </span>
@@ -426,9 +423,6 @@ const CatalogNav = ({
                           : 'text-muted-foreground hover:text-foreground'
                       }`}
                     >
-                      <span className="font-mono text-[10px] opacity-70">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
                       <span className="font-display font-medium">
                         {renderQxText(section.label)}
                       </span>

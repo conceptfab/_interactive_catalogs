@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Sora:wght@300..800&family=Outfit:wght@300..800&family=Roboto+Mono:wght@300..700&family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300..700&family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Sora:wght@300..800&family=Outfit:wght@300..800&family=Roboto+Mono:wght@300..700&family=Roboto:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -1087,21 +1087,21 @@ html {
   transform: none;
 }
 
-/* QX-4 dedicated visual direction: blush warm */
+/* QX-4 dedicated visual direction: warm amber lifestyle */
 .catalog-qx4 {
-  --background: 15 30% 96%;
-  --foreground: 10 18% 18%;
-  --surface: 18 28% 91%;
-  --surface-elevated: 20 18% 99%;
-  --muted: 18 22% 87%;
-  --muted-foreground: 10 12% 42%;
-  --border: 15 20% 82%;
-  --primary: 10 18% 18%;
-  --primary-foreground: 20 18% 99%;
-  --accent: 340 42% 52%;
+  --background: 30 25% 96%;
+  --foreground: 25 14% 18%;
+  --surface: 28 22% 91%;
+  --surface-elevated: 30 15% 99%;
+  --muted: 28 18% 87%;
+  --muted-foreground: 25 10% 42%;
+  --border: 28 16% 82%;
+  --primary: 25 14% 18%;
+  --primary-foreground: 30 15% 99%;
+  --accent: 25 55% 48%;
   --accent-foreground: 0 0% 100%;
-  --hero-overlay: 340 30% 20%;
-  --warm-light: 20 40% 90%;
+  --hero-overlay: 25 30% 16%;
+  --warm-light: 30 40% 90%;
   --font-display: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
   --radius: 1.25rem;
@@ -1118,10 +1118,10 @@ html {
   background:
     radial-gradient(
       60rem 40rem at 30% -10%,
-      hsl(340 50% 80% / 0.12),
+      hsl(30 45% 75% / 0.12),
       transparent 60%
     ),
-    linear-gradient(180deg, hsl(15 30% 97%), hsl(18 25% 94%));
+    linear-gradient(180deg, hsl(30 25% 97%), hsl(28 20% 94%));
 }
 
 .catalog-qx4 nav {
@@ -1147,6 +1147,11 @@ html {
 .catalog-qx4 .qx4-nav-link.is-active::after,
 .catalog-qx4 .qx4-nav-link[aria-current='true']::after {
   height: 3px;
+}
+
+.catalog-qx4 {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Outfit', sans-serif;
 }
 
 .catalog-qx4 section {
@@ -1178,8 +1183,8 @@ html {
 .catalog-qx4 #cover .hero-overlay-layer {
   background: linear-gradient(
     180deg,
-    hsl(12 40% 18% / 0.18) 0%,
-    hsl(340 30% 20% / 0.72) 100%
+    hsl(25 30% 18% / 0.18) 0%,
+    hsl(25 25% 16% / 0.72) 100%
   ) !important;
 }
 
@@ -1212,29 +1217,9 @@ html {
   font-weight: 400;
 }
 
-.catalog-qx4 main img {
-  filter: sepia(12%) saturate(115%) hue-rotate(-8deg) brightness(1.03);
-}
-
-.catalog-qx4 #cover img {
-  filter: sepia(20%) saturate(120%) hue-rotate(-10deg) brightness(1)
-    contrast(0.95);
-}
-
-.catalog-qx4 #cover .hero-main img {
-  filter: sepia(20%) saturate(120%) hue-rotate(-10deg);
-}
-
-.catalog-qx4 #cover .hero-thumb-image-1 {
-  filter: sepia(10%) saturate(110%) hue-rotate(-5deg) brightness(1.05);
-}
-
-.catalog-qx4 #cover .hero-thumb-image-2 {
-  filter: sepia(15%) saturate(125%) hue-rotate(-12deg);
-}
-
-.catalog-qx4 #cover .hero-thumb-image-3 {
-  filter: sepia(8%) saturate(108%) hue-rotate(-6deg) brightness(1.08);
+/* Single unified warm filter for all images — golden hour feel */
+.catalog-qx4 img {
+  filter: sepia(0.12) saturate(1.15) brightness(1.03);
 }
 
 .catalog-qx4 #overview figure,
@@ -1244,21 +1229,14 @@ html {
 
 .catalog-qx4 #overview figure::after,
 .catalog-qx4 #gallery .group::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: hsl(15 60% 60% / 0.06);
-  mix-blend-mode: multiply;
-  pointer-events: none;
+  display: none;
 }
 
 .catalog-qx4 .step-card,
 .catalog-qx4 #features [role='tabpanel'],
-.catalog-qx4 #dimensions .lg\:col-span-2,
 .catalog-qx4 #materials figure {
   border: 1px solid hsl(var(--border));
-  box-shadow: 0 4px 20px hsl(340 30% 50% / 0.06);
+  box-shadow: 0 4px 20px hsl(25 30% 40% / 0.06);
   background: hsl(var(--surface-elevated));
 }
 
@@ -1304,4 +1282,3 @@ html {
     min-height: 22svh;
   }
 }
-
