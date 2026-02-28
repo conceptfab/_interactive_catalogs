@@ -552,21 +552,9 @@ html {
   border-radius: 4px !important;
 }
 
-/* Restyle gallery category labels: 2x larger, no background, bottom-right */
+/* Hide gallery category labels instead of restyling them */
 .catalog-qx2 #gallery span {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  padding: 0 !important;
-  font-size: 1.5rem !important;
-  font-family: var(--font-display) !important;
-  font-weight: 500 !important;
-  color: hsl(var(--foreground)) !important;
-  bottom: 1.5rem !important;
-  right: 1.5rem !important;
-  left: auto !important;
-  text-align: right !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 2px rgba(255, 255, 255, 0.4);
-  /* Stronger shadow for readability */
+  display: none !important;
 }
 
 /* Specific sections that might need container rounded corners too */
@@ -673,13 +661,12 @@ html {
   gap: 3rem;
 }
 
-.catalog-qx2 nav ul.justify-end {
-  justify-content: flex-start !important;
-}
+
 
 /* Restyle section labels: 4x larger, weight 100 - ONLY for headers */
 .catalog-qx2 section .text-center p.text-accent,
-.catalog-qx2 #assembly .text-center p.text-accent {
+.catalog-qx2 #assembly .text-center p.text-accent,
+.catalog-qx2 #overview p.text-accent {
   font-size: clamp(2rem, 6vw, 3.5rem) !important;
   font-weight: 100 !important;
   letter-spacing: 0.1em !important;
@@ -789,7 +776,7 @@ html {
   border-bottom: 6px solid transparent !important;
   border-radius: 0 !important;
   background: transparent !important;
-  padding: 0.5rem 1rem 0.25rem 1rem !important;
+  padding: 0.5rem 1rem 0 1rem !important;
   margin: 0 4px !important;
   height: auto !important;
   min-height: 48px !important;

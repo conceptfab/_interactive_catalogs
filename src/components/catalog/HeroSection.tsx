@@ -322,14 +322,14 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className={`text-white/90 font-body text-lg md:text-xl mt-8 max-w-2xl text-balance leading-relaxed ${catalogId?.toUpperCase() === 'QX-2' ? 'ml-0' : 'mx-auto'}`}
+          className={`font-body text-lg md:text-xl mt-8 max-w-2xl text-balance leading-relaxed ${catalogId?.toUpperCase() === 'QX-2' ? 'ml-0 text-white opacity-100' : 'mx-auto text-white/90'}`}
           style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
         >
           {renderQxText(data.tagline)}
           {data.taglineLine2 && (
             <>
               <br className="hidden md:block" />
-              <span className="opacity-80 font-light text-base md:text-lg block mt-2">
+              <span className={`block mt-2 ${catalogId?.toUpperCase() === 'QX-2' ? 'font-normal text-white opacity-100' : 'opacity-80 font-light text-base md:text-lg'}`}>
                 {renderQxText(data.taglineLine2)}
               </span>
             </>
@@ -348,7 +348,10 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
                 .getElementById('overview')
                 ?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="btn-premium inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-display font-bold text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors shadow-lg min-h-[44px]"
+            className={`btn-premium inline-flex items-center gap-3 px-8 py-4 rounded-full font-display font-bold text-sm uppercase tracking-widest transition-colors min-h-[44px] ${catalogId?.toUpperCase() === 'QX-2'
+              ? 'text-white hover:text-white/80 bg-transparent'
+              : 'bg-accent text-accent-foreground hover:opacity-100'
+              }`}
           >
             <span>{data.ctaLabel}</span>
             <ArrowDown size={18} className="animate-bounce" />

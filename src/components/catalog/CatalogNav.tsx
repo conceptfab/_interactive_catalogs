@@ -118,11 +118,11 @@ const CatalogNav = ({
         <nav
           role="navigation"
           aria-label="Catalog sections"
-          className="fixed top-3 left-0 right-0 z-[60]"
+          className="fixed top-0 left-0 right-0 z-[60]"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-transparent shadow-[0_8px_22px_hsl(220_10%_10%/0.06)]">
-              <div className="flex items-center gap-2 p-1.5">
+              <div className="flex items-center gap-2 px-1.5 pt-1.5 pb-0">
                 {backToCatalogListHref ? (
                   <a
                     href={backToCatalogListHref}
@@ -142,7 +142,7 @@ const CatalogNav = ({
                 )}
 
                 <ul
-                  className="hidden lg:flex items-center gap-1 flex-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                  className="hidden lg:flex items-center gap-1 flex-1 justify-end overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                   role="list"
                 >
                   {visibleSections.map((section, idx) => (
