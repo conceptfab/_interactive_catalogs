@@ -49,7 +49,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
             className="sticky top-24"
           >
             <div
-              className="w-full bg-surface/30 mix-blend-multiply p-8 lg:p-12 flex justify-center items-center relative transition-all duration-300 group"
+              className="relative aspect-square w-full overflow-hidden bg-surface/30 mix-blend-multiply"
               style={{
                 filter:
                   selectedColor > 2
@@ -60,7 +60,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
               <img
                 src={data.previewImage}
                 alt={`Desk in ${data.desktopColors[selectedColor].name} finish with ${data.frameColors[selectedFrame].name} frame`}
-                className="w-full h-auto object-contain max-h-[500px] group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"
               />
             </div>

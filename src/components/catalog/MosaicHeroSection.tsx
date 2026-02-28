@@ -37,11 +37,6 @@ function resolveHeroTitle(rawTitle: string | undefined, variant: 'qx3' | 'qx4') 
   return cleaned;
 }
 
-const clipRevealTransition = {
-  duration: 0.5,
-  ease: [0.25, 0, 0, 1] as const,
-};
-
 const blendTransition = {
   duration: 1.2,
   ease: 'easeInOut' as const,
@@ -59,54 +54,24 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
   const [qx4ThumbIndices, setQx4ThumbIndices] = useState(() =>
     [0, 1, 2].map((slot) => thumbIndex(slides.length, 0, slot)),
   );
-  const [qx3PreviewIndices, setQx3PreviewIndices] = useState<[number, number]>([
-    1,
-    2,
-  ]);
-  const [qx3DiagnosticTick, setQx3DiagnosticTick] = useState(0);
 
   useEffect(() => {
     setMainIndex(0);
     setQx4ThumbOffset(1);
     setQx4ThumbIndices([0, 1, 2].map((slot) => thumbIndex(slides.length, 0, slot)));
-    setQx3PreviewIndices([1 % slides.length, 2 % slides.length]);
-    setQx3DiagnosticTick(0);
   }, [slides.length]);
 
   useEffect(() => {
     if (variant !== 'qx3') return;
     if (slides.length <= 1) return;
 
-    let mounted = true;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-
     const cycle = () => {
-      setMainIndex((previousIndex) => {
-        const nextMainIndex = (previousIndex + 1) % slides.length;
-        const nextPreviewA = (nextMainIndex + 1) % slides.length;
-        const nextPreviewB = (nextMainIndex + 2) % slides.length;
-
-        const previewATimer = setTimeout(() => {
-          if (!mounted) return;
-          setQx3PreviewIndices((prev) => [nextPreviewA, prev[1]]);
-        }, 150);
-        const previewBTimer = setTimeout(() => {
-          if (!mounted) return;
-          setQx3PreviewIndices((prev) => [prev[0], nextPreviewB]);
-        }, 300);
-
-        timers.push(previewATimer, previewBTimer);
-        return nextMainIndex;
-      });
-
-      setQx3DiagnosticTick((prev) => prev + 1);
+      setMainIndex((previousIndex) => (previousIndex + 1) % slides.length);
     };
 
     const interval = setInterval(cycle, 6000);
     return () => {
-      mounted = false;
       clearInterval(interval);
-      timers.forEach((timer) => clearTimeout(timer));
     };
   }, [slides.length, variant]);
 
@@ -138,19 +103,30 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
   const mainSlide = slides[mainIndex];
   const heroTitle = resolveHeroTitle(data.collectionName, variant);
 
-  const qx3PreviewSlides = qx3PreviewIndices.map(
-    (index) => slides[index % slides.length],
+  const qx3PreviewSlides = Array.from(
+    { length: Math.max(0, slides.length - 1) },
+    (_, offset) => {
+      const keyIndex = (mainIndex + offset + 1) % slides.length;
+      return {
+        slide: slides[keyIndex],
+        keyIndex,
+      };
+    },
   );
-
-  const qx3Meters = [
-    28 + ((mainIndex + qx3DiagnosticTick * 2) % 58),
-    25 + ((mainIndex * 2 + qx3DiagnosticTick * 3) % 62),
-    30 + ((mainIndex * 3 + qx3DiagnosticTick * 4) % 55),
-  ];
 
   const scrollToOverview = () => {
     document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const [qx3TaglineLine1, qx3TaglineLine2] = (() => {
+    if (data.taglineLine2) return [data.tagline, data.taglineLine2] as const;
+    const splitIndex = data.tagline.indexOf('. ');
+    if (splitIndex === -1) return [data.tagline, undefined] as const;
+    return [
+      data.tagline.slice(0, splitIndex + 1),
+      data.tagline.slice(splitIndex + 2),
+    ] as const;
+  })();
 
   if (variant === 'qx3') {
     return (
@@ -159,41 +135,36 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
         className="relative overflow-hidden text-primary-foreground"
         aria-label={`${heroTitle} Collection cover`}
       >
-        <div className="hero-qx3-grid grid min-h-[100svh] grid-cols-1 gap-[2px] lg:grid-cols-[68fr_32fr] lg:grid-rows-[1fr_auto_1fr]">
-          <div className="hero-main relative min-h-[60svh] overflow-hidden lg:row-span-3 lg:min-h-0">
+        <div className="hero-qx3-grid grid min-h-[100svh] grid-cols-1 gap-[2px] lg:grid-cols-[68fr_32fr]">
+          <div className="hero-main relative min-h-[60svh] overflow-hidden lg:min-h-[100svh]">
             <AnimatePresence mode="sync">
               <motion.img
                 key={`main-qx3-${mainIndex}`}
                 src={mainSlide.src}
                 alt={mainSlide.alt}
                 className="absolute inset-0 h-full w-full object-cover"
-                initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-                animate={{ opacity: 1, clipPath: 'inset(0 0 0 0)' }}
-                exit={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-                transition={clipRevealTransition}
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.55, ease: [0.25, 0, 0, 1] }}
               />
             </AnimatePresence>
 
-            <div className="hero-overlay-layer absolute inset-0 z-[1] bg-[hsl(var(--hero-overlay)/0.78)]" />
-
             <div className="absolute left-4 top-4 z-[3] flex gap-2 text-[10px] uppercase tracking-[0.24em] text-on-dark-muted sm:left-8 sm:top-8">
-              <span className="border border-border/70 bg-background/40 px-3 py-1">QX-3</span>
+              <span className="border border-border/70 bg-background/40 px-3 py-1 text-primary-foreground">QX-3</span>
               <span className="border border-border/70 bg-background/40 px-3 py-1">
                 Frame {pad2(mainIndex + 1)}
               </span>
             </div>
 
             <div className="qx3-hero-copy absolute inset-x-0 bottom-0 z-[3] px-4 pb-6 sm:px-8 sm:pb-10">
-              <div className="max-w-3xl border border-border/70 bg-[hsl(var(--background)/0.35)] p-5 backdrop-blur-sm sm:p-8">
-                <p className="font-body text-[11px] uppercase tracking-[0.3em] text-on-dark-muted">
-                  {renderQxText(data.brandLabel || 'METRO')}
-                </p>
-                <h1 className="mt-3 font-display text-[clamp(2.4rem,6.4vw,5.6rem)] font-light uppercase leading-[0.82] tracking-[0.04em] text-primary-foreground">
-                  {renderQxText(heroTitle)}
+              <div className="max-w-3xl p-5 sm:p-8">
+                <h1 className="font-display text-[clamp(4.8rem,12.8vw,11.2rem)] font-light uppercase leading-[0.82] tracking-[0.04em] text-primary-foreground">
+                  {renderQxText('QX')}
                 </h1>
-                <p className="mt-4 max-w-2xl text-sm text-on-dark-muted sm:text-base">
-                  {renderQxText(data.tagline)}
-                  {data.taglineLine2 ? ` ${renderQxText(data.taglineLine2)}` : ''}
+                <p className="max-w-2xl text-sm text-on-dark-muted sm:text-base">
+                  <span className="block">{renderQxText(qx3TaglineLine1)}</span>
+                  {qx3TaglineLine2 ? <span className="block">{renderQxText(qx3TaglineLine2)}</span> : null}
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <button
@@ -213,65 +184,23 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
             </div>
           </div>
 
-          {[0, 1].map((slot) => {
-            const preview = qx3PreviewSlides[slot];
-            return (
-              <div
-                key={`qx3-preview-${slot}`}
-                className={`qx3-preview relative overflow-hidden ${
-                  slot === 0 ? 'min-h-[22svh]' : 'min-h-[22svh] lg:row-start-3'
-                }`}
-              >
-                <AnimatePresence mode="sync">
-                  <motion.img
-                    key={`qx3-preview-image-${slot}-${qx3PreviewIndices[slot]}`}
-                    src={preview.src}
-                    alt={preview.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-                    animate={{ opacity: 1, clipPath: 'inset(0 0 0 0)' }}
-                    exit={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-                    transition={clipRevealTransition}
-                  />
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-[hsl(var(--hero-overlay)/0.58)]" />
+          <div
+            className="grid grid-cols-1 gap-[2px] lg:min-h-[100svh]"
+            style={{ gridTemplateRows: `repeat(${qx3PreviewSlides.length}, minmax(0, 1fr))` }}
+          >
+            {qx3PreviewSlides.map(({ slide, keyIndex }, slot) => (
+              <div key={`qx3-preview-${slot}`} className="qx3-preview relative min-h-[18svh] overflow-hidden">
+                <img
+                  key={`qx3-preview-image-${slot}-${keyIndex}`}
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="absolute inset-0 h-full w-full object-cover opacity-55"
+                />
                 <p className="absolute bottom-3 left-3 z-[2] text-[10px] uppercase tracking-[0.24em] text-on-dark-muted">
                   Feed {pad2(slot + 1)}
                 </p>
               </div>
-            );
-          })}
-
-          <div className="qx3-diagnostics relative border-y border-border/70 bg-[hsl(var(--surface)/0.92)] p-4 lg:col-start-2 lg:row-start-2 lg:row-end-3 lg:border-y-0 lg:border-t lg:border-b">
-            <div className="mb-3 flex items-center justify-between border-b border-border/70 pb-2">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-on-dark-muted">Diagnostics</p>
-              <span className="text-[10px] uppercase tracking-[0.22em] text-accent">Live</span>
-            </div>
-
-            <div className="space-y-3">
-              {qx3Meters.map((meter, index) => (
-                <div key={`qx3-meter-${index}`} className="space-y-1">
-                  <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-on-dark-subtle">
-                    <span>{['Sync', 'Telemetry', 'Stability'][index]}</span>
-                    <span>{pad2(meter)}%</span>
-                  </div>
-                  <div className="h-[3px] bg-border/70">
-                    <motion.div
-                      key={`qx3-meter-bar-${index}-${qx3DiagnosticTick}`}
-                      className="h-full bg-accent"
-                      initial={{ width: '12%' }}
-                      animate={{ width: `${meter}%` }}
-                      transition={{ duration: 0.3, ease: [0.25, 0, 0, 1] }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-4 border-t border-border/70 pt-3 text-[10px] uppercase tracking-[0.2em] text-on-dark-subtle">
-              <p>Module set: QX/{pad2((mainIndex + 1) * 7)}</p>
-              <p className="mt-1">Cycle: {pad2(qx3DiagnosticTick + 1)}</p>
-            </div>
+            ))}
           </div>
         </div>
 

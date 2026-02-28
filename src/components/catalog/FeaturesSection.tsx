@@ -110,7 +110,7 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
               );
             })()}
 
-            <div className="mt-12 bg-muted/50 p-8 rounded-xl">
+            <div className="mt-12 p-8 rounded-xl">
               <div className="flex items-center justify-center h-40">
                 <motion.div
                   className="w-48 h-3 bg-border rounded-full relative"
@@ -139,3 +139,4 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
 };
 
 export default FeaturesSection;
+

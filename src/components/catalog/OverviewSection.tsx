@@ -72,11 +72,11 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
             className="w-full flex justify-center lg:justify-end"
           >
             <figure className="w-full overflow-hidden bg-transparent">
-              <div className="relative aspect-auto bg-surface/50 mix-blend-multiply flex items-center justify-center p-8 lg:p-12">
+              <div className="relative aspect-square w-full overflow-hidden">
                 <img
                   src={data.packshotImage}
                   alt={data.packshotImageAlt}
-                  className="w-full h-auto object-contain max-h-[600px] hover:scale-[1.03] transition-transform duration-700 ease-out"
+                  className="absolute inset-0 h-full w-full object-cover"
                   loading="lazy"
                 />
               </div>

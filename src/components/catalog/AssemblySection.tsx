@@ -71,7 +71,7 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="bg-white/40 backdrop-blur-md border border-border/50 p-8 lg:p-12 mb-16 rounded-2xl shadow-xl shadow-foreground/5"
+          className="assembly-codes-panel bg-white/40 backdrop-blur-md border border-border/50 p-8 lg:p-12 mb-16 rounded-2xl shadow-xl shadow-foreground/5"
         >
           <div className="flex flex-col lg:flex-row gap-12 items-start">
             <div className="lg:w-1/3">
