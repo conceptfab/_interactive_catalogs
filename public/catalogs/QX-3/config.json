@@ -1,19 +1,19 @@
 {
   "meta": {
-    "title": "QX Series | METRO",
-    "description": "QX Series – Modular desk system engineered for the modern workspace.",
+    "title": "QX-3 Dark Precision | METRO",
+    "description": "QX-3 Dark Precision - premium dark modular desk system engineered for focused work.",
     "brandName": "METRO",
-    "collectionName": "QX Series",
-    "theme": "qx0"
+    "collectionName": "QX-3 Dark Precision",
+    "theme": "qx3"
   },
   "sections": [
     { "id": "cover", "label": "Cover" },
     { "id": "overview", "label": "Overview" },
     { "id": "gallery", "label": "Gallery" },
-    { "id": "variants", "label": "Variants" },
-    { "id": "dimensions", "label": "Dimensions" },
+    { "id": "variants", "label": "Loadout" },
+    { "id": "dimensions", "label": "Specs" },
     { "id": "materials", "label": "Materials" },
     { "id": "features", "label": "Features" },
-    { "id": "assembly", "label": "Assembly" }
+    { "id": "assembly", "label": "Deploy" }
   ]
 }

@@ -6,6 +6,7 @@ import { loadCatalog, getGlobalConfig } from '@/lib/catalog-loader';
 import type { CatalogData } from '@/types/catalog';
 import CatalogNav from '@/components/catalog/CatalogNav';
 import HeroSection from '@/components/catalog/HeroSection';
+import MosaicHeroSection from '@/components/catalog/MosaicHeroSection';
 import OverviewSection from '@/components/catalog/OverviewSection';
 import GallerySection from '@/components/catalog/GallerySection';
 import VariantsSection from '@/components/catalog/VariantsSection';
@@ -85,10 +86,18 @@ export default function CatalogPage() {
       ? 'qx2'
       : catalog.meta.theme === 'qx1'
         ? 'qx1'
+        : catalog.meta.theme === 'qx3'
+          ? 'qx3'
+          : catalog.meta.theme === 'qx4'
+            ? 'qx4'
         : 'default';
   const normalizedCatalogId = catalogId?.toUpperCase();
   const isQx0 = normalizedCatalogId === 'QX-0';
   const isQx1 = normalizedCatalogId === 'QX-1';
+  const isQx3 = normalizedCatalogId === 'QX-3';
+  const isQx4 = normalizedCatalogId === 'QX-4';
+  const isMosaicTheme =
+    catalog.meta.theme === 'qx3' || catalog.meta.theme === 'qx4';
 
   return (
     <div className={themeClassName}>
@@ -106,6 +115,10 @@ export default function CatalogPage() {
             ? '/catalogs/QX-0/metro_logo.svg'
             : isQx1
               ? '/catalogs/QX-1/metro_logo.svg'
+              : isQx3
+                ? '/catalogs/QX-3/metro_logo.svg'
+                : isQx4
+                  ? '/catalogs/QX-4/metro_logo.svg'
               : undefined
         }
         backToCatalogListHref="/"
@@ -113,7 +126,14 @@ export default function CatalogPage() {
       />
 
       <main id="main-content" lang="en">
-        <HeroSection data={catalog.hero} catalogId={catalogId} />
+        {isMosaicTheme ? (
+          <MosaicHeroSection
+            data={catalog.hero}
+            variant={catalog.meta.theme as 'qx3' | 'qx4'}
+          />
+        ) : (
+          <HeroSection data={catalog.hero} catalogId={catalogId} />
+        )}
         <OverviewSection data={catalog.overview} />
         <GallerySection data={catalog.gallery} />
         <VariantsSection data={catalog.variants} />
