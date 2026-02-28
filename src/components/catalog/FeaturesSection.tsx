@@ -60,7 +60,7 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                     size={24}
                     className={
                       activeFeature === i
-                        ? 'text-accent'
+                        ? 'text-background'
                         : 'text-muted-foreground group-hover:text-foreground'
                     }
                   />

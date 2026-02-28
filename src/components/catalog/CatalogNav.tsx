@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import type { SectionConfig } from '@/types/catalog';
 
 const DEFAULT_SECTIONS: SectionConfig[] = [
@@ -17,6 +18,7 @@ const DEFAULT_SECTIONS: SectionConfig[] = [
 interface CatalogNavProps {
   sections?: SectionConfig[];
   brandLabel?: string;
+  brandLogoSrc?: string;
   backToCatalogListHref?: string;
   variant?: 'default' | 'qx1' | 'qx2';
 }
@@ -24,6 +26,7 @@ interface CatalogNavProps {
 const CatalogNav = ({
   sections = DEFAULT_SECTIONS,
   brandLabel = 'METRO',
+  brandLogoSrc,
   backToCatalogListHref,
   variant = 'default',
 }: CatalogNavProps) => {
@@ -32,6 +35,47 @@ const CatalogNav = ({
   const [scrolled, setScrolled] = useState(false);
 
   const visibleSections = sections.filter((s) => s.enabled !== false);
+
+  const renderBrand = (logoClassName: string) => {
+    if (!brandLogoSrc) return brandLabel;
+    return (
+      <Image
+        src={brandLogoSrc}
+        alt={`${brandLabel} logo`}
+        width={160}
+        height={48}
+        className={logoClassName}
+      />
+    );
+  };
+
+  const renderQx1Brand = () => {
+    if (brandLogoSrc) {
+      return (
+        <Image
+          src={brandLogoSrc}
+          alt={`${brandLabel} logo`}
+          width={160}
+          height={48}
+          className={`h-9 w-auto object-contain ${
+            scrolled || isOpen ? 'mix-blend-difference invert' : ''
+          }`}
+        />
+      );
+    }
+
+    return (
+      <span
+        className={
+          scrolled || isOpen
+            ? 'text-foreground mix-blend-difference invert'
+            : 'text-primary-foreground'
+        }
+      >
+        {brandLabel}
+      </span>
+    );
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,22 +124,22 @@ const CatalogNav = ({
             <div className="bg-transparent shadow-[0_8px_22px_hsl(220_10%_10%/0.06)]">
               <div className="flex items-center gap-2 p-1.5">
                 {backToCatalogListHref ? (
-                  <a
-                    href={backToCatalogListHref}
-                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
-                    aria-label="Back to catalog list"
-                  >
-                    {brandLabel}
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => scrollTo('cover')}
-                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
-                    aria-label={`${brandLabel} - back to top`}
-                  >
-                    {brandLabel}
-                  </button>
-                )}
+                <a
+                  href={backToCatalogListHref}
+                  className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
+                  aria-label="Back to catalog list"
+                >
+                  {renderBrand('h-6 w-auto object-contain')}
+                </a>
+              ) : (
+                <button
+                  onClick={() => scrollTo('cover')}
+                  className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
+                  aria-label={`${brandLabel} - back to top`}
+                >
+                  {renderBrand('h-6 w-auto object-contain')}
+                </button>
+              )}
 
                 <ul
                   className="hidden lg:flex items-center gap-1 flex-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -192,15 +236,7 @@ const CatalogNav = ({
                   className="font-display font-medium text-2xl tracking-wide"
                   aria-label="Back to catalog list"
                 >
-                  <span
-                    className={
-                      scrolled || isOpen
-                        ? 'text-foreground mix-blend-difference invert'
-                        : 'text-primary-foreground'
-                    }
-                  >
-                    {brandLabel}
-                  </span>
+                  {renderQx1Brand()}
                 </a>
               ) : (
                 <button
@@ -208,15 +244,7 @@ const CatalogNav = ({
                   className="font-display font-medium text-2xl tracking-wide"
                   aria-label={`${brandLabel} - back to top`}
                 >
-                  <span
-                    className={
-                      scrolled || isOpen
-                        ? 'text-foreground mix-blend-difference invert'
-                        : 'text-primary-foreground'
-                    }
-                  >
-                    {brandLabel}
-                  </span>
+                  {renderQx1Brand()}
                 </button>
               )}
 
@@ -290,7 +318,7 @@ const CatalogNav = ({
                 className="font-display font-black text-xl tracking-tighter text-foreground"
                 aria-label="Back to catalog list"
               >
-                {brandLabel}
+                {renderBrand('h-7 w-auto object-contain')}
               </a>
             ) : (
               <button
@@ -298,7 +326,7 @@ const CatalogNav = ({
                 className="font-display font-black text-xl tracking-tighter text-foreground"
                 aria-label={`${brandLabel} - back to top`}
               >
-                {brandLabel}
+                {renderBrand('h-7 w-auto object-contain')}
               </button>
             )}
 
