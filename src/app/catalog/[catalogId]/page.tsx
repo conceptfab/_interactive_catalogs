@@ -90,7 +90,9 @@ export default function CatalogPage() {
           ? 'qx3'
           : catalog.meta.theme === 'qx4'
             ? 'qx4'
-        : 'default';
+            : catalog.meta.theme === 'qx0'
+              ? 'qx0'
+              : 'default';
   const normalizedCatalogId = catalogId?.toUpperCase();
   const isQx0 = normalizedCatalogId === 'QX-0';
   const isQx1 = normalizedCatalogId === 'QX-1';
@@ -119,7 +121,7 @@ export default function CatalogPage() {
                 ? '/catalogs/QX-3/metro_logo.svg'
                 : isQx4
                   ? '/catalogs/QX-4/metro_logo.svg'
-              : undefined
+                  : undefined
         }
         backToCatalogListHref="/"
         variant={navVariant}

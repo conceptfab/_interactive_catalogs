@@ -21,7 +21,7 @@ interface CatalogNavProps {
   brandLabel?: string;
   brandLogoSrc?: string;
   backToCatalogListHref?: string;
-  variant?: 'default' | 'qx1' | 'qx2' | 'qx3' | 'qx4';
+  variant?: 'default' | 'qx0' | 'qx1' | 'qx2' | 'qx3' | 'qx4';
 }
 
 const CatalogNav = ({
@@ -58,8 +58,9 @@ const CatalogNav = ({
           alt={`${brandLabel} logo`}
           width={160}
           height={48}
-          className={`h-9 w-auto object-contain ${scrolled || isOpen ? 'mix-blend-difference invert' : ''
-            }`}
+          className={`h-9 w-auto object-contain ${
+            scrolled || isOpen ? 'mix-blend-difference invert' : ''
+          }`}
         />
       );
     }
@@ -149,10 +150,11 @@ const CatalogNav = ({
                     <li key={section.id}>
                       <button
                         onClick={() => scrollTo(section.id)}
-                        className={`nav-button px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${activeSection === section.id
-                          ? 'border-accent text-foreground'
-                          : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
-                          }`}
+                        className={`nav-button px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${
+                          activeSection === section.id
+                            ? 'border-accent text-foreground'
+                            : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                        }`}
                         aria-current={
                           activeSection === section.id ? 'true' : undefined
                         }
@@ -194,10 +196,11 @@ const CatalogNav = ({
                   <li key={section.id}>
                     <button
                       onClick={() => scrollTo(section.id)}
-                      className={`nav-button w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${activeSection === section.id
-                        ? 'border-accent text-foreground'
-                        : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
-                        }`}
+                      className={`nav-button w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${
+                        activeSection === section.id
+                          ? 'border-accent text-foreground'
+                          : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                      }`}
                     >
                       <span className="font-mono text-[10px] opacity-70">
                         {String(idx + 1).padStart(2, '0')}
@@ -261,7 +264,9 @@ const CatalogNav = ({
                     <button
                       onClick={() => scrollTo(section.id)}
                       className={`nav-button qx3-nav-link ${
-                        activeSection === section.id ? 'is-active text-accent' : 'text-on-dark-muted'
+                        activeSection === section.id
+                          ? 'is-active text-accent'
+                          : 'text-on-dark-muted'
                       } flex min-h-[56px] w-full items-center justify-between px-4 py-2 transition-colors hover:text-primary-foreground`}
                       aria-current={
                         activeSection === section.id ? 'true' : undefined
@@ -309,8 +314,12 @@ const CatalogNav = ({
                           : 'text-on-dark-muted hover:text-primary-foreground'
                       }`}
                     >
-                      <span className="font-mono">{String(idx + 1).padStart(2, '0')}</span>
-                      <span className="font-display">{renderQxText(section.label)}</span>
+                      <span className="font-mono">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      <span className="font-display">
+                        {renderQxText(section.label)}
+                      </span>
                     </button>
                   </li>
                 ))}
@@ -367,7 +376,9 @@ const CatalogNav = ({
                     <button
                       onClick={() => scrollTo(section.id)}
                       className={`nav-button qx4-nav-link ${
-                        activeSection === section.id ? 'is-active text-accent' : 'text-muted-foreground'
+                        activeSection === section.id
+                          ? 'is-active text-accent'
+                          : 'text-muted-foreground'
                       } inline-flex min-h-[44px] items-center gap-2 px-3 py-2 text-sm uppercase tracking-[0.16em] transition-colors hover:text-foreground`}
                       aria-current={
                         activeSection === section.id ? 'true' : undefined
@@ -432,21 +443,121 @@ const CatalogNav = ({
     );
   }
 
+  if (variant === 'qx0') {
+    return (
+      <>
+        <nav
+          role="navigation"
+          aria-label="Catalog sections"
+          className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+            scrolled || isOpen
+              ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm'
+              : 'bg-white'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-6 sm:px-8">
+            <div className="flex items-center justify-between h-11 sm:h-14 transition-all duration-300">
+              {backToCatalogListHref ? (
+                <a
+                  href={backToCatalogListHref}
+                  className="font-display font-black text-xl tracking-tighter text-slate-900 !rounded-none"
+                  aria-label="Back to catalog list"
+                >
+                  {renderBrand('h-7 w-auto object-contain rounded-none')}
+                </a>
+              ) : (
+                <button
+                  onClick={() => scrollTo('cover')}
+                  className="font-display font-black text-xl tracking-tighter text-slate-900 !rounded-none"
+                  aria-label={`${brandLabel} - back to top`}
+                >
+                  {renderBrand('h-7 w-auto object-contain !rounded-none')}
+                </button>
+              )}
+
+              <ul
+                className="hidden lg:flex items-stretch h-full flex-1 justify-end"
+                role="list"
+              >
+                {visibleSections.map((section) => (
+                  <li key={section.id} className="h-full">
+                    <button
+                      onClick={() => scrollTo(section.id)}
+                      className={`h-full px-6 text-sm font-medium transition-colors !rounded-none flex items-center ${
+                        activeSection === section.id
+                          ? 'bg-slate-900 text-white'
+                          : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                      }`}
+                      aria-current={
+                        activeSection === section.id ? 'true' : undefined
+                      }
+                    >
+                      {renderQxText(section.label)}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="lg:hidden ml-4 p-2 text-slate-900 hover:bg-slate-100 !rounded-none transition-colors"
+                aria-expanded={isOpen}
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="lg:hidden fixed top-[44px] sm:top-[56px] left-0 right-0 z-[59] border-b border-slate-200 bg-white shadow-xl !rounded-none"
+            >
+              <ul className="flex flex-col !rounded-none" role="list">
+                {visibleSections.map((section) => (
+                  <li key={section.id}>
+                    <button
+                      onClick={() => scrollTo(section.id)}
+                      className={`w-full p-5 text-left text-base font-medium transition-colors border-b border-slate-100 last:border-0 !rounded-none ${
+                        activeSection === section.id
+                          ? 'bg-slate-900 text-white'
+                          : 'text-slate-500 hover:text-slate-900'
+                      }`}
+                    >
+                      {renderQxText(section.label)}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </>
+    );
+  }
+
   if (variant === 'qx1') {
     return (
       <>
         <nav
           role="navigation"
           aria-label="Catalog sections"
-          className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled || isOpen ? 'py-3' : 'py-5'
-            }`}
+          className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+            scrolled || isOpen ? 'py-3' : 'py-5'
+          }`}
         >
           <div className="max-w-7xl mx-auto px-6 sm:px-8">
             <div
-              className={`flex items-center justify-between gap-3 rounded-sm border px-4 sm:px-5 py-2 backdrop-blur-xl transition-all duration-300 ${scrolled || isOpen
-                ? 'bg-background/90 border-border shadow-[0_14px_36px_hsl(0_0%_8%/0.16)]'
-                : 'bg-background/70 border-border/50 shadow-[0_8px_24px_hsl(0_0%_8%/0.08)]'
-                }`}
+              className={`flex items-center justify-between gap-3 rounded-sm border px-4 sm:px-5 py-2 backdrop-blur-xl transition-all duration-300 ${
+                scrolled || isOpen
+                  ? 'bg-background/90 border-border shadow-[0_14px_36px_hsl(0_0%_8%/0.16)]'
+                  : 'bg-background/70 border-border/50 shadow-[0_8px_24px_hsl(0_0%_8%/0.08)]'
+              }`}
             >
               {backToCatalogListHref ? (
                 <a
@@ -518,10 +629,11 @@ const CatalogNav = ({
                     >
                       <button
                         onClick={() => scrollTo(section.id)}
-                        className={`w-full min-h-[56px] inline-flex items-baseline gap-4 text-left transition-colors ${activeSection === section.id
-                          ? 'text-accent'
-                          : 'text-foreground hover:text-accent/75'
-                          }`}
+                        className={`w-full min-h-[56px] inline-flex items-baseline gap-4 text-left transition-colors ${
+                          activeSection === section.id
+                            ? 'text-accent'
+                            : 'text-foreground hover:text-accent/75'
+                        }`}
                         aria-current={
                           activeSection === section.id ? 'true' : undefined
                         }
@@ -549,10 +661,11 @@ const CatalogNav = ({
       <nav
         role="navigation"
         aria-label="Catalog sections"
-        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled || isOpen
-          ? 'bg-white/30 backdrop-blur-xl border-b border-slate-200/50 py-3 shadow-sm'
-          : 'bg-white py-4 shadow-none'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+          scrolled || isOpen
+            ? 'bg-white/30 backdrop-blur-xl border-b border-slate-200/50 py-3 shadow-sm'
+            : 'bg-white py-4 shadow-none'
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           <div className="flex items-center justify-between">
@@ -582,10 +695,11 @@ const CatalogNav = ({
                 <li key={section.id}>
                   <button
                     onClick={() => scrollTo(section.id)}
-                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${activeSection === section.id
-                      ? 'border-slate-900 text-slate-900'
-                      : 'border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-200'
-                      }`}
+                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 ${
+                      activeSection === section.id
+                        ? 'border-slate-900 text-slate-900'
+                        : 'border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-200'
+                    }`}
                     aria-current={
                       activeSection === section.id ? 'true' : undefined
                     }
@@ -621,10 +735,11 @@ const CatalogNav = ({
                 <li key={section.id}>
                   <button
                     onClick={() => scrollTo(section.id)}
-                    className={`w-full p-4 text-left text-base font-medium transition-colors ${activeSection === section.id
-                      ? 'text-slate-900 bg-slate-50 rounded-md'
-                      : 'text-slate-500 hover:text-slate-900'
-                      }`}
+                    className={`w-full p-4 text-left text-base font-medium transition-colors ${
+                      activeSection === section.id
+                        ? 'text-slate-900 bg-slate-50 rounded-md'
+                        : 'text-slate-500 hover:text-slate-900'
+                    }`}
                   >
                     {renderQxText(section.label)}
                   </button>
