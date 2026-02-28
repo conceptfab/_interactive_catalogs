@@ -113,7 +113,7 @@ export default function CatalogPage() {
       />
 
       <main id="main-content" lang="en">
-        <HeroSection data={catalog.hero} />
+        <HeroSection data={catalog.hero} catalogId={catalogId} />
         <OverviewSection data={catalog.overview} />
         <GallerySection data={catalog.gallery} />
         <VariantsSection data={catalog.variants} />

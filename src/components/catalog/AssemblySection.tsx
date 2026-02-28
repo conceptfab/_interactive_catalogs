@@ -49,9 +49,7 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
               transition={{ delay: 0.1 + i * 0.1 }}
               className={`step-card ${i % 2 === 1 ? 'lg:translate-y-12' : ''}`}
             >
-              <div className="absolute -top-6 -left-6 text-8xl font-display font-black text-foreground/[0.03] pointer-events-none">
-                0{s.step}
-              </div>
+
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-display font-bold text-sm mb-6 shadow-lg shadow-accent/20">
                   {s.step}
@@ -71,7 +69,7 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="bg-white/40 backdrop-blur-md border border-border/50 p-8 lg:p-12 mb-16 rounded-[2rem] shadow-xl shadow-foreground/5"
+          className="bg-white/40 backdrop-blur-md border border-border/50 p-8 lg:p-12 mb-16 rounded-2xl shadow-xl shadow-foreground/5"
         >
           <div className="flex flex-col lg:flex-row gap-12 items-start">
             <div className="lg:w-1/3">

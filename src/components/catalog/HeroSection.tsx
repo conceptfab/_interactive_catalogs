@@ -11,6 +11,7 @@ import { renderQxText } from './renderQxText';
 
 interface HeroSectionProps {
   data: HeroData;
+  catalogId?: string;
 }
 
 const DEFAULT_SLIDER = {
@@ -59,7 +60,7 @@ function descriptionPositionClasses(position: HeroDescriptionPosition): string {
   }
 }
 
-const HeroSection = ({ data }: HeroSectionProps) => {
+const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
   const slider = { ...DEFAULT_SLIDER, ...data.slider };
   const fallbackSlides: HeroSlide[] = (data.heroImages ?? []).map(
     (src, index, all) => ({
@@ -289,20 +290,18 @@ const HeroSection = ({ data }: HeroSectionProps) => {
           transition={{ delay: 0.4 }}
           className="font-display font-bold text-primary-foreground leading-[0.8] flex flex-col items-center overflow-visible"
         >
-          {data.collectionName.toLowerCase().includes('qx series') ? (
-            <>
+          {catalogId?.toUpperCase() === 'QX-0' && data.collectionName.toLowerCase().includes('qx series') ? (
+            <span
+              className="flex items-baseline gap-[0.15em] text-[clamp(5.6rem,17.5vw,15.4rem)] tracking-tighter qx-giant py-4"
+              style={{ lineHeight: '0.9', fontFamily: "'Sora', sans-serif", fontWeight: 200 }}
+            >
+              QX
               <span
-                className="block text-[clamp(8rem,25vw,22rem)] tracking-tighter qx-giant py-4"
-                style={{ lineHeight: '0.9', fontFamily: "'Sora', sans-serif", fontWeight: 600 }}
-              >
-                QX
-              </span>
-              <span
-                className="block text-[clamp(1.5rem,4vw,3.5rem)] uppercase tracking-[0.5em] mt-2 opacity-90 font-light"
+                className="text-[0.22em] uppercase tracking-[0.5em] opacity-90 font-semibold"
               >
                 Series
               </span>
-            </>
+            </span>
           ) : (
             <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
               {renderQxText(data.collectionName)}

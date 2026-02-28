@@ -31,7 +31,7 @@
                    }
                ],
     "descriptionStyle":  {
-                             "enabled":  true,
+                             "enabled":  false,
                              "position":  "bottom-center",
                              "offsetPx":  40,
                              "textColor":  "#E8EEF5",

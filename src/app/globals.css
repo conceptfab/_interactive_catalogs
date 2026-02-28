@@ -211,7 +211,8 @@ html {
   border-radius: 0.2rem !important;
 }
 
-.catalog-qx0 #overview .rounded-2xl {
+.catalog-qx0 #overview .rounded-2xl,
+.catalog-qx0 #assembly .rounded-2xl {
   border-radius: 0.25rem !important;
 }
 
