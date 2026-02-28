@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Award, CheckCircle } from 'lucide-react';
+import Image from 'next/image';
 import type { DimensionsData } from '@/types/catalog';
 
 interface DimensionsSectionProps {
@@ -10,12 +11,6 @@ interface DimensionsSectionProps {
 const DimensionsSection = ({ data }: DimensionsSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const diagram = data.dimensionDiagram || {
-    width: '1600 mm',
-    depth: '800 mm',
-    heightRange: '650–1300 mm',
-  };
 
   return (
     <section
@@ -48,141 +43,13 @@ const DimensionsSection = ({ data }: DimensionsSectionProps) => {
             transition={{ delay: 0.2 }}
             className="lg:col-span-3 bg-transparent p-0 lg:p-8 flex items-center justify-center"
           >
-            <svg
-              viewBox="0 0 600 350"
+            <Image
+              src="/axo.svg"
+              alt="Technical dimension drawing"
+              width={842}
+              height={842}
               className="w-full h-auto"
-              role="img"
-              aria-label={`Technical dimension drawing showing width ${diagram.width}, depth ${diagram.depth}, height range ${diagram.heightRange}`}
-            >
-              <rect
-                x="100"
-                y="120"
-                width="400"
-                height="12"
-                rx="2"
-                fill="hsl(35, 40%, 65%)"
-              />
-              <rect
-                x="120"
-                y="132"
-                width="8"
-                height="150"
-                rx="1"
-                fill="hsl(220, 10%, 30%)"
-              />
-              <rect
-                x="472"
-                y="132"
-                width="8"
-                height="150"
-                rx="1"
-                fill="hsl(220, 10%, 30%)"
-              />
-              <rect
-                x="120"
-                y="275"
-                width="60"
-                height="8"
-                rx="1"
-                fill="hsl(220, 10%, 30%)"
-              />
-              <rect
-                x="420"
-                y="275"
-                width="60"
-                height="8"
-                rx="1"
-                fill="hsl(220, 10%, 30%)"
-              />
-              <line
-                x1="100"
-                y1="100"
-                x2="500"
-                y2="100"
-                stroke="hsl(30, 60%, 52%)"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="100"
-                y1="94"
-                x2="100"
-                y2="106"
-                stroke="hsl(30, 60%, 52%)"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="500"
-                y1="94"
-                x2="500"
-                y2="106"
-                stroke="hsl(30, 60%, 52%)"
-                strokeWidth="1.5"
-              />
-              <text
-                x="300"
-                y="93"
-                textAnchor="middle"
-                fill="hsl(30, 60%, 52%)"
-                fontSize="13"
-                fontFamily="Inter"
-              >
-                {diagram.width}
-              </text>
-              <line
-                x1="540"
-                y1="120"
-                x2="540"
-                y2="283"
-                stroke="hsl(30, 60%, 52%)"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="534"
-                y1="120"
-                x2="546"
-                y2="120"
-                stroke="hsl(30, 60%, 52%)"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="534"
-                y1="283"
-                x2="546"
-                y2="283"
-                stroke="hsl(30, 60%, 52%)"
-                strokeWidth="1.5"
-              />
-              <text
-                x="560"
-                y="205"
-                textAnchor="start"
-                fill="hsl(30, 60%, 52%)"
-                fontSize="12"
-                fontFamily="Inter"
-              >
-                {diagram.heightRange.replace(' mm', '')}
-              </text>
-              <text
-                x="560"
-                y="220"
-                textAnchor="start"
-                fill="hsl(30, 60%, 52%)"
-                fontSize="12"
-                fontFamily="Inter"
-              >
-                mm
-              </text>
-              <text
-                x="300"
-                y="330"
-                textAnchor="middle"
-                fill="hsl(220, 10%, 46%)"
-                fontSize="12"
-                fontFamily="Inter"
-              >
-                Depth: {diagram.depth}
-              </text>
-            </svg>
+            />
           </motion.div>
 
           <motion.div

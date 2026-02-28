@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getCatalogList, getGlobalConfig } from '@/lib/catalog-loader';
 import type { GlobalConfig } from '@/lib/catalog-loader';
 import { LayoutGrid } from 'lucide-react';
@@ -41,8 +42,16 @@ export default function IndexPage() {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="font-display font-bold text-2xl text-foreground">
-            {globalConfig?.siteTitle ?? 'METRO'}
+          <h1 className="text-foreground">
+            <Image
+              src="/metro_logo.svg"
+              alt="METRO"
+              width={220}
+              height={52}
+              className="h-8 w-auto"
+              priority
+            />
+            <span className="sr-only">{globalConfig?.siteTitle ?? 'METRO'}</span>
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
             {globalConfig?.siteSubtitle ??

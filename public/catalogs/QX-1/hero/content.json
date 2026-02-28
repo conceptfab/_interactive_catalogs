@@ -1,17 +1,17 @@
 {
   "brandLabel": "",
   "collectionName": "QX Series",
-  "tagline": "Engineered for motion.",
-  "taglineLine2": "Your workspace, liberated.",
-  "ctaLabel": "Discover QX",
+  "tagline": "Modular desk system engineered for the modern workspace.",
+  "taglineLine2": "Where precision meets flexibility.",
+  "ctaLabel": "Explore Collection",
   "heroImage": "hero-office.jpg",
   "heroImageAlt": "QX desk system in a modern open-space office with people working",
   "slider": {
     "autoAdvance": true,
-    "interval": 4000,
+    "interval": 5000,
     "pauseOnHover": true,
-    "transitionMs": 800,
-    "showArrows": false,
+    "transitionMs": 900,
+    "showArrows": true,
     "showDots": true,
     "initialSlide": 0
   }

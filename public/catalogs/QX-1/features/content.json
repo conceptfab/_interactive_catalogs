@@ -1,42 +1,42 @@
 {
-  "sectionLabel": "Tech Specs",
-  "title": "Built for speed.",
+  "sectionLabel": "Functionality",
+  "title": "Features & ergonomics",
   "items": [
     {
       "icon": "arrow-up-down",
-      "title": "Smart Motion",
-      "desc": "Dual-motor electric lift. Smooth, silent 38mm/s travel. 4 memory presets on LED touch interface. Anti-collision tech included.",
-      "badge": "Electric"
+      "title": "Height Adjustment",
+      "desc": "Dual-motor electric system with anti-collision sensor. Smooth 38mm/s travel speed, 4 memory presets on LED touchpad. Manual crank option available for QX Basic.",
+      "badge": "Electric / Manual"
     },
     {
       "icon": "cable",
-      "title": "Zero Clutter",
-      "desc": "Integrated power routing via central spine. Hidden cable tray with brush grommets. Clean desk, clear mind.",
+      "title": "Cable Management",
+      "desc": "Integrated cable spine runs full desk length. Removable cable tray with brush grommet openings. Power socket modules available for desktop mounting.",
       "badge": "Integrated"
     },
     {
       "icon": "wrench",
-      "title": "Snap & Go",
-      "desc": "Click-lock frame connections. Just 6 screws for the top. Full setup perfectly in under 20 minutes.",
+      "title": "Tool-Free Assembly",
+      "desc": "Pre-assembled frame with click-lock connections. Desktop attachment with 6 screws only. Full setup in under 20 minutes by one person.",
       "badge": "< 20 min"
     },
     {
       "icon": "layout-grid",
-      "title": "Infinite Setup",
-      "desc": "Add monitor arms, acoustic panels, CPU mounts. Everything connects via universal T-slot.",
-      "badge": "30+ Add-ons"
+      "title": "Modular Expansion",
+      "desc": "Add return desks, screen dividers, CPU holders, monitor arms, and under-desk storage. All accessories use universal T-slot mounting system.",
+      "badge": "30+ Accessories"
     },
     {
       "icon": "monitor-smartphone",
-      "title": "App Connected",
-      "desc": "Sync with Metro App via Bluetooth. Track standing habits, get wellness nudges, sync presets across the grid.",
-      "badge": "Smart"
+      "title": "Smart Integration",
+      "desc": "Optional Bluetooth module connects to Metro Desk App. Track sitting/standing time, receive reminders, and sync height presets across devices.",
+      "badge": "Optional"
     },
     {
       "icon": "armchair",
-      "title": "Pure Ergonomics",
-      "desc": "EN 527 certified. Curved edge reduces wrist fatigue. Designed to keep you moving throughout the day.",
-      "badge": "Pro Ergo"
+      "title": "Ergonomic Design",
+      "desc": "Designed with occupational therapists to promote active sitting/standing cycles. Curved front edge reduces forearm pressure. Meets EN 527 ergonomic requirements.",
+      "badge": "EN 527"
     }
   ]
 }

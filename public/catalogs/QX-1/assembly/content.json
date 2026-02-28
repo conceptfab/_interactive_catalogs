@@ -1,36 +1,36 @@
 {
-  "sectionLabel": "Setup",
-  "title": "Box to desk. Fast.",
+  "sectionLabel": "Getting Started",
+  "title": "Assembly & ordering",
   "steps": [
     {
       "step": 1,
-      "title": "Unpack",
-      "desc": "Lift frame from the box. Check the parts."
+      "title": "Unpack frame",
+      "desc": "Remove frame components from packaging. Verify all parts against the included checklist."
     },
     {
       "step": 2,
-      "title": "Snap legs",
-      "desc": "Click-lock columns to the crossbar. Zero tools needed."
+      "title": "Assemble legs",
+      "desc": "Click-lock the column tubes into the crossbar. No tools required for this step."
     },
     {
       "step": 3,
-      "title": "Add feet",
-      "desc": "Screw in levellers. Balance the base."
+      "title": "Attach feet",
+      "desc": "Screw levelling feet into column bases. Adjust for uneven floors as needed."
     },
     {
       "step": 4,
-      "title": "Mount top",
-      "desc": "Flip top face-down. Drop frame. Drive 6 screws."
+      "title": "Mount desktop",
+      "desc": "Place desktop face-down on soft surface. Align frame and secure with 6 included screws."
     },
     {
       "step": 5,
-      "title": "Plug in",
-      "desc": "Route spine cables. Connect the hub and power up."
+      "title": "Connect power",
+      "desc": "Route motor cables through cable spine. Connect control box and plug into mains power."
     },
     {
       "step": 6,
-      "title": "Calibrate",
-      "desc": "Flip upright. Hold ▼ for 5s. Ready to flow."
+      "title": "Flip & calibrate",
+      "desc": "Carefully flip desk upright. Run auto-calibration by holding ▼ button for 5 seconds."
     }
   ],
   "orderCodes": [
@@ -56,10 +56,10 @@
     }
   ],
   "ctaLabels": {
-    "quote": "Get Quote",
-    "pdf": "Get PDF",
-    "contact": "Talk to us"
+    "quote": "Request a Quote",
+    "pdf": "Download PDF",
+    "contact": "Contact Sales"
   },
-  "footerText": "© 2025 METRO. Built for movement. QX-2025.1",
-  "versionInfo": "Co-financed by EU Funds. Fully WCAG 2.1 AA compliant."
+  "footerText": "© 2025 METRO. All rights reserved. Catalogue version QX-2025.1",
+  "versionInfo": "Co-financed by European Funds (PARP). All products meet WCAG 2.1 AA accessibility standards."
 }

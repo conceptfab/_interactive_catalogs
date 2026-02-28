@@ -1,35 +1,35 @@
 {
-  "sectionLabel": "Overview",
-  "title": "Flow state.",
-  "titleLine2": "Activated.",
+  "sectionLabel": "Collection Overview",
+  "title": "Designed for the way",
+  "titleLine2": "you work today",
   "paragraphs": [
-    "Scandinavian minimal. German precision. QX adapts to your rhythm, not the other way around. Sustainably built and engineered to break the mold.",
-    "Build it your way. Infinite modularity, integrated cable routing, zero clutter. The ultimate setup for creators, coders, and visionaries."
+    "The QX Series represents Metro's most advanced desk system, combining Scandinavian design principles with German engineering precision. Each desk is crafted from sustainably sourced materials and built to exceed EN 527 office furniture standards.",
+    "Whether configuring a single workstation or an entire open-plan office, QX adapts seamlessly with its modular frame system, integrated cable management, and extensive range of accessories."
   ],
   "packshotImage": "packshot.jpg",
   "packshotImageAlt": "QX desk system product shot – L-shaped oak desktop with black steel frame on white background",
-  "packshotCaption": "QX-2000L — Natural Oak / Black",
+  "packshotCaption": "QX-2000L — L-shaped configuration, Natural Oak / Black",
   "features": [
     {
       "icon": "puzzle",
-      "title": "Modular Core",
-      "desc": "Infinite configs for any space"
+      "title": "Modular Design",
+      "desc": "Infinitely configurable to fit any workspace layout"
     },
     {
       "icon": "zap",
-      "title": "Smart Lift",
-      "desc": "Electric motion with memory presets"
+      "title": "Height Adjustable",
+      "desc": "Electric sit-stand mechanism with memory presets"
     },
     {
       "icon": "ruler",
-      "title": "Right Sized",
-      "desc": "1200mm to 2000mm widths"
+      "title": "Multiple Sizes",
+      "desc": "From compact 1200mm to executive 2000mm widths"
     },
     {
       "icon": "shield",
-      "title": "10-Year Trust",
-      "desc": "Premium build. Made to last."
+      "title": "10-Year Warranty",
+      "desc": "Built to last with premium materials and craftsmanship"
     }
   ],
-  "quickLinkLabels": ["Models", "Specs", "Materials", "Tech"]
+  "quickLinkLabels": ["Variants", "Dimensions", "Materials", "Features"]
 }

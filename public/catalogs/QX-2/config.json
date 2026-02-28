@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "QX-2 Series | METRO",
-    "description": "QX Series – Modular desk system engineered for the modern workspace. Electric sit-stand, premium materials, German engineering.",
+    "title": "QX Series | METRO",
+    "description": "QX Series – Modular desk system engineered for the modern workspace.",
     "brandName": "METRO",
-    "collectionName": "QX-2 Series",
-    "theme": "qx2"
+    "collectionName": "QX Series",
+    "theme": "qx0"
   },
   "sections": [
     { "id": "cover", "label": "Cover" },

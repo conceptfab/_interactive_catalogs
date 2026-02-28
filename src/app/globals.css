@@ -180,6 +180,26 @@ html {
   border-radius: 3px;
 }
 
+/* QX-0: subtle rounding for controls */
+.catalog-qx0 {
+  --radius: 0.25rem;
+}
+
+.catalog-qx0 button,
+.catalog-qx0 [role='button'],
+.catalog-qx0 [role='tab'],
+.catalog-qx0 [role='radio'] {
+  border-radius: 0.25rem !important;
+}
+
+.catalog-qx0 #cover [role='tab'] span {
+  border-radius: 0.2rem !important;
+}
+
+.catalog-qx0 #overview .rounded-2xl {
+  border-radius: 0.25rem !important;
+}
+
 /* QX-2 dedicated visual direction: minimalist + youthful tech feel */
 .catalog-qx2 {
   --background: 220 14% 96%;

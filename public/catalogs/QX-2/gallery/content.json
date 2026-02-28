@@ -5,7 +5,7 @@
     {
       "image": "packshot.jpg",
       "alt": "QX desk packshot on white background – full product view",
-      "category": "Packshot"
+      "category": "Bench"
     },
     {
       "image": "hero-office.jpg",
@@ -15,7 +15,7 @@
     {
       "image": "office-arrangement.jpg",
       "alt": "QX executive desk in private office with monitor arm setup",
-      "category": "Executive"
+      "category": "Office"
     },
     {
       "image": "desk-detail.jpg",
@@ -25,7 +25,7 @@
     {
       "image": "office-lifestyle.jpg",
       "alt": "Modern conference room with QX conference table and chairs",
-      "category": "Conference"
+      "category": "Office"
     }
   ]
 }
