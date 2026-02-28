@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Sora:wght@300..800&family=Outfit:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Sora:wght@300..800&family=Outfit:wght@300..800&family=Roboto+Mono:wght@300..700&family=Roboto:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -384,7 +384,7 @@ html {
 
 /* QX-2 dedicated visual direction: minimalist + youthful tech feel */
 .catalog-qx2 {
-  --background: 220 14% 96%;
+  --background: 0 0% 97.25%;
   --foreground: 220 10% 11%;
   --surface: 220 11% 92%;
   --surface-elevated: 0 0% 100%;
@@ -396,21 +396,15 @@ html {
   --accent: 220 7% 23%;
   --accent-foreground: 0 0% 98%;
   --hero-overlay: 220 12% 9%;
+  --font-display: 'Roboto Mono', monospace;
+  --font-body: 'Roboto Mono', monospace;
   --radius: 1rem;
   position: relative;
   overflow: clip;
 }
 
 .catalog-qx2::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(70rem 40rem at 10% -10%, hsl(220 7% 26% / 0.12), transparent 60%),
-    radial-gradient(55rem 30rem at 100% 15%, hsl(220 7% 40% / 0.08), transparent 60%),
-    linear-gradient(180deg, hsl(220 12% 98%), hsl(220 13% 94%));
+  display: none;
 }
 
 .catalog-qx2 .skip-link {
@@ -422,8 +416,17 @@ html {
 }
 
 .catalog-qx2 nav .font-display {
-  font-family: 'Sora', var(--font-display);
+  font-family: var(--font-display);
   letter-spacing: 0.02em;
+}
+
+/* Preserve METRO brand styling */
+.catalog-qx2 .brand-logo {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.05em !important;
+  text-transform: none;
+  /* Keep original casing if any */
 }
 
 .catalog-qx2 section {
@@ -457,27 +460,19 @@ html {
 
 .catalog-qx2 #overview,
 .catalog-qx2 #variants,
-.catalog-qx2 #materials {
-  background: transparent !important;
-}
-
+.catalog-qx2 #materials,
 .catalog-qx2 #gallery,
 .catalog-qx2 #dimensions,
-.catalog-qx2 #features {
-  background: hsl(0 0% 100% / 0.62) !important;
-}
-
+.catalog-qx2 #features,
 .catalog-qx2 #assembly {
-  background:
-    radial-gradient(45rem 22rem at 0% 0%, hsl(0 0% 100% / 0.08), transparent 65%),
-    linear-gradient(165deg, hsl(220 12% 14%) 0%, hsl(220 10% 8%) 100%) !important;
+  background: transparent !important;
 }
 
 .catalog-qx2 h1,
 .catalog-qx2 h2,
 .catalog-qx2 h3,
 .catalog-qx2 h4 {
-  font-family: 'Sora', var(--font-display);
+  font-family: var(--font-display);
   letter-spacing: -0.015em;
 }
 
@@ -494,17 +489,42 @@ html {
   box-shadow: 0 12px 32px hsl(224 28% 15% / 0.08);
 }
 
-.catalog-qx2 button {
-  transition: all 220ms ease;
-}
-
 .catalog-qx2 button:hover {
   transform: translateY(-1px);
+}
+
+/* Explicit overrides to win over Tailwind utilities */
+.catalog-qx2 .font-display,
+.catalog-qx2 h1,
+.catalog-qx2 h2,
+.catalog-qx2 h3,
+.catalog-qx2 h4,
+.catalog-qx2 h5,
+.catalog-qx2 h6 {
+  font-family: var(--font-display) !important;
+}
+
+.catalog-qx2 .font-body,
+.catalog-qx2 p,
+.catalog-qx2 li,
+.catalog-qx2 button,
+.catalog-qx2 span:not(.brand-logo),
+.catalog-qx2 td,
+.catalog-qx2 th,
+.catalog-qx2 div {
+  font-family: var(--font-body) !important;
 }
 
 .catalog-qx2 #gallery .group {
   border: 1px solid hsl(var(--border) / 0.7);
   box-shadow: 0 10px 24px hsl(224 28% 15% / 0.07);
+}
+
+/* Specific branding for QX-2: "QX" text in Roboto Bold 700 */
+.catalog-qx2 .qx-word {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
 }
 
 .catalog-qx2 #features [role='tabpanel'],
@@ -513,9 +533,302 @@ html {
   backdrop-filter: blur(6px);
 }
 
+
+.catalog-qx2 #overview figure img,
+.catalog-qx2 #variants .group img {
+  max-height: none !important;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: var(--radius);
+}
+
+.catalog-qx2 #gallery .group {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Ensure all images have at least 4px border radius */
+.catalog-qx2 img {
+  border-radius: 4px !important;
+}
+
+/* Restyle gallery category labels: 2x larger, no background, bottom-right */
+.catalog-qx2 #gallery span {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  font-size: 1.5rem !important;
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  color: hsl(var(--foreground)) !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  left: auto !important;
+  text-align: right !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 2px rgba(255, 255, 255, 0.4);
+  /* Stronger shadow for readability */
+}
+
+/* Specific sections that might need container rounded corners too */
+.catalog-qx2 #gallery .group,
 .catalog-qx2 #overview .bg-surface,
 .catalog-qx2 #variants .bg-surface,
 .catalog-qx2 #features .bg-surface-elevated,
 .catalog-qx2 #dimensions .bg-surface-elevated {
-  background: hsl(0 0% 100% / 0.75) !important;
+  background: transparent !important;
+}
+
+/* Align Hero/Cover content to the left edge */
+.catalog-qx2 #cover h1 {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+.catalog-qx2 #cover p {
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+.catalog-qx2 #cover .max-w-2xl,
+.catalog-qx2 #cover .max-w-4xl {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  max-width: 4xl !important;
+}
+
+/* Remove decorative frames around images and scale them */
+.catalog-qx2 #overview figure div,
+.catalog-qx2 #variants .group {
+  padding: 0 !important;
+  background: transparent !important;
+  mix-blend-mode: normal !important;
+}
+
+.catalog-qx2 #overview figure,
+.catalog-qx2 #variants .group {
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+
+/* Align section headers to the left */
+.catalog-qx2 .text-center {
+  text-align: left !important;
+}
+
+.catalog-qx2 .max-w-7xl.mx-auto>div:first-child[class*='mb-'] {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.catalog-qx2 #assembly .text-center.mb-20 {
+  text-align: left !important;
+}
+
+.catalog-qx2 h2 {
+  margin-left: 0 !important;
+}
+
+
+
+/* Align navigation and sections to the consistent margin of the container below */
+.catalog-qx2 nav .max-w-7xl,
+.catalog-qx2 #cover .max-w-7xl {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Specific to the cover content alignment - perfectly aligned with headers below */
+.catalog-qx2 #cover .relative.z-10 {
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+
+.catalog-qx2 #cover h1,
+.catalog-qx2 #cover p,
+.catalog-qx2 #cover .mt-12 {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+/* Remove frames/borders from slider dots and arrows */
+.catalog-qx2 #cover button {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.catalog-qx2 #cover button:hover {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Ensure Logo and Nav items align correctly inside the centered container */
+.catalog-qx2 nav .flex.items-center.justify-between {
+  justify-content: flex-start !important;
+  gap: 3rem;
+}
+
+.catalog-qx2 nav ul.justify-end {
+  justify-content: flex-start !important;
+}
+
+/* Restyle section labels: 4x larger, weight 100 - ONLY for headers */
+.catalog-qx2 section .text-center p.text-accent,
+.catalog-qx2 #assembly .text-center p.text-accent {
+  font-size: clamp(2rem, 6vw, 3.5rem) !important;
+  font-weight: 100 !important;
+  letter-spacing: 0.1em !important;
+  line-height: 1.1 !important;
+  margin-bottom: 0.5rem !important;
+  opacity: 1;
+  /* More visible */
+  text-transform: uppercase !important;
+}
+
+/* Ensure other technical accents (like norms) stay small */
+.catalog-qx2 p.text-xs.text-accent {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  opacity: 0.7;
+}
+
+/* Section dividers: custom dashed gray line using pseudo-element to avoid background reset */
+.catalog-qx2 section {
+  border-bottom: none !important;
+}
+
+.catalog-qx2 section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, hsl(var(--border)) 50%, transparent 50%);
+  background-size: 24px 1px;
+  /* 12px dash, 12px gap */
+  background-repeat: repeat-x;
+}
+
+.catalog-qx2 section:last-of-type::after {
+  display: none;
+}
+
+/* Restyle all buttons in QX-2 - EXCEPT color selection swatches AND nav buttons */
+.catalog-qx2 button:not([style*='background']):not(.nav-button),
+.catalog-qx2 .btn-premium,
+.catalog-qx2 #cover button,
+.catalog-qx2 #assembly button {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px dashed hsl(var(--foreground)) !important;
+  border-radius: 4px !important;
+  color: hsl(var(--foreground)) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Base style for ALL buttons except nav items to have dashed border and 4px radius */
+.catalog-qx2 button:not(.nav-button) {
+  border: 1px dashed hsl(var(--foreground)) !important;
+  border-radius: 4px !important;
+}
+
+.catalog-qx2 button:hover,
+.catalog-qx2 .btn-premium:hover {
+  background: hsl(var(--foreground) / 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Ensure icons and text inside buttons don't have conflicting colors */
+.catalog-qx2 button svg,
+.catalog-qx2 button span,
+.catalog-qx2 button p {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Ensure all containers and cards have 4px radius in QX-2 */
+.catalog-qx2 .step-card,
+.catalog-qx2 #assembly div[class*='bg-white/40'],
+.catalog-qx2 #overview div[class*='rounded-2xl'],
+.catalog-qx2 section div[class*='rounded-'] {
+  border-radius: 4px !important;
+}
+
+/* Restyle Overview features: larger icons, no frames, text right */
+.catalog-qx2 #overview .icon-container {
+  background: transparent !important;
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.catalog-qx2 #overview .icon-container svg {
+  width: 48px !important;
+  height: 48px !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.catalog-qx2 section:last-of-type::after {
+  display: none;
+}
+
+/* Restyle navigation: no borders, 6px bottom border on hover/active */
+.catalog-qx2 nav button.nav-button {
+  border: none !important;
+  border-bottom: 6px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0.5rem 1rem 0.25rem 1rem !important;
+  margin: 0 4px !important;
+  height: auto !important;
+  min-height: 48px !important;
+  opacity: 0.6;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.catalog-qx2 nav button.nav-button:hover,
+.catalog-qx2 nav button.nav-button[aria-current='true'] {
+  border-bottom: 6px solid hsl(var(--foreground)) !important;
+  opacity: 1;
+  background: transparent !important;
+}
+
+.catalog-qx2 nav button.nav-button[class*='text-foreground'] {
+  opacity: 1;
+  background: transparent !important;
+}
+
+.catalog-qx2 section:last-of-type {
+  border-bottom: none !important;
+}
+
+/* Final overrides for Slider Dots and Arrows in QX-2 to remove frames and fix padding */
+.catalog-qx2 #cover button.min-h-\[44px\],
+.catalog-qx2 #cover button[aria-label*='slide'],
+.catalog-qx2 #cover button[aria-label*='scroll'],
+.catalog-qx2 #cover button[aria-label*='Go to'] {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.catalog-qx2 #cover button.min-h-\[44px\]:hover,
+.catalog-qx2 #cover button[aria-label*='slide']:hover,
+.catalog-qx2 #cover button[aria-label*='scroll']:hover {
+  border: none !important;
+  background: transparent !important;
 }

@@ -96,17 +96,19 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                className="group"
+                className="group flex gap-6 items-start"
               >
-                <div className="w-12 h-12 rounded-2xl bg-foreground text-background flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Icon size={24} />
+                <div className="icon-container shrink-0 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform text-foreground">
+                  <Icon size={48} />
                 </div>
-                <h3 className="font-display font-black text-foreground text-xl mb-2">
-                  {renderQxText(f.title)}
-                </h3>
-                <p className="text-muted-foreground text-base leading-relaxed">
-                  {renderQxText(f.desc)}
-                </p>
+                <div className="flex-1">
+                  <h3 className="font-display font-black text-foreground text-xl mb-2">
+                    {renderQxText(f.title)}
+                  </h3>
+                  <p className="text-muted-foreground text-base leading-relaxed">
+                    {renderQxText(f.desc)}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

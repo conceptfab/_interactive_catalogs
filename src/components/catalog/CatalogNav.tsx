@@ -120,13 +120,13 @@ const CatalogNav = ({
           aria-label="Catalog sections"
           className="fixed top-3 left-0 right-0 z-[60]"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-transparent shadow-[0_8px_22px_hsl(220_10%_10%/0.06)]">
               <div className="flex items-center gap-2 p-1.5">
                 {backToCatalogListHref ? (
                   <a
                     href={backToCatalogListHref}
-                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
+                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo"
                     aria-label="Back to catalog list"
                   >
                     {renderBrand('h-6 w-auto object-contain')}
@@ -134,7 +134,7 @@ const CatalogNav = ({
                 ) : (
                   <button
                     onClick={() => scrollTo('cover')}
-                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center"
+                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo"
                     aria-label={`${brandLabel} - back to top`}
                   >
                     {renderBrand('h-6 w-auto object-contain')}
@@ -149,7 +149,7 @@ const CatalogNav = ({
                     <li key={section.id}>
                       <button
                         onClick={() => scrollTo(section.id)}
-                        className={`px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${activeSection === section.id
+                        className={`nav-button px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${activeSection === section.id
                           ? 'border-accent text-foreground'
                           : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
                           }`}
@@ -194,7 +194,7 @@ const CatalogNav = ({
                   <li key={section.id}>
                     <button
                       onClick={() => scrollTo(section.id)}
-                      className={`w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${activeSection === section.id
+                      className={`nav-button w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${activeSection === section.id
                         ? 'border-accent text-foreground'
                         : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
                         }`}

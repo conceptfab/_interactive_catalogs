@@ -50,16 +50,18 @@ const AssemblySection = ({ data }: AssemblySectionProps) => {
               className={`step-card ${i % 2 === 1 ? 'lg:translate-y-12' : ''}`}
             >
 
-              <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-display font-bold text-sm mb-6 shadow-lg shadow-accent/20">
+              <div className="flex items-start gap-6 group">
+                <div className="step-number font-display font-medium text-foreground/20 text-6xl leading-none transition-colors group-hover:text-accent/40 shrink-0">
                   {s.step}
                 </div>
-                <h3 className="font-display font-bold text-xl text-foreground mb-3 tracking-tight">
-                  {renderQxText(s.title)}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed font-body">
-                  {renderQxText(s.desc)}
-                </p>
+                <div className="flex flex-col pt-1">
+                  <h3 className="font-display font-bold text-xl text-foreground mb-3 tracking-tight">
+                    {renderQxText(s.title)}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed font-body">
+                    {renderQxText(s.desc)}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

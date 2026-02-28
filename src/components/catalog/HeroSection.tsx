@@ -274,7 +274,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
         </motion.p>
       )}
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      <div className={`relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full ${catalogId?.toUpperCase() === 'QX-2' ? 'text-left mb-[clamp(6rem,16vw,14rem)]' : 'text-center'}`}>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -288,7 +288,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="font-display font-bold text-primary-foreground leading-[0.8] flex flex-col items-center overflow-visible"
+          className={`font-display font-bold text-primary-foreground leading-[0.8] flex flex-col overflow-visible ${catalogId?.toUpperCase() === 'QX-2' ? 'items-start' : 'items-center'}`}
         >
           {catalogId?.toUpperCase() === 'QX-0' && data.collectionName.toLowerCase().includes('qx series') ? (
             <span
@@ -302,6 +302,15 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
                 Series
               </span>
             </span>
+          ) : catalogId?.toUpperCase() === 'QX-2' ? (
+            <span className="flex items-baseline gap-[0.2em] uppercase">
+              <span style={{ fontSize: 'clamp(6rem, 16vw, 14rem)', fontWeight: 100 }}>
+                QX
+              </span>
+              <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
+                SERIES
+              </span>
+            </span>
           ) : (
             <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
               {renderQxText(data.collectionName)}
@@ -313,7 +322,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="text-white/90 font-body text-lg md:text-xl mt-8 max-w-2xl mx-auto text-balance leading-relaxed"
+          className={`text-white/90 font-body text-lg md:text-xl mt-8 max-w-2xl text-balance leading-relaxed ${catalogId?.toUpperCase() === 'QX-2' ? 'ml-0' : 'mx-auto'}`}
           style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
         >
           {renderQxText(data.tagline)}
@@ -339,7 +348,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
                 .getElementById('overview')
                 ?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="btn-premium inline-flex items-center gap-3 bg-accent text-accent-foreground px-10 py-5 rounded-full font-display font-bold text-sm uppercase tracking-widest hover:opacity-100 min-h-[44px]"
+            className="btn-premium inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-display font-bold text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors shadow-lg min-h-[44px]"
           >
             <span>{data.ctaLabel}</span>
             <ArrowDown size={18} className="animate-bounce" />
