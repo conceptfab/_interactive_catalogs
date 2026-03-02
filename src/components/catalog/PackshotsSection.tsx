@@ -8,17 +8,18 @@ import { renderQxText } from './renderQxText';
 interface PackshotsSectionProps {
   data: PackshotsData;
   theme?: string;
+  catalogId?: string;
 }
 
 // ── qx0: Clean catalog grid ───────────────────────────────────────
 function DefaultCard({ item }: { item: PackshotItem }) {
   return (
     <div className="group border border-border bg-background overflow-hidden">
-      <div className="bg-surface/30 mix-blend-multiply p-4 flex items-center justify-center aspect-square">
+      <div className="bg-surface/30 mix-blend-multiply p-0 flex items-end justify-center aspect-[3/2] overflow-hidden">
         <img
           src={item.image}
           alt={`${item.code} – ${item.colorName}`}
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
+          className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           loading="lazy"
         />
       </div>
@@ -45,11 +46,11 @@ function DefaultCard({ item }: { item: PackshotItem }) {
 function FunctionalCard({ item }: { item: PackshotItem }) {
   return (
     <div className="group">
-      <div className="bg-surface/20 p-3 flex items-center justify-center aspect-square">
+      <div className="bg-surface/20 p-0 flex items-end justify-center aspect-[16/9] overflow-hidden">
         <img
           src={item.image}
           alt={`${item.code} – ${item.colorName}`}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover object-[center_82%]"
           loading="lazy"
         />
       </div>
@@ -72,11 +73,11 @@ function FunctionalCard({ item }: { item: PackshotItem }) {
 function PremiumCard({ item }: { item: PackshotItem }) {
   return (
     <div className="group bg-background shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-      <div className="bg-surface/20 mix-blend-multiply p-6 lg:p-8 flex items-center justify-center aspect-square relative">
+      <div className="bg-surface/20 mix-blend-multiply p-0 flex items-end justify-center aspect-[16/9] overflow-hidden relative">
         <img
           src={item.image}
           alt={`${item.code} – ${item.colorName}`}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover object-[center_82%]"
           loading="lazy"
         />
         {item.colorHex && (
@@ -148,14 +149,22 @@ function WarmCard({ item }: { item: PackshotItem }) {
 }
 
 // ── Main component ────────────────────────────────────────────────
-const PackshotsSection = ({ data, theme = 'qx0' }: PackshotsSectionProps) => {
+const PackshotsSection = ({
+  data,
+  theme = 'qx0',
+  catalogId,
+}: PackshotsSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const isDark = theme === 'qx3';
-  const isWarm = theme === 'qx4';
-  const isPremium = theme === 'qx2';
-  const isFunctional = theme === 'qx1';
+  const normalizedTheme = theme.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normalizedCatalogId = catalogId?.toUpperCase();
+
+  const isDark = normalizedTheme === 'qx3' || normalizedCatalogId === 'QX-3';
+  const isWarm = normalizedTheme === 'qx4' || normalizedCatalogId === 'QX-4';
+  const isPremium = normalizedTheme === 'qx2' || normalizedCatalogId === 'QX-2';
+  const isFunctional =
+    normalizedTheme === 'qx1' || normalizedCatalogId === 'QX-1';
 
   const sectionBg = isDark
     ? 'bg-[#060606] text-white'

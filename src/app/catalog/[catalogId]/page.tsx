@@ -141,7 +141,11 @@ export default function CatalogPage() {
         <GallerySection data={catalog.gallery} />
         <VariantsSection data={catalog.variants} />
         {catalog.packshots && (
-          <PackshotsSection data={catalog.packshots} theme={catalog.meta.theme} />
+          <PackshotsSection
+            data={catalog.packshots}
+            theme={catalog.meta.theme}
+            catalogId={catalogId}
+          />
         )}
         <DimensionsSection data={catalog.dimensions} />
         <MaterialsSection data={catalog.materials} />
