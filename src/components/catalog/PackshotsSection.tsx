@@ -2,13 +2,44 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import type { PackshotsData, PackshotItem } from '@/types/catalog';
+import type { PackshotsData, PackshotGroup, PackshotItem } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
 
 interface PackshotsSectionProps {
   data: PackshotsData;
   theme?: string;
   catalogId?: string;
+}
+
+const ADJUSTABLE_DESK_LABEL = 'Height-adjustable desk';
+
+function hasAdjustableMarker(value?: string): boolean {
+  if (!value) return false;
+
+  const modelToken = value
+    .toUpperCase()
+    .split(/[\\/_-]/)[0];
+
+  return modelToken.includes('R');
+}
+
+function isAdjustableGroup(group: PackshotGroup): boolean {
+  if (hasAdjustableMarker(group.model) || hasAdjustableMarker(group.label)) {
+    return true;
+  }
+
+  return group.items.some((item) => hasAdjustableMarker(item.code));
+}
+
+function resolveGroupDescription(
+  group: PackshotGroup,
+  addAdjustableLabel: boolean,
+): string | undefined {
+  if (addAdjustableLabel && isAdjustableGroup(group)) {
+    return ADJUSTABLE_DESK_LABEL;
+  }
+
+  return group.desc?.trim() || undefined;
 }
 
 // ── qx0: Clean catalog grid ───────────────────────────────────────
@@ -159,6 +190,7 @@ const PackshotsSection = ({
 
   const normalizedTheme = theme.toLowerCase().replace(/[^a-z0-9]/g, '');
   const normalizedCatalogId = catalogId?.toUpperCase();
+  const isQxCatalog = normalizedCatalogId?.startsWith('QX') ?? false;
 
   const isDark = normalizedTheme === 'qx3' || normalizedCatalogId === 'QX-3';
   const isWarm = normalizedTheme === 'qx4' || normalizedCatalogId === 'QX-4';
@@ -219,6 +251,7 @@ const PackshotsSection = ({
           }
         >
           {data.groups.map((group, gi) => {
+            const groupDescription = resolveGroupDescription(group, isQxCatalog);
             const gridCols = (() => {
               if (isFunctional)  return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3';
               if (isPremium)     return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
@@ -256,13 +289,13 @@ const PackshotsSection = ({
                   >
                     {renderQxText(group.label)}
                   </h3>
-                  {group.desc && (
+                  {groupDescription && (
                     <span
                       className={`text-sm ${
                         isDark ? 'font-mono text-white/25' : 'text-muted-foreground'
                       }`}
                     >
-                      {isDark ? '// ' : ''}{group.desc}
+                      {isDark ? '// ' : ''}{groupDescription}
                     </span>
                   )}
                 </div>
