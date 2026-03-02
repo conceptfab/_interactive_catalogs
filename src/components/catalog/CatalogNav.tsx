@@ -275,7 +275,7 @@ const CatalogNav = ({
                       <span className="font-mono text-[10px] tracking-[0.22em]">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-body text-[12px] uppercase tracking-[0.14em]">
+                      <span className="font-body text-[13px] uppercase tracking-[0.14em]">
                         {renderQxText(section.label)}
                       </span>
                     </button>
