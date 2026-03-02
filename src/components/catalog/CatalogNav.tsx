@@ -129,7 +129,7 @@ const CatalogNav = ({
                 {backToCatalogListHref ? (
                   <a
                     href={backToCatalogListHref}
-                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo"
+                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo qx2-brand-link"
                     aria-label="Back to catalog list"
                   >
                     {renderBrand('h-7 w-auto object-contain qx2-brand-mark')}
@@ -137,7 +137,7 @@ const CatalogNav = ({
                 ) : (
                   <button
                     onClick={() => scrollTo('cover')}
-                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo"
+                    className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo qx2-brand-link"
                     aria-label={`${brandLabel} - back to top`}
                   >
                     {renderBrand('h-7 w-auto object-contain qx2-brand-mark')}
@@ -145,14 +145,14 @@ const CatalogNav = ({
                 )}
 
                 <ul
-                  className="hidden lg:flex items-center gap-1 flex-1 justify-end overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                  className="hidden lg:flex flex-nowrap items-center gap-0.5 flex-1 justify-end overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                   role="list"
                 >
                   {visibleSections.map((section, idx) => (
                     <li key={section.id}>
                       <button
                         onClick={() => scrollTo(section.id)}
-                        className={`nav-button px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${
+                        className={`nav-button qx2-nav-link px-3 py-2 min-h-[44px] inline-flex items-center gap-2 text-sm transition-colors border-b-2 ${
                           activeSection === section.id
                             ? 'border-accent text-foreground'
                             : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
@@ -198,7 +198,7 @@ const CatalogNav = ({
                   <li key={section.id}>
                     <button
                       onClick={() => scrollTo(section.id)}
-                      className={`nav-button w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${
+                      className={`nav-button qx2-nav-link w-full px-2 py-3 text-left text-sm min-h-[44px] inline-flex items-center gap-2 transition-colors border-b-2 ${
                         activeSection === section.id
                           ? 'border-accent text-foreground'
                           : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'

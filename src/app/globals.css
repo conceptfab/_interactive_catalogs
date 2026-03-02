@@ -656,10 +656,15 @@ html {
 }
 
 .catalog-qx2 .brand-logo .qx2-brand-mark {
-  height: 2rem !important;
+  height: 1.45rem !important;
   width: auto !important;
   opacity: 1 !important;
   filter: brightness(0) contrast(1.35);
+}
+
+.catalog-qx2 .qx2-brand-link {
+  padding: 0.35rem 0.55rem !important;
+  min-height: 34px !important;
 }
 
 .catalog-qx2 section {
@@ -1011,13 +1016,40 @@ html {
   border-bottom: 6px solid transparent !important;
   border-radius: 0 !important;
   background: transparent !important;
-  padding: 0.5rem 1rem 0 1rem !important;
-  margin: 0 4px !important;
+  padding: 0.5rem 0.72rem 0 0.72rem !important;
+  margin: 0 1px !important;
   height: auto !important;
   min-height: 48px !important;
   opacity: 0.6;
   transition: all 0.2s ease !important;
   box-shadow: none !important;
+}
+
+/* Denser desktop menu for QX-2 */
+.catalog-qx2 nav ul[role='list'] {
+  gap: 0.1rem !important;
+}
+
+.catalog-qx2 nav button.nav-button.qx2-nav-link {
+  min-height: 44px !important;
+  gap: 0.4rem !important;
+  white-space: nowrap;
+}
+
+.catalog-qx2 nav button.nav-button.qx2-nav-link,
+.catalog-qx2 nav button.nav-button.qx2-nav-link .font-display,
+.catalog-qx2 nav button.nav-button.qx2-nav-link .font-mono {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+.catalog-qx2 nav button.nav-button.qx2-nav-link .font-mono {
+  font-size: 9px !important;
+  letter-spacing: 0.04em !important;
+}
+
+.catalog-qx2 nav button.nav-button.qx2-nav-link .font-display {
+  font-size: 0.95rem !important;
+  letter-spacing: 0.01em !important;
 }
 
 .catalog-qx2 nav button.nav-button:hover,
@@ -1043,11 +1075,16 @@ html {
   margin: 0 0 0 auto !important;
   min-height: 64px !important;
   min-width: 64px !important;
-  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   box-shadow: none !important;
   opacity: 1 !important;
+}
+
+@media (min-width: 1024px) {
+  .catalog-qx2 nav button.nav-button.qx2-menu-button {
+    display: none !important;
+  }
 }
 
 .catalog-qx2 nav button.nav-button.qx2-menu-button:hover {
@@ -2006,7 +2043,6 @@ html {
 
 .catalog-qx0,
 .catalog-qx1,
-.catalog-qx2,
 .catalog-qx3,
 .catalog-qx4,
 .catalog-qx5 {
@@ -2016,7 +2052,6 @@ html {
 
 .catalog-qx0 .font-body,
 .catalog-qx1 .font-body,
-.catalog-qx2 .font-body,
 .catalog-qx3 .font-body,
 .catalog-qx4 .font-body,
 .catalog-qx5 .font-body {
@@ -2025,7 +2060,6 @@ html {
 
 .catalog-qx0 .font-display,
 .catalog-qx1 .font-display,
-.catalog-qx2 .font-display,
 .catalog-qx3 .font-display,
 .catalog-qx4 .font-display,
 .catalog-qx5 .font-display {
