@@ -682,8 +682,8 @@ html {
 
 /* Ensure Logo and Nav items align correctly inside the centered container */
 .catalog-qx2 nav .flex.items-center.justify-between {
-  justify-content: flex-start !important;
-  gap: 3rem;
+  justify-content: space-between !important;
+  gap: 0.5rem !important;
 }
 
 /* Restyle section labels: 4x larger, weight 100 - ONLY for headers */
@@ -733,8 +733,8 @@ html {
   display: none;
 }
 
-/* Restyle all buttons in QX-2 - EXCEPT color selection swatches AND nav buttons */
-.catalog-qx2 button:not([style*='background']):not(.nav-button),
+/* Restyle all buttons in QX-2 - EXCEPT color selection swatches, nav buttons and mobile menu trigger */
+.catalog-qx2 button:not([style*='background']):not(.nav-button):not(.qx2-menu-button),
 .catalog-qx2 .btn-premium,
 .catalog-qx2 #cover button,
 .catalog-qx2 #assembly button {
@@ -752,7 +752,7 @@ html {
 }
 
 /* Base style for ALL buttons except nav items to have dashed border and 4px radius */
-.catalog-qx2 button:not(.nav-button) {
+.catalog-qx2 button:not(.nav-button):not(.qx2-menu-button) {
   border: 1px dashed hsl(var(--foreground)) !important;
   border-radius: 4px !important;
 }
@@ -822,6 +822,31 @@ html {
 .catalog-qx2 nav button.nav-button[class*='text-foreground'] {
   opacity: 1;
   background: transparent !important;
+}
+
+/* QX-2 mobile menu trigger: larger icon button aligned right, no frame */
+.catalog-qx2 nav button.nav-button.qx2-menu-button {
+  border: none !important;
+  border-bottom: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0.25rem !important;
+  margin: 0 0 0 auto !important;
+  min-height: 64px !important;
+  min-width: 64px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.catalog-qx2 nav button.nav-button.qx2-menu-button:hover {
+  border-bottom: none !important;
+  border: none !important;
+  background: transparent !important;
+  transform: none !important;
 }
 
 .catalog-qx2 section:last-of-type {

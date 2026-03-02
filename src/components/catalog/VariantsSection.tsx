@@ -46,7 +46,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2 }}
-            className="sticky top-24"
+            className="relative z-0"
           >
             <div
               className="relative aspect-square w-full overflow-hidden bg-surface/30 mix-blend-multiply"

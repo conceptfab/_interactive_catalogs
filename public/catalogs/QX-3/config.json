@@ -10,11 +10,11 @@
     { "id": "cover", "label": "Cover" },
     { "id": "overview", "label": "Overview" },
     { "id": "gallery", "label": "Gallery" },
-    { "id": "variants", "label": "Loadout" },
-    { "id": "packshots", "label": "Configs" },
-    { "id": "dimensions", "label": "Specs" },
+    { "id": "variants", "label": "Variants" },
+    { "id": "packshots", "label": "Models" },
+    { "id": "dimensions", "label": "Dimensions" },
     { "id": "materials", "label": "Materials" },
     { "id": "features", "label": "Features" },
-    { "id": "assembly", "label": "Deploy" }
+    { "id": "assembly", "label": "Assembly" }
   ]
 }

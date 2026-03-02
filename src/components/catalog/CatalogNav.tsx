@@ -123,7 +123,7 @@ const CatalogNav = ({
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-transparent shadow-[0_8px_22px_hsl(220_10%_10%/0.06)]">
-              <div className="flex items-center gap-2 px-1.5 pt-1.5 pb-0">
+              <div className="flex items-center justify-between gap-2 px-1.5 pt-1.5 pb-0">
                 {backToCatalogListHref ? (
                   <a
                     href={backToCatalogListHref}
@@ -172,11 +172,11 @@ const CatalogNav = ({
 
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="lg:hidden p-2 bg-transparent text-foreground hover:text-muted-foreground transition-colors min-h-[40px] min-w-[40px] flex items-center justify-center"
+                  className="lg:hidden nav-button qx2-menu-button ml-auto inline-flex items-center justify-center bg-transparent text-foreground hover:text-foreground transition-colors min-h-[64px] min-w-[64px] p-2"
                   aria-expanded={isOpen}
                   aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 >
-                  {isOpen ? <X size={22} /> : <Menu size={22} />}
+                  {isOpen ? <X size={30} /> : <Menu size={30} />}
                 </button>
               </div>
             </div>
@@ -285,11 +285,11 @@ const CatalogNav = ({
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden inline-flex min-h-[56px] min-w-[56px] items-center justify-center border-l border-border/70 text-primary-foreground transition-colors hover:bg-white/10"
+                className="lg:hidden nav-button qx3-menu-button ml-auto inline-flex min-h-[68px] min-w-[68px] items-center justify-center border-0 text-white transition-colors hover:text-white/85 hover:bg-transparent"
                 aria-expanded={isOpen}
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
-                {isOpen ? <X size={20} /> : <Menu size={20} />}
+                {isOpen ? <X size={30} /> : <Menu size={30} />}
               </button>
             </div>
           </div>
@@ -606,10 +606,10 @@ const CatalogNav = ({
               >
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-b border-border/70 pb-4">
                   <p className="font-display text-3xl leading-tight text-foreground">
-                    {renderQxText('QX-1 Workspace System')}
+                    {renderQxText('QX Workspace System')}
                   </p>
                   <p className="font-body text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    {renderQxText('METRO Collection / QX-1')}
+                    {renderQxText('METRO Collection / QX')}
                   </p>
                 </div>
 
