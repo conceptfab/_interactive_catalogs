@@ -14,6 +14,7 @@ import DimensionsSection from '@/components/catalog/DimensionsSection';
 import MaterialsSection from '@/components/catalog/MaterialsSection';
 import FeaturesSection from '@/components/catalog/FeaturesSection';
 import AssemblySection from '@/components/catalog/AssemblySection';
+import PackshotsSection from '@/components/catalog/PackshotsSection';
 
 export default function CatalogPage() {
   const params = useParams();
@@ -139,6 +140,9 @@ export default function CatalogPage() {
         <OverviewSection data={catalog.overview} />
         <GallerySection data={catalog.gallery} />
         <VariantsSection data={catalog.variants} />
+        {catalog.packshots && (
+          <PackshotsSection data={catalog.packshots} theme={catalog.meta.theme} />
+        )}
         <DimensionsSection data={catalog.dimensions} />
         <MaterialsSection data={catalog.materials} />
         <FeaturesSection data={catalog.features} />

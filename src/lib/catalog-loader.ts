@@ -10,6 +10,7 @@ import type {
   MaterialsData,
   FeaturesData,
   AssemblyData,
+  PackshotsData,
 } from '@/types/catalog';
 
 /** Raw gallery from JSON - images use `image` not `src` */
@@ -178,6 +179,7 @@ export async function loadCatalog(
     materials,
     features,
     assembly,
+    packshots,
   ] = await Promise.all([
     fetchJson<HeroData>(`${base}/hero/content.json`),
     fetchJson<HeroSliderFile>(`${base}/hero/slider.json`),
@@ -188,6 +190,7 @@ export async function loadCatalog(
     fetchJson<MaterialsData>(`${base}/materials/content.json`),
     fetchJson<FeaturesData>(`${base}/features/content.json`),
     fetchJson<AssemblyData>(`${base}/assembly/content.json`),
+    fetchJson<PackshotsData>('/shared/packshots/content.json'),
   ]);
 
   if (
@@ -271,6 +274,7 @@ export async function loadCatalog(
     },
     features,
     assembly,
+    ...(packshots ? { packshots } : {}),
   };
 }
 

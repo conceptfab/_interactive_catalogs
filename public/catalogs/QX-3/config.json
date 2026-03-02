@@ -11,6 +11,7 @@
     { "id": "overview", "label": "Overview" },
     { "id": "gallery", "label": "Gallery" },
     { "id": "variants", "label": "Loadout" },
+    { "id": "packshots", "label": "Configs" },
     { "id": "dimensions", "label": "Specs" },
     { "id": "materials", "label": "Materials" },
     { "id": "features", "label": "Features" },

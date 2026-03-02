@@ -11,6 +11,7 @@ export interface CatalogData {
   materials: MaterialsData;
   features: FeaturesData;
   assembly: AssemblyData;
+  packshots?: PackshotsData;
   sections?: SectionConfig[];
 }
 
@@ -264,4 +265,26 @@ export interface SectionConfig {
   id: string;
   label: string;
   enabled?: boolean;
+}
+
+export interface PackshotItem {
+  code: string;
+  colorName: string;
+  colorCode?: string;
+  colorHex?: string;
+  image: string;
+}
+
+export interface PackshotGroup {
+  model: string;
+  label: string;
+  desc?: string;
+  items: PackshotItem[];
+}
+
+export interface PackshotsData {
+  sectionLabel: string;
+  title: string;
+  subtitle?: string;
+  groups: PackshotGroup[];
 }
