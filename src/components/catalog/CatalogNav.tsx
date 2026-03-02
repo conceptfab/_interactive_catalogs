@@ -130,7 +130,7 @@ const CatalogNav = ({
                     className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo"
                     aria-label="Back to catalog list"
                   >
-                    {renderBrand('h-6 w-auto object-contain')}
+                    {renderBrand('h-7 w-auto object-contain qx2-brand-mark')}
                   </a>
                 ) : (
                   <button
@@ -138,7 +138,7 @@ const CatalogNav = ({
                     className="shrink-0 bg-transparent text-foreground px-3 py-2 text-xs font-display font-semibold tracking-[0.16em] min-h-[40px] inline-flex items-center brand-logo"
                     aria-label={`${brandLabel} - back to top`}
                   >
-                    {renderBrand('h-6 w-auto object-contain')}
+                    {renderBrand('h-7 w-auto object-contain qx2-brand-mark')}
                   </button>
                 )}
 
@@ -275,7 +275,7 @@ const CatalogNav = ({
                       <span className="font-mono text-[10px] tracking-[0.22em]">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-display text-[10px] uppercase tracking-[0.2em]">
+                      <span className="font-body text-[12px] uppercase tracking-[0.14em]">
                         {renderQxText(section.label)}
                       </span>
                     </button>
@@ -317,7 +317,7 @@ const CatalogNav = ({
                       <span className="font-mono">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-display">
+                      <span className="font-body text-[12px] tracking-[0.14em]">
                         {renderQxText(section.label)}
                       </span>
                     </button>
@@ -361,7 +361,7 @@ const CatalogNav = ({
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden nav-button qx5-menu-button absolute right-3 inline-flex min-h-[48px] min-w-[48px] items-center justify-center text-[#1f2328]"
+                className="md:hidden qx5-menu-button absolute right-3 inline-flex min-h-[48px] min-w-[48px] items-center justify-center text-[#1f2328]"
                 aria-expanded={isOpen}
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
@@ -370,14 +370,14 @@ const CatalogNav = ({
             </div>
 
             <ul
-              className="hidden lg:flex min-h-[48px] w-full items-center justify-center gap-1 border-t border-[#1f2328]/20 px-4"
+              className="hidden md:flex min-h-[48px] w-full items-center justify-center gap-1 border-t border-[#1f2328]/20 px-4"
               role="list"
             >
               {visibleSections.map((section) => (
                 <li key={section.id}>
                   <button
                     onClick={() => scrollTo(section.id)}
-                    className={`nav-button qx5-nav-link inline-flex min-h-[40px] items-center px-3 py-2 text-[11px] uppercase tracking-[0.12em] transition-colors ${
+                    className={`qx5-nav-link inline-flex min-h-[40px] items-center px-3 py-2 text-[11px] uppercase tracking-[0.12em] transition-colors ${
                       activeSection === section.id
                         ? 'is-active text-[#1f2328]'
                         : 'text-[#56524a] hover:text-[#1f2328]'
@@ -402,7 +402,7 @@ const CatalogNav = ({
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="lg:hidden fixed top-[64px] left-0 right-0 z-[59] qx5-nav-panel"
+              className="md:hidden fixed top-[64px] left-0 right-0 z-[59] qx5-nav-panel"
             >
               <ul className="grid grid-cols-2" role="list">
                 {visibleSections.map((section, idx) => (
@@ -641,9 +641,9 @@ const CatalogNav = ({
             scrolled || isOpen ? 'py-3' : 'py-5'
           }`}
         >
-          <div className="max-w-7xl mx-auto px-6 sm:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
             <div
-              className={`flex items-center justify-between gap-3 rounded-sm border px-4 sm:px-5 py-2 backdrop-blur-xl transition-all duration-300 ${
+              className={`flex items-center justify-between gap-3 border px-4 sm:px-5 py-2 backdrop-blur-xl transition-all duration-300 ${
                 scrolled || isOpen
                   ? 'bg-background/90 border-border shadow-[0_14px_36px_hsl(0_0%_8%/0.16)]'
                   : 'bg-background/70 border-border/50 shadow-[0_8px_24px_hsl(0_0%_8%/0.08)]'
@@ -669,16 +669,11 @@ const CatalogNav = ({
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center gap-2 min-h-[46px] rounded-full bg-foreground text-background px-3 py-2 hover:scale-[1.03] transition-transform shadow-lg shrink-0"
+                className="inline-flex min-h-[52px] min-w-[52px] items-center justify-center border-0 bg-transparent p-2 text-foreground transition-colors hover:text-accent shrink-0"
                 aria-expanded={isOpen}
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
-                <span className="hidden sm:inline text-[11px] font-body uppercase tracking-[0.24em]">
-                  {isOpen ? 'Close' : 'Menu'}
-                </span>
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-background/15">
-                  {isOpen ? <X size={20} /> : <Menu size={20} />}
-                </span>
+                {isOpen ? <X size={30} /> : <Menu size={30} />}
               </button>
             </div>
           </div>

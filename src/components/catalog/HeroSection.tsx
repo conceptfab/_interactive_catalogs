@@ -235,7 +235,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
                 onClick={goPrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-on-dark-muted hover:text-on-dark transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 text-on-dark-muted hover:text-on-dark transition-colors min-h-[44px] min-w-[44px] items-center justify-center"
                 aria-label="Previous slide"
               >
                 <ArrowDown size={24} className="rotate-90" />
@@ -246,7 +246,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
                 onClick={goNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-on-dark-muted hover:text-on-dark transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 text-on-dark-muted hover:text-on-dark transition-colors min-h-[44px] min-w-[44px] items-center justify-center"
                 aria-label="Next slide"
               >
                 <ArrowDown size={24} className="-rotate-90" />
@@ -258,7 +258,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2"
+              className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2"
               role="tablist"
               aria-label="Slide indicators"
             >
@@ -427,7 +427,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
             .getElementById('overview')
             ?.scrollIntoView({ behavior: 'smooth' })
         }
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-on-dark-muted hover:text-on-dark transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-on-dark-muted hover:text-on-dark transition-colors min-h-[44px] min-w-[44px] items-center justify-center"
         aria-label="Scroll to overview"
       >
         <motion.div

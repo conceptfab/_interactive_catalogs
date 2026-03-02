@@ -655,6 +655,13 @@ html {
   /* Keep original casing if any */
 }
 
+.catalog-qx2 .brand-logo .qx2-brand-mark {
+  height: 2rem !important;
+  width: auto !important;
+  opacity: 1 !important;
+  filter: brightness(0) contrast(1.35);
+}
+
 .catalog-qx2 section {
   position: relative;
 }
@@ -1512,7 +1519,7 @@ html {
   --hero-overlay: 0 0% 0%;
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Calibre', 'Inter', sans-serif;
-  --qx5-nav-bg: #f7f6f2;
+  --qx5-nav-bg: #fbfaf6;
   --radius: 0;
   position: relative;
   overflow-x: clip;
@@ -1550,6 +1557,24 @@ html {
   width: 100%;
   background: var(--qx5-nav-bg);
   border-bottom: 1px solid hsl(220 8% 16% / 0.28);
+}
+
+.catalog-qx5 .qx5-nav-shell button,
+.catalog-qx5 .qx5-nav-panel button {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.catalog-qx5 .qx5-nav-panel button {
+  color: #1f2328 !important;
+}
+
+.catalog-qx5 .qx5-nav-panel button span {
+  color: inherit !important;
+  opacity: 1 !important;
 }
 
 .catalog-qx5 .qx5-nav-link {
@@ -1878,7 +1903,8 @@ html {
   display: none !important;
 }
 
-.catalog-qx5 #features .feature-tab-button {
+.catalog-qx5 #features .feature-tab-button,
+.catalog-qx5 #features [role='tab'] {
   border: 1px solid #1f2328 !important;
   border-radius: 0 !important;
   background: transparent !important;
@@ -1888,20 +1914,22 @@ html {
   min-height: 5.5rem !important;
 }
 
-.catalog-qx5 #features .feature-tab-button:hover {
-  background: #ebe7de !important;
+.catalog-qx5 #features .feature-tab-button:hover,
+.catalog-qx5 #features [role='tab']:hover {
+  background: #f1eee6 !important;
   color: #1f2328 !important;
 }
 
 .catalog-qx5 #features .feature-tab-button.is-active,
-.catalog-qx5 #features .feature-tab-button[aria-selected='true'] {
-  background: #ebe7de !important;
+.catalog-qx5 #features .feature-tab-button[aria-selected='true'],
+.catalog-qx5 #features [role='tab'][aria-selected='true'] {
+  background: #f1eee6 !important;
   border-color: #1f2328 !important;
   color: #1f2328 !important;
 }
 
 .catalog-qx5 #features .feature-tab-icon {
-  color: #5f5a52 !important;
+  color: #666158 !important;
   stroke-width: 1.45 !important;
   flex-shrink: 0;
 }
@@ -1916,24 +1944,6 @@ html {
   visibility: visible !important;
 }
 
-.catalog-qx5 #features [role='tab'] {
-  border: 1px solid #1f2328 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  color: #1f2328 !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.catalog-qx5 #features [role='tab']:hover,
-.catalog-qx5 #features [role='tab'][aria-selected='true'] {
-  background: #ebe7de !important;
-  color: #1f2328 !important;
-  border-color: #1f2328 !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
 .catalog-qx5 #features [role='tab'] span,
 .catalog-qx5 #features [role='tab'] .feature-tab-label {
   color: #1f2328 !important;
@@ -1943,11 +1953,27 @@ html {
 
 .catalog-qx5 #features [role='tab'] svg,
 .catalog-qx5 #features [role='tab'] .feature-tab-icon {
-  color: #5f5a52 !important;
+  color: #666158 !important;
   stroke-width: 1.45 !important;
 }
 
-.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([aria-label='Previous slide']):not([aria-label='Next slide']):not([aria-label='Scroll to overview']):not([aria-label='Close lightbox']):not([aria-label='Previous image']):not([aria-label='Next image']):not([aria-label*='fullscreen']):not([aria-label^='Go to slide']) {
+.catalog-qx5 #features .feature-tab-button.is-active .feature-tab-label,
+.catalog-qx5 #features .feature-tab-button[aria-selected='true'] .feature-tab-label,
+.catalog-qx5 #features [role='tab'][aria-selected='true'] .feature-tab-label,
+.catalog-qx5 #features .feature-tab-button.is-active span,
+.catalog-qx5 #features [role='tab'][aria-selected='true'] span {
+  color: #1f2328 !important;
+}
+
+.catalog-qx5 #features .feature-tab-button.is-active .feature-tab-icon,
+.catalog-qx5 #features .feature-tab-button[aria-selected='true'] .feature-tab-icon,
+.catalog-qx5 #features [role='tab'][aria-selected='true'] .feature-tab-icon,
+.catalog-qx5 #features .feature-tab-button.is-active svg,
+.catalog-qx5 #features [role='tab'][aria-selected='true'] svg {
+  color: #4f4941 !important;
+}
+
+.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([role='tab']):not([aria-label='Previous slide']):not([aria-label='Next slide']):not([aria-label='Scroll to overview']):not([aria-label='Close lightbox']):not([aria-label='Previous image']):not([aria-label='Next image']):not([aria-label*='fullscreen']):not([aria-label^='Go to slide']) {
   border: 1px solid #1f2328 !important;
   border-radius: 0 !important;
   background: transparent !important;
@@ -1961,20 +1987,20 @@ html {
     border-color 0.24s ease !important;
 }
 
-.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([aria-label='Previous slide']):not([aria-label='Next slide']):not([aria-label='Scroll to overview']):not([aria-label='Close lightbox']):not([aria-label='Previous image']):not([aria-label='Next image']):not([aria-label*='fullscreen']):not([aria-label^='Go to slide']):hover {
+.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([role='tab']):not([aria-label='Previous slide']):not([aria-label='Next slide']):not([aria-label='Scroll to overview']):not([aria-label='Close lightbox']):not([aria-label='Previous image']):not([aria-label='Next image']):not([aria-label*='fullscreen']):not([aria-label^='Go to slide']):hover {
   background: #1f2328 !important;
   color: #f2f2f2 !important;
   transform: none !important;
 }
 
-.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button)[aria-selected='true'],
-.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button)[aria-checked='true'] {
+.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([role='tab'])[aria-selected='true'],
+.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([role='tab'])[aria-checked='true'] {
   background: #1f2328 !important;
   color: #f2f2f2 !important;
   border-color: #1f2328 !important;
 }
 
-.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button) svg {
+.catalog-qx5 section:not(#cover) button:not(.variant-swatch):not(.feature-tab-button):not([role='tab']) svg {
   stroke-width: 1.8;
 }
 
