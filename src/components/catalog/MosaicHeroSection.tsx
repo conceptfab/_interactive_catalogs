@@ -6,7 +6,7 @@ import { renderQxText } from './renderQxText';
 
 interface MosaicHeroSectionProps {
   data: HeroData;
-  variant: 'qx3' | 'qx4';
+  variant: 'qx3' | 'qx4' | 'qx5';
 }
 
 function normalizeSlides(data: HeroData): HeroSlide[] {
@@ -31,11 +31,15 @@ function normalizeSlides(data: HeroData): HeroSlide[] {
 
 function resolveHeroTitle(
   rawTitle: string | undefined,
-  variant: 'qx3' | 'qx4',
+  variant: 'qx3' | 'qx4' | 'qx5',
 ) {
   const cleaned = rawTitle?.trim();
   if (!cleaned || cleaned.toLowerCase() === 'qx series') {
-    return variant === 'qx3' ? 'QX-3 Dark Precision' : 'QX';
+    return variant === 'qx3'
+      ? 'QX-3 Dark Precision'
+      : variant === 'qx5'
+        ? 'QX'
+        : 'QX';
   }
   return cleaned;
 }
@@ -81,7 +85,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
   }, [slides.length, variant]);
 
   useEffect(() => {
-    if (variant !== 'qx4') return;
+    if (variant !== 'qx4' && variant !== 'qx5') return;
     if (slides.length <= 1) return;
 
     const mainInterval = setInterval(() => {
@@ -99,7 +103,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
   }, [slides.length, variant]);
 
   useEffect(() => {
-    if (variant !== 'qx4') return;
+    if (variant !== 'qx4' && variant !== 'qx5') return;
     setQx4ThumbIndices(
       [0, 1, 2].map(
         (slot) => (mainIndex + qx4ThumbOffset + slot) % slides.length,

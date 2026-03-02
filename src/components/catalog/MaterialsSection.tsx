@@ -50,7 +50,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                 loading="lazy"
               />
             </figure>
-            <p className="text-sm text-muted-foreground text-center px-4">
+            <p className="materials-detail-caption text-sm text-muted-foreground text-center px-4">
               {renderQxText(data.detailImageCaption)}
             </p>
           </motion.div>

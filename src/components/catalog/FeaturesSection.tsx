@@ -51,24 +51,20 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                   role="tab"
                   aria-selected={activeFeature === i}
                   onClick={() => setActiveFeature(i)}
-                  className={`w-full text-left px-6 py-5 flex items-center gap-4 transition-all min-h-[44px] rounded-xl ${activeFeature === i
-                      ? 'bg-foreground text-background shadow-lg scale-105'
-                      : 'hover:bg-muted text-foreground'
-                    }`}
+                  className={`feature-tab-button w-full text-left px-6 py-5 flex items-center gap-4 transition-all min-h-[44px] rounded-xl ${
+                    activeFeature === i ? 'is-active' : ''
+                  }`}
                 >
                   <Icon
                     size={24}
-                    className={
-                      activeFeature === i
-                        ? 'text-background'
-                        : 'text-muted-foreground group-hover:text-foreground'
-                    }
+                    className={`feature-tab-icon ${
+                      activeFeature === i ? 'is-active' : ''
+                    }`}
                   />
                   <span
-                    className={`font-display text-lg font-bold ${activeFeature === i
-                        ? 'text-background'
-                        : 'text-foreground'
-                      }`}
+                    className={`feature-tab-label font-display text-lg font-bold ${
+                      activeFeature === i ? 'is-active' : ''
+                    }`}
                   >
                     {renderQxText(f.title)}
                   </span>

@@ -6,12 +6,14 @@ import { renderQxText } from './renderQxText';
 
 interface GallerySectionProps {
   data: GalleryData;
+  catalogId?: string;
 }
 
-const GallerySection = ({ data }: GallerySectionProps) => {
+const GallerySection = ({ data, catalogId }: GallerySectionProps) => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isQx5 = catalogId?.toUpperCase() === 'QX-5';
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -47,7 +49,7 @@ const GallerySection = ({ data }: GallerySectionProps) => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="gallery-grid grid grid-cols-2 lg:grid-cols-3 gap-4">
           {data.images.map((img, i) => (
             <motion.button
               key={i}
@@ -55,8 +57,12 @@ const GallerySection = ({ data }: GallerySectionProps) => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1 }}
               onClick={() => openLightbox(i)}
-              className={`group relative overflow-hidden ${
-                i === 0 ? 'col-span-2 lg:col-span-2 row-span-2' : ''
+              className={`gallery-item group relative overflow-hidden ${
+                !isQx5 && i === 0
+                  ? 'col-span-2 lg:col-span-2 row-span-2'
+                  : isQx5
+                    ? 'h-[15rem] lg:h-[20rem]'
+                    : ''
               } min-h-[44px] shadow-lg`}
               aria-label={`View ${img.category} image in fullscreen`}
             >
@@ -72,9 +78,6 @@ const GallerySection = ({ data }: GallerySectionProps) => {
                   size={28}
                 />
               </div>
-              <span className="absolute bottom-3 left-3 bg-card/90 backdrop-blur-sm text-card-foreground text-xs font-medium px-3 py-1">
-                {renderQxText(img.category)}
-              </span>
             </motion.button>
           ))}
         </div>
@@ -130,8 +133,7 @@ const GallerySection = ({ data }: GallerySectionProps) => {
               onClick={(e) => e.stopPropagation()}
             />
             <p className="absolute bottom-6 text-on-dark-muted text-sm" aria-live="polite">
-              {lightboxIndex + 1} / {data.images.length} -{' '}
-              {renderQxText(data.images[lightboxIndex].category)}
+              {lightboxIndex + 1} / {data.images.length}
             </p>
           </motion.div>
         )}

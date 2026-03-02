@@ -80,7 +80,7 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
                   loading="lazy"
                 />
               </div>
-              <figcaption className="mt-6 text-center text-sm font-medium tracking-wide text-muted-foreground uppercase">
+              <figcaption className="overview-packshot-caption mt-6 text-center text-sm font-medium tracking-wide text-muted-foreground uppercase">
                 {renderQxText(data.packshotCaption)}
               </figcaption>
             </figure>

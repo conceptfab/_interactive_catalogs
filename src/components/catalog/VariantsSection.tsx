@@ -103,7 +103,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                     onClick={() => setSelectedColor(i)}
                     role="radio"
                     aria-checked={selectedColor === i}
-                    className={`w-12 h-12 rounded-full border-2 transition-all min-h-[44px] min-w-[44px] ${
+                    className={`variant-swatch w-12 h-12 rounded-full border-2 transition-all min-h-[44px] min-w-[44px] ${
                       selectedColor === i
                         ? 'border-accent scale-110 shadow-md'
                         : 'border-border hover:border-muted-foreground'
@@ -134,7 +134,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                     onClick={() => setSelectedFrame(i)}
                     role="radio"
                     aria-checked={selectedFrame === i}
-                    className={`w-12 h-12 rounded-full border-2 transition-all min-h-[44px] min-w-[44px] ${
+                    className={`variant-swatch w-12 h-12 rounded-full border-2 transition-all min-h-[44px] min-w-[44px] ${
                       selectedFrame === i
                         ? 'border-accent scale-110 shadow-md'
                         : 'border-border hover:border-muted-foreground'

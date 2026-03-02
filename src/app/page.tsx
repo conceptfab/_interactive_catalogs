@@ -7,10 +7,44 @@ import { getCatalogList, getGlobalConfig } from '@/lib/catalog-loader';
 import type { GlobalConfig } from '@/lib/catalog-loader';
 import { LayoutGrid } from 'lucide-react';
 
+type VariantKey = 'qx0' | 'qx1' | 'qx2' | 'qx3' | 'qx4' | 'qx5';
+
 function formatCatalogHeading(catalogId: string): string {
   const match = catalogId.match(/^QX-(\d+)$/i);
   if (match) return `QX ${match[1]}`;
   return catalogId.toUpperCase();
+}
+
+function resolveVariantKey(catalogId: string, theme?: string): VariantKey {
+  const normalizedTheme = theme?.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (
+    normalizedTheme === 'qx0' ||
+    normalizedTheme === 'qx1' ||
+    normalizedTheme === 'qx2' ||
+    normalizedTheme === 'qx3' ||
+    normalizedTheme === 'qx4' ||
+    normalizedTheme === 'qx5'
+  ) {
+    return normalizedTheme;
+  }
+
+  const idMatch = catalogId.match(/^QX-(\d+)$/i);
+  const number = idMatch?.[1] ?? '0';
+  if (number === '1') return 'qx1';
+  if (number === '2') return 'qx2';
+  if (number === '3') return 'qx3';
+  if (number === '4') return 'qx4';
+  if (number === '5') return 'qx5';
+  return 'qx0';
+}
+
+function variantDescriptor(variant: VariantKey): string {
+  if (variant === 'qx1') return 'Warm Editorial';
+  if (variant === 'qx2') return 'Mono Tech';
+  if (variant === 'qx3') return 'Dark Precision';
+  if (variant === 'qx4') return 'Blush Warm';
+  if (variant === 'qx5') return 'Linear Premium';
+  return 'Core Minimal';
 }
 
 export default function IndexPage() {
@@ -22,6 +56,7 @@ export default function IndexPage() {
         description: string;
         brandName: string;
         collectionName: string;
+        theme?: string;
       };
     }>
   >([]);
@@ -39,7 +74,7 @@ export default function IndexPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="variant-list-page min-h-screen bg-background">
       <header className="border-b border-border bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <h1 className="text-foreground">
@@ -79,20 +114,26 @@ export default function IndexPage() {
           ) : (
             <>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {catalogs.map(({ id }) => (
-                  <Link
-                    key={id}
-                    href={`/catalog/${id}`}
-                    className="group flex aspect-square flex-col p-4 rounded-lg border border-border bg-surface-elevated hover:border-accent hover:shadow-md transition-all min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                  >
-                    <h3 className="font-display font-semibold text-foreground group-hover:text-accent transition-colors">
-                      {formatCatalogHeading(id)}
-                    </h3>
-                    <span className="inline-block mt-auto self-end text-sm font-medium text-accent group-hover:underline">
-                      View →
-                    </span>
-                  </Link>
-                ))}
+                {catalogs.map(({ id, meta }) => {
+                  const variant = resolveVariantKey(id, meta.theme);
+                  return (
+                    <Link
+                      key={id}
+                      href={`/catalog/${id}`}
+                      className={`variant-tile variant-tile-${variant} group flex aspect-square flex-col border p-4 transition-all min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2`}
+                    >
+                      <h3 className="variant-tile-title">
+                        {formatCatalogHeading(id)}
+                      </h3>
+                      <p className="variant-tile-meta">
+                        {variantDescriptor(variant)}
+                      </p>
+                      <span className="variant-tile-cta inline-block mt-auto self-end text-sm">
+                        View →
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
 
               {catalogs.length === 0 && (

@@ -179,6 +179,30 @@ function WarmCard({ item }: { item: PackshotItem }) {
   );
 }
 
+// ── qx5: Linear premium / architectural ──────────────────────────
+function LinearCard({ item }: { item: PackshotItem }) {
+  return (
+    <div className="packshot-linear-card group bg-transparent overflow-hidden text-left">
+      <div className="packshot-linear-media p-0 flex items-end justify-center aspect-[4/3]">
+        <img
+          src={item.image}
+          alt={`${item.code} – ${item.colorName}`}
+          className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 group-hover:scale-[1.015]"
+          loading="lazy"
+        />
+      </div>
+      <div className="packshot-linear-caption px-0 py-2 bg-transparent text-left">
+        <p className="packshot-linear-code font-mono text-[11px] text-[#111] tracking-[0.18em] uppercase">
+          {item.code}
+        </p>
+        <p className="packshot-linear-color text-[11px] text-[#555] uppercase tracking-[0.12em] mt-0.5">
+          {item.colorName}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ── Main component ────────────────────────────────────────────────
 const PackshotsSection = ({
   data,
@@ -193,13 +217,18 @@ const PackshotsSection = ({
   const isQxCatalog = normalizedCatalogId?.startsWith('QX') ?? false;
 
   const isDark = normalizedTheme === 'qx3' || normalizedCatalogId === 'QX-3';
-  const isWarm = normalizedTheme === 'qx4' || normalizedCatalogId === 'QX-4';
+  const isLinear = normalizedTheme === 'qx5' || normalizedCatalogId === 'QX-5';
+  const isWarm =
+    normalizedTheme === 'qx4' ||
+    normalizedCatalogId === 'QX-4';
   const isPremium = normalizedTheme === 'qx2' || normalizedCatalogId === 'QX-2';
   const isFunctional =
     normalizedTheme === 'qx1' || normalizedCatalogId === 'QX-1';
 
   const sectionBg = isDark
     ? 'bg-[#060606] text-white'
+    : isLinear
+      ? 'bg-[#f2f2f2]'
     : isWarm
       ? 'bg-[#fdf8f2]'
       : 'bg-background';
@@ -256,6 +285,7 @@ const PackshotsSection = ({
               if (isFunctional)  return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3';
               if (isPremium)     return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
               if (isDark)        return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-px';
+              if (isLinear)      return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0';
               if (isWarm)        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5';
               return             'grid-cols-2 sm:grid-cols-3 gap-4';
             })();
@@ -273,6 +303,8 @@ const PackshotsSection = ({
                   className={`flex items-center gap-3 mb-5 pb-3 border-b ${
                     isDark
                       ? 'border-white/[0.06]'
+                      : isLinear
+                        ? 'border-[#555]'
                       : isWarm
                         ? 'border-[#e6ddd4]'
                         : 'border-border'
@@ -282,6 +314,8 @@ const PackshotsSection = ({
                     className={`font-display font-bold ${
                       isDark
                         ? 'font-mono text-xs uppercase tracking-[0.25em] text-white/60'
+                        : isLinear
+                          ? 'text-base uppercase tracking-[0.14em] text-[#111]'
                         : isFunctional
                           ? 'text-base text-foreground'
                           : 'text-lg text-foreground'
@@ -292,7 +326,11 @@ const PackshotsSection = ({
                   {groupDescription && (
                     <span
                       className={`text-sm ${
-                        isDark ? 'font-mono text-white/25' : 'text-muted-foreground'
+                        isDark
+                          ? 'font-mono text-white/25'
+                          : isLinear
+                            ? 'text-[#555]'
+                            : 'text-muted-foreground'
                       }`}
                     >
                       {isDark ? '// ' : ''}{groupDescription}
@@ -306,6 +344,7 @@ const PackshotsSection = ({
                 >
                   {group.items.map((item: PackshotItem) => {
                     if (isDark)       return <DarkCard      key={item.code} item={item} />;
+                    if (isLinear)     return <LinearCard    key={item.code} item={item} />;
                     if (isWarm)       return <WarmCard      key={item.code} item={item} />;
                     if (isPremium)    return <PremiumCard   key={item.code} item={item} />;
                     if (isFunctional) return <FunctionalCard key={item.code} item={item} />;

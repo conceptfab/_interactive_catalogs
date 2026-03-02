@@ -1,0 +1,65 @@
+{
+  "sectionLabel": "Getting Started",
+  "title": "Assembly & ordering",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Unpack frame",
+      "desc": "Remove frame components from packaging. Verify all parts against the included checklist."
+    },
+    {
+      "step": 2,
+      "title": "Assemble legs",
+      "desc": "Click-lock the column tubes into the crossbar. No tools required for this step."
+    },
+    {
+      "step": 3,
+      "title": "Attach feet",
+      "desc": "Screw levelling feet into column bases. Adjust for uneven floors as needed."
+    },
+    {
+      "step": 4,
+      "title": "Mount desktop",
+      "desc": "Place desktop face-down on soft surface. Align frame and secure with 6 included screws."
+    },
+    {
+      "step": 5,
+      "title": "Connect power",
+      "desc": "Route motor cables through cable spine. Connect control box and plug into mains power."
+    },
+    {
+      "step": 6,
+      "title": "Flip & calibrate",
+      "desc": "Carefully flip desk upright. Run auto-calibration by holding ▼ button for 5 seconds."
+    }
+  ],
+  "orderCodes": [
+    {
+      "code": "QX-1200-OAK-BK",
+      "desc": "1200×600mm, Natural Oak, Black Frame"
+    },
+    {
+      "code": "QX-1400-OAK-BK",
+      "desc": "1400×700mm, Natural Oak, Black Frame"
+    },
+    {
+      "code": "QX-1600-OAK-BK",
+      "desc": "1600×800mm, Natural Oak, Black Frame"
+    },
+    {
+      "code": "QX-1800-WAL-SL",
+      "desc": "1800×800mm, Walnut Dark, Silver Frame"
+    },
+    {
+      "code": "QX-2000L-OAK-BK",
+      "desc": "2000×900mm L-Shape, Natural Oak, Black Frame"
+    }
+  ],
+  "ctaLabels": {
+    "quote": "Request a Quote",
+    "pdf": "Download PDF",
+    "contact": "Contact Sales"
+  },
+  "footerText": "© 2025 METRO. All rights reserved. Catalogue version QX-2025.1",
+  "versionInfo": "Co-financed by European Funds (PARP). All products meet WCAG 2.1 AA accessibility standards."
+}

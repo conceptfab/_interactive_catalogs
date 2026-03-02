@@ -21,7 +21,7 @@ interface CatalogNavProps {
   brandLabel?: string;
   brandLogoSrc?: string;
   backToCatalogListHref?: string;
-  variant?: 'default' | 'qx0' | 'qx1' | 'qx2' | 'qx3' | 'qx4';
+  variant?: 'default' | 'qx0' | 'qx1' | 'qx2' | 'qx3' | 'qx4' | 'qx5';
 }
 
 const CatalogNav = ({
@@ -331,6 +331,102 @@ const CatalogNav = ({
     );
   }
 
+  if (variant === 'qx5') {
+    return (
+      <>
+        <nav
+          role="navigation"
+          aria-label="Catalog sections"
+          className="fixed top-0 left-0 right-0 z-[60]"
+        >
+          <div className="w-full qx5-nav-shell">
+            <div className="relative flex min-h-[64px] w-full items-center justify-center px-4">
+              {backToCatalogListHref ? (
+                <a
+                  href={backToCatalogListHref}
+                  className="inline-flex min-h-[44px] items-center"
+                  aria-label="Back to catalog list"
+                >
+                  {renderBrand('h-6 w-auto object-contain')}
+                </a>
+              ) : (
+                <button
+                  onClick={() => scrollTo('cover')}
+                  className="inline-flex min-h-[44px] items-center"
+                  aria-label={`${brandLabel} - back to top`}
+                >
+                  {renderBrand('h-6 w-auto object-contain')}
+                </button>
+              )}
+
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="lg:hidden nav-button qx5-menu-button absolute right-3 inline-flex min-h-[48px] min-w-[48px] items-center justify-center text-[#1f2328]"
+                aria-expanded={isOpen}
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+
+            <ul
+              className="hidden lg:flex min-h-[48px] w-full items-center justify-center gap-1 border-t border-[#1f2328]/20 px-4"
+              role="list"
+            >
+              {visibleSections.map((section) => (
+                <li key={section.id}>
+                  <button
+                    onClick={() => scrollTo(section.id)}
+                    className={`nav-button qx5-nav-link inline-flex min-h-[40px] items-center px-3 py-2 text-[11px] uppercase tracking-[0.12em] transition-colors ${
+                      activeSection === section.id
+                        ? 'is-active text-[#1f2328]'
+                        : 'text-[#56524a] hover:text-[#1f2328]'
+                    }`}
+                    aria-current={
+                      activeSection === section.id ? 'true' : undefined
+                    }
+                  >
+                    <span className="font-body font-medium">
+                      {renderQxText(section.label)}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="lg:hidden fixed top-[64px] left-0 right-0 z-[59] qx5-nav-panel"
+            >
+              <ul className="grid grid-cols-2" role="list">
+                {visibleSections.map((section, idx) => (
+                  <li key={section.id}>
+                    <button
+                      onClick={() => scrollTo(section.id)}
+                      className={`w-full min-h-[44px] px-3 py-2 text-center text-[11px] uppercase tracking-[0.12em] transition-colors ${
+                        idx % 2 === 0 ? 'border-r border-[#1f2328]/15' : ''
+                      } ${activeSection === section.id ? 'text-[#1f2328]' : 'text-[#5f5a52] hover:text-[#1f2328]'}`}
+                    >
+                      <span className="font-body font-medium">
+                        {renderQxText(section.label)}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </>
+    );
+  }
+
   if (variant === 'qx4') {
     return (
       <>
@@ -371,7 +467,7 @@ const CatalogNav = ({
                 className="hidden lg:flex items-center gap-1 flex-1 justify-end"
                 role="list"
               >
-                {visibleSections.map((section, idx) => (
+                {visibleSections.map((section) => (
                   <li key={section.id}>
                     <button
                       onClick={() => scrollTo(section.id)}
@@ -413,7 +509,7 @@ const CatalogNav = ({
               className="lg:hidden fixed top-20 left-3 right-3 z-[59] border border-[hsl(15_20%_82%/0.9)] bg-[hsl(20_18%_99%/0.96)] p-3 backdrop-blur-xl shadow-2xl"
             >
               <ul className="grid grid-cols-2 gap-2" role="list">
-                {visibleSections.map((section, idx) => (
+                {visibleSections.map((section) => (
                   <li key={section.id}>
                     <button
                       onClick={() => scrollTo(section.id)}

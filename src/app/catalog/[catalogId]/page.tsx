@@ -91,6 +91,8 @@ export default function CatalogPage() {
           ? 'qx3'
           : catalog.meta.theme === 'qx4'
             ? 'qx4'
+            : catalog.meta.theme === 'qx5'
+              ? 'qx5'
             : catalog.meta.theme === 'qx0'
               ? 'qx0'
               : 'default';
@@ -99,6 +101,7 @@ export default function CatalogPage() {
   const isQx1 = normalizedCatalogId === 'QX-1';
   const isQx3 = normalizedCatalogId === 'QX-3';
   const isQx4 = normalizedCatalogId === 'QX-4';
+  const isQx5 = normalizedCatalogId === 'QX-5';
   const isMosaicTheme =
     catalog.meta.theme === 'qx3' || catalog.meta.theme === 'qx4';
 
@@ -122,6 +125,8 @@ export default function CatalogPage() {
                 ? '/catalogs/QX-3/metro_logo.svg'
                 : isQx4
                   ? '/catalogs/QX-4/metro_logo.svg'
+                  : isQx5
+                    ? '/catalogs/QX-5/metro_logo.svg'
                   : undefined
         }
         backToCatalogListHref="/"
@@ -138,7 +143,7 @@ export default function CatalogPage() {
           <HeroSection data={catalog.hero} catalogId={catalogId} />
         )}
         <OverviewSection data={catalog.overview} />
-        <GallerySection data={catalog.gallery} />
+        <GallerySection data={catalog.gallery} catalogId={catalogId} />
         <VariantsSection data={catalog.variants} />
         {catalog.packshots && (
           <PackshotsSection
