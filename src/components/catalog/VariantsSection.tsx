@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { VariantsData } from '@/types/catalog';
@@ -202,7 +204,9 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
                         key={row.feature}
                         className="border-b border-border/50 last:border-0"
                       >
-                        <td className="py-3 pr-4">{renderQxText(row.feature)}</td>
+                        <td className="py-3 pr-4">
+                          {renderQxText(row.feature)}
+                        </td>
                         <td className="py-3 px-4">{renderQxText(row.basic)}</td>
                         <td className="py-3 pl-4 text-foreground font-medium">
                           {renderQxText(row.premium)}

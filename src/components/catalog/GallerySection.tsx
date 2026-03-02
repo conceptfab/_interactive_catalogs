@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -132,7 +134,10 @@ const GallerySection = ({ data, catalogId }: GallerySectionProps) => {
               className="max-w-full max-h-[85vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
             />
-            <p className="absolute bottom-6 text-on-dark-muted text-sm" aria-live="polite">
+            <p
+              className="absolute bottom-6 text-on-dark-muted text-sm"
+              aria-live="polite"
+            >
               {lightboxIndex + 1} / {data.images.length}
             </p>
           </motion.div>

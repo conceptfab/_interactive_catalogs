@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { FeaturesData } from '@/types/catalog';
@@ -135,4 +137,3 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
 };
 
 export default FeaturesSection;
-

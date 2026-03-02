@@ -1,9 +1,10 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { loadCatalog, getGlobalConfig } from '@/lib/catalog-loader';
-import type { CatalogData } from '@/types/catalog';
+import { notFound } from 'next/navigation';
+import {
+  loadCatalog,
+  getGlobalConfig,
+  getCatalogList,
+} from '@/lib/catalog-loader';
+import type { Metadata } from 'next';
 import CatalogNav from '@/components/catalog/CatalogNav';
 import HeroSection from '@/components/catalog/HeroSection';
 import MosaicHeroSection from '@/components/catalog/MosaicHeroSection';
@@ -16,67 +17,44 @@ import FeaturesSection from '@/components/catalog/FeaturesSection';
 import AssemblySection from '@/components/catalog/AssemblySection';
 import PackshotsSection from '@/components/catalog/PackshotsSection';
 
-export default function CatalogPage() {
-  const params = useParams();
-  const router = useRouter();
-  const catalogId = params?.catalogId as string | undefined;
+export async function generateStaticParams() {
+  const catalogs = await getCatalogList();
+  return catalogs.map((catalog) => ({
+    catalogId: catalog.id,
+  }));
+}
 
-  const [catalog, setCatalog] = useState<CatalogData | null | 'loading'>(
-    'loading',
-  );
-  const [globalConfig, setGlobalConfig] = useState<{
-    brandName: string;
-  } | null>(null);
-  const [notFound, setNotFound] = useState(false);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ catalogId: string }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const catalog = await loadCatalog(resolvedParams.catalogId);
+  if (!catalog) return {};
 
-  useEffect(() => {
-    getGlobalConfig().then((cfg) => setGlobalConfig(cfg));
-  }, []);
+  const variantName = resolvedParams.catalogId
+    ? resolvedParams.catalogId.toUpperCase()
+    : '';
+  return {
+    title: `${variantName} - ${catalog.meta.title}`,
+  };
+}
 
-  useEffect(() => {
-    if (!catalogId) {
-      setNotFound(true);
-      return;
-    }
-    setCatalog('loading');
-    loadCatalog(catalogId)
-      .then((data) => {
-        setCatalog(data);
-        if (!data) setNotFound(true);
-      })
-      .catch(() => {
-        setCatalog(null);
-        setNotFound(true);
-      });
-  }, [catalogId]);
+export default async function CatalogPage({
+  params,
+}: {
+  params: Promise<{ catalogId: string }>;
+}) {
+  const resolvedParams = await params;
+  const catalogId = resolvedParams.catalogId;
+  const [catalog, globalConfig] = await Promise.all([
+    loadCatalog(catalogId),
+    getGlobalConfig(),
+  ]);
 
-  useEffect(() => {
-    if (catalog && catalog !== 'loading') {
-      const variantName = catalogId ? catalogId.toUpperCase() : '';
-      document.title = `${variantName} - ${catalog.meta.title}`;
-    }
-  }, [catalog, catalogId]);
-
-  useEffect(() => {
-    if (notFound || catalog === null) {
-      router.replace('/');
-    }
-  }, [notFound, catalog, router]);
-
-  if (notFound || catalog === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-muted-foreground">Redirecting…</p>
-      </div>
-    );
-  }
-
-  if (catalog === 'loading') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-muted-foreground">Loading catalogue…</p>
-      </div>
-    );
+  if (!catalog) {
+    notFound();
   }
 
   const themeClassName = catalog.meta.theme
@@ -93,9 +71,9 @@ export default function CatalogPage() {
             ? 'qx4'
             : catalog.meta.theme === 'qx5'
               ? 'qx5'
-            : catalog.meta.theme === 'qx0'
-              ? 'qx0'
-              : 'default';
+              : catalog.meta.theme === 'qx0'
+                ? 'qx0'
+                : 'default';
   const normalizedCatalogId = catalogId?.toUpperCase();
   const isQx0 = normalizedCatalogId === 'QX-0';
   const isQx1 = normalizedCatalogId === 'QX-1';
@@ -124,13 +102,13 @@ export default function CatalogPage() {
               ? '/catalogs/QX-1/metro_logo.svg'
               : isQx2
                 ? '/catalogs/QX-2/metro_logo.svg'
-              : isQx3
-                ? '/catalogs/QX-3/metro_logo.svg'
-                : isQx4
-                  ? '/catalogs/QX-4/metro_logo.svg'
-                  : isQx5
-                    ? '/catalogs/QX-5/metro_logo.svg'
-                  : undefined
+                : isQx3
+                  ? '/catalogs/QX-3/metro_logo.svg'
+                  : isQx4
+                    ? '/catalogs/QX-4/metro_logo.svg'
+                    : isQx5
+                      ? '/catalogs/QX-5/metro_logo.svg'
+                      : undefined
         }
         backToCatalogListHref="/"
         variant={navVariant}

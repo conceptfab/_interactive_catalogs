@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useCallback, type CSSProperties } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
@@ -118,14 +120,20 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
     (index: number) => {
       setCurrentIndex(
         ((index % displaySlides.length) + displaySlides.length) %
-        displaySlides.length,
+          displaySlides.length,
       );
     },
     [displaySlides.length],
   );
 
-  const goPrev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo]);
-  const goNext = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
+  const goPrev = useCallback(
+    () => goTo(currentIndex - 1),
+    [currentIndex, goTo],
+  );
+  const goNext = useCallback(
+    () => goTo(currentIndex + 1),
+    [currentIndex, goTo],
+  );
 
   useEffect(() => {
     if (
@@ -331,23 +339,28 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
           data.collectionName.toLowerCase().includes('qx series') ? (
             <span
               className="flex items-baseline gap-[0.15em] text-[clamp(5.6rem,17.5vw,15.4rem)] tracking-tighter qx-giant py-4"
-              style={{ lineHeight: '0.9', fontFamily: "'Sora', sans-serif", fontWeight: 200 }}
+              style={{
+                lineHeight: '0.9',
+                fontFamily: "'Sora', sans-serif",
+                fontWeight: 200,
+              }}
             >
               QX
-              <span
-                className="text-[0.22em] uppercase tracking-[0.5em] opacity-90 font-semibold"
-              >
+              <span className="text-[0.22em] uppercase tracking-[0.5em] opacity-90 font-semibold">
                 Series
               </span>
             </span>
           ) : isQx2 ? (
             <span className="flex items-baseline gap-[0.2em] uppercase">
-              <span style={{ fontSize: 'clamp(6rem, 16vw, 14rem)', fontWeight: 100 }}>
+              <span
+                style={{
+                  fontSize: 'clamp(6rem, 16vw, 14rem)',
+                  fontWeight: 100,
+                }}
+              >
                 QX
               </span>
-              <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
-                SERIES
-              </span>
+              <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>SERIES</span>
             </span>
           ) : (
             <span style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>

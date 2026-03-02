@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -696,11 +698,13 @@ const CatalogNav = ({
                 className="max-w-7xl mx-auto h-full w-full px-6 sm:px-8 pt-28 pb-10"
               >
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-b border-border/70 pb-4">
-                  <p className="font-display text-3xl leading-tight text-foreground">
-                    {renderQxText('QX Workspace System')}
+                  <p className="font-display text-3xl leading-tight text-foreground uppercase">
+                    {renderQxText(variant.replace('qx', 'QX '))}
                   </p>
                   <p className="font-body text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    {renderQxText('METRO Collection / QX')}
+                    {renderQxText(
+                      `${brandLabel} Collection / ${variant.toUpperCase()}`,
+                    )}
                   </p>
                 </div>
 

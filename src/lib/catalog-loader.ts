@@ -35,14 +35,9 @@ const DEFAULT_GLOBAL_CONFIG: GlobalConfig = {
 };
 
 export async function getGlobalConfig(): Promise<GlobalConfig> {
-  const res = await fetch('/config.json', { cache: 'no-store' });
-  if (!res.ok) return DEFAULT_GLOBAL_CONFIG;
-  try {
-    const data = (await res.json()) as Partial<GlobalConfig>;
-    return { ...DEFAULT_GLOBAL_CONFIG, ...data };
-  } catch {
-    return DEFAULT_GLOBAL_CONFIG;
-  }
+  const data = await readPublicJson<Partial<GlobalConfig>>('config.json');
+  if (!data) return DEFAULT_GLOBAL_CONFIG;
+  return { ...DEFAULT_GLOBAL_CONFIG, ...data };
 }
 
 const SECTION_ORDER = [
@@ -70,26 +65,47 @@ function resolveImage(base: string, path: string): string {
 
 const MAX_HERO_SLIDES = 20;
 
-/** Discovers hero_NN.jpg files in hero folder by trying sequential fetches. */
-async function discoverHeroImages(heroBaseUrl: string): Promise<string[]> {
-  const found: string[] = [];
-  for (let i = 0; i < MAX_HERO_SLIDES; i++) {
-    const filename = `hero_${String(i).padStart(2, '0')}.jpg`;
-    const url = `${heroBaseUrl}/${filename}`;
-    try {
-      const res = await fetch(url, { method: 'HEAD' });
-      const contentType = res.headers.get('content-type') ?? '';
-      const isImage = res.ok && contentType.startsWith('image/');
-      if (isImage) found.push(url);
-      else break;
-    } catch {
-      break;
-    }
+import fs from 'fs/promises';
+import path from 'path';
+
+const PUBLIC_DIR = path.join(process.cwd(), 'public');
+
+/** Helper to read JSON from public directory */
+async function readPublicJson<T>(filePath: string): Promise<T | null> {
+  try {
+    const fullPath = path.join(PUBLIC_DIR, filePath);
+    const content = await fs.readFile(fullPath, 'utf8');
+    return JSON.parse(content) as T;
+  } catch {
+    return null;
   }
-  return found;
 }
 
-function defaultHeroSlideAlt(baseAlt: string, index: number, total: number): string {
+/** Parallelized hero image discovery with limited batch size using fs */
+async function discoverHeroImages(heroBaseUrl: string): Promise<string[]> {
+  const found: string[] = [];
+  const heroDir = path.join(PUBLIC_DIR, heroBaseUrl);
+
+  try {
+    const files = await fs.readdir(heroDir);
+    const heroFiles = files
+      .filter((f) => f.startsWith('hero_') && f.endsWith('.jpg'))
+      .sort();
+
+    // Return URLs relative to public, exactly as the previous code did
+    return heroFiles
+      .slice(0, MAX_HERO_SLIDES)
+      .map((f) => `${heroBaseUrl}/${f}`);
+  } catch {
+    return [];
+  }
+}
+
+function defaultHeroSlideAlt(
+  baseAlt: string,
+  index: number,
+  total: number,
+): string {
   return index === 0 ? baseAlt : `${baseAlt} - slide ${index + 1} of ${total}`;
 }
 
@@ -127,34 +143,30 @@ interface CatalogConfig {
   sections: CatalogData['sections'];
 }
 
+/** Lightweight loader for list view */
+export async function loadCatalogMeta(
+  catalogId: string,
+): Promise<{ id: string; meta: CatalogData['meta'] } | null> {
+  const base = catalogBase(catalogId);
+  const config = await readPublicJson<CatalogConfig>(`${base}/config.json`);
+  if (!config) return null;
+  return { id: catalogId, meta: config.meta };
+}
+
 export async function getCatalogList(): Promise<
   Array<{ id: string; meta: CatalogData['meta'] }>
 > {
   let catalogs: string[] = [];
 
-  try {
-    const apiRes = await fetch('/api/catalogs', { cache: 'no-store' });
-    if (apiRes.ok) {
-      const data = (await apiRes.json()) as CatalogIndex;
-      catalogs = data.catalogs ?? [];
-    }
-  } catch {
-    // Fallback below for environments without API routes.
-  }
-
-  if (catalogs.length === 0) {
-    const res = await fetch(`${BASE}/index.json`, { cache: 'no-store' });
-    if (!res.ok) return [];
-    const data = (await res.json()) as CatalogIndex;
+  const data = await readPublicJson<CatalogIndex>(`${BASE}/index.json`);
+  if (data) {
     catalogs = data.catalogs ?? [];
   }
 
-  const list: Array<{ id: string; meta: CatalogData['meta'] }> = [];
-  for (const id of catalogs) {
-    const catalog = await loadCatalog(id);
-    if (catalog) list.push({ id, meta: catalog.meta });
-  }
-  return list;
+  const results = await Promise.all(catalogs.map((id) => loadCatalogMeta(id)));
+  return results.filter(
+    (item): item is { id: string; meta: CatalogData['meta'] } => item !== null,
+  );
 }
 
 export async function loadCatalog(
@@ -162,10 +174,9 @@ export async function loadCatalog(
 ): Promise<CatalogData | null> {
   const base = catalogBase(catalogId);
 
-  const configRes = await fetch(`${base}/config.json`, { cache: 'no-store' });
-  if (!configRes.ok) return null;
+  const config = await readPublicJson<CatalogConfig>(`${base}/config.json`);
+  if (!config) return null;
 
-  const config = (await configRes.json()) as CatalogConfig;
   const sections =
     config.sections ?? SECTION_ORDER.map((id) => ({ id, label: id }));
 
@@ -181,16 +192,16 @@ export async function loadCatalog(
     assembly,
     packshots,
   ] = await Promise.all([
-    fetchJson<HeroData>(`${base}/hero/content.json`),
-    fetchJson<HeroSliderFile>(`${base}/hero/slider.json`),
-    fetchJson<OverviewData>(`${base}/overview/content.json`),
-    fetchJson<RawGalleryData>(`${base}/gallery/content.json`),
-    fetchJson<VariantsData>(`${base}/variants/content.json`),
-    fetchJson<DimensionsData>(`${base}/dimensions/content.json`),
-    fetchJson<MaterialsData>(`${base}/materials/content.json`),
-    fetchJson<FeaturesData>(`${base}/features/content.json`),
-    fetchJson<AssemblyData>(`${base}/assembly/content.json`),
-    fetchJson<PackshotsData>('/shared/packshots/content.json'),
+    readPublicJson<HeroData>(`${base}/hero/content.json`),
+    readPublicJson<HeroSliderFile>(`${base}/hero/slider.json`),
+    readPublicJson<OverviewData>(`${base}/overview/content.json`),
+    readPublicJson<RawGalleryData>(`${base}/gallery/content.json`),
+    readPublicJson<VariantsData>(`${base}/variants/content.json`),
+    readPublicJson<DimensionsData>(`${base}/dimensions/content.json`),
+    readPublicJson<MaterialsData>(`${base}/materials/content.json`),
+    readPublicJson<FeaturesData>(`${base}/features/content.json`),
+    readPublicJson<AssemblyData>(`${base}/assembly/content.json`),
+    readPublicJson<PackshotsData>('/shared/packshots/content.json'),
   ]);
 
   if (
@@ -242,14 +253,9 @@ export async function loadCatalog(
       heroImage: resolveImage(heroBase, hero.heroImage),
       heroSlides,
       heroImages: heroSlides?.map((slide) => slide.src),
-      slider:
-        Object.keys(sliderConfig).length > 0
-          ? sliderConfig
-          : undefined,
+      slider: Object.keys(sliderConfig).length > 0 ? sliderConfig : undefined,
       descriptionStyle:
-        Object.keys(descriptionStyle).length > 0
-          ? descriptionStyle
-          : undefined,
+        Object.keys(descriptionStyle).length > 0 ? descriptionStyle : undefined,
     },
     overview: {
       ...overview,
@@ -276,13 +282,4 @@ export async function loadCatalog(
     assembly,
     ...(packshots ? { packshots } : {}),
   };
-}
-
-async function fetchJson<T>(url: string): Promise<T | null> {
-  try {
-    const res = await fetch(url, { cache: 'no-store' });
-    return res.ok ? ((await res.json()) as T) : null;
-  } catch {
-    return null;
-  }
 }

@@ -1,4 +1,6 @@
-﻿import { useEffect, useMemo, useState } from 'react';
+﻿'use client';
+
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import type { HeroData, HeroSlide } from '@/types/catalog';
@@ -35,11 +37,7 @@ function resolveHeroTitle(
 ) {
   const cleaned = rawTitle?.trim();
   if (!cleaned || cleaned.toLowerCase() === 'qx series') {
-    return variant === 'qx3'
-      ? 'QX-3 Dark Precision'
-      : variant === 'qx5'
-        ? 'QX'
-        : 'QX';
+    return variant === 'qx3' ? 'QX-3' : variant === 'qx5' ? 'QX-5' : 'QX-4';
   }
   return cleaned;
 }

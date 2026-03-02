@@ -1,10 +1,6 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getCatalogList, getGlobalConfig } from '@/lib/catalog-loader';
-import type { GlobalConfig } from '@/lib/catalog-loader';
 import { LayoutGrid } from 'lucide-react';
 
 type VariantKey = 'qx0' | 'qx1' | 'qx2' | 'qx3' | 'qx4' | 'qx5';
@@ -38,40 +34,9 @@ function resolveVariantKey(catalogId: string, theme?: string): VariantKey {
   return 'qx0';
 }
 
-function variantDescriptor(variant: VariantKey): string {
-  if (variant === 'qx1') return 'Warm Editorial';
-  if (variant === 'qx2') return 'Mono Tech';
-  if (variant === 'qx3') return 'Dark Precision';
-  if (variant === 'qx4') return 'Blush Warm';
-  if (variant === 'qx5') return 'Linear Premium';
-  return 'Core Minimal';
-}
-
-export default function IndexPage() {
-  const [catalogs, setCatalogs] = useState<
-    Array<{
-      id: string;
-      meta: {
-        title: string;
-        description: string;
-        brandName: string;
-        collectionName: string;
-        theme?: string;
-      };
-    }>
-  >([]);
-  const [globalConfig, setGlobalConfig] = useState<GlobalConfig | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    Promise.all([getCatalogList(), getGlobalConfig()]).then(
-      ([list, config]) => {
-        setCatalogs(list);
-        setGlobalConfig(config);
-        setLoading(false);
-      },
-    );
-  }, []);
+export default async function IndexPage() {
+  const catalogs = await getCatalogList();
+  const globalConfig = await getGlobalConfig();
 
   return (
     <div className="variant-list-page min-h-screen bg-background">
@@ -86,7 +51,9 @@ export default function IndexPage() {
               className="h-8 w-auto"
               priority
             />
-            <span className="sr-only">{globalConfig?.siteTitle ?? 'METRO'}</span>
+            <span className="sr-only">
+              {globalConfig?.siteTitle ?? 'METRO'}
+            </span>
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
             {globalConfig?.siteSubtitle ??
@@ -109,39 +76,28 @@ export default function IndexPage() {
             {globalConfig?.catalogListTitle ?? 'Available catalogues'}
           </h2>
 
-          {loading ? (
-            <p className="text-muted-foreground">Loading catalogues…</p>
-          ) : (
-            <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {catalogs.map(({ id, meta }) => {
-                  const variant = resolveVariantKey(id, meta.theme);
-                  return (
-                    <Link
-                      key={id}
-                      href={`/catalog/${id}`}
-                      className={`variant-tile variant-tile-${variant} group flex aspect-square flex-col border p-4 transition-all min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2`}
-                    >
-                      <h3 className="variant-tile-title">
-                        {formatCatalogHeading(id)}
-                      </h3>
-                      <p className="variant-tile-meta">
-                        {variantDescriptor(variant)}
-                      </p>
-                      <span className="variant-tile-cta inline-block mt-auto self-end text-sm">
-                        View →
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {catalogs.map(({ id, meta }) => {
+              const variant = resolveVariantKey(id, meta.theme);
+              return (
+                <Link
+                  key={id}
+                  href={`/catalog/${id}`}
+                  className={`variant-tile variant-tile-${variant} group flex aspect-square flex-col border p-4 transition-all min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2`}
+                >
+                  <h3 className="variant-tile-title">
+                    {formatCatalogHeading(id)}
+                  </h3>
+                  <span className="variant-tile-cta inline-block mt-auto self-end text-sm">
+                    View →
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
 
-              {catalogs.length === 0 && (
-                <p className="text-muted-foreground">
-                  No catalogues available.
-                </p>
-              )}
-            </>
+          {catalogs.length === 0 && (
+            <p className="text-muted-foreground">No catalogues available.</p>
           )}
         </section>
       </main>
