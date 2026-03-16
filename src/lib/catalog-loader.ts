@@ -8,10 +8,14 @@ import type {
   VariantsData,
   DimensionsData,
   MaterialsData,
+  MaterialsConfiguratorData,
+  MaterialsConfiguratorOption,
   FeaturesData,
   AssemblyData,
   PackshotsData,
 } from '@/types/catalog';
+import fs from 'fs/promises';
+import path from 'path';
 
 /** Raw gallery from JSON - images use `image` not `src` */
 interface RawGalleryData extends Omit<GalleryData, 'images'> {
@@ -57,16 +61,12 @@ function catalogBase(catalogId: string): string {
   return `${BASE}/${catalogId}`;
 }
 
-function resolveImage(base: string, path: string): string {
-  if (!path) return '';
-  if (path.startsWith('http') || path.startsWith('/')) return path;
-  return `${base}/${path}`;
-}
-
 const MAX_HERO_SLIDES = 20;
-
-import fs from 'fs/promises';
-import path from 'path';
+const IMAGE_EXTENSION_PRIORITY = ['.webp', '.jpg', '.jpeg', '.png'] as const;
+const IMAGE_EXTENSION_PRIORITY_MAP = new Map<string, number>(
+  IMAGE_EXTENSION_PRIORITY.map((ext, index) => [ext, index]),
+);
+const WEBP_SOURCE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png']);
 
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
 
@@ -81,21 +81,110 @@ async function readPublicJson<T>(filePath: string): Promise<T | null> {
   }
 }
 
+function normalizeRelativeAssetPath(assetPath: string): string {
+  return assetPath.replace(/\\/g, '/').replace(/^\/+/, '');
+}
+
+function trimSlashes(value: string): string {
+  return value.replace(/^\/+|\/+$/g, '');
+}
+
+function resolveImageUrl(base: string, assetPath: string): string {
+  const normalizedBase = base.replace(/\/+$/g, '');
+  const normalizedAssetPath = normalizeRelativeAssetPath(assetPath);
+  return `${normalizedBase}/${normalizedAssetPath}`;
+}
+
+function toPublicFilePath(...segments: string[]): string {
+  const normalizedSegments = segments
+    .flatMap((segment) => trimSlashes(segment).split('/'))
+    .filter(Boolean);
+
+  return path.join(PUBLIC_DIR, ...normalizedSegments);
+}
+
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function buildImageCandidates(assetPath: string): string[] {
+  const normalizedAssetPath = normalizeRelativeAssetPath(assetPath);
+  const ext = path.posix.extname(normalizedAssetPath).toLowerCase();
+  const parsed = path.posix.parse(normalizedAssetPath);
+
+  if (!ext) {
+    return IMAGE_EXTENSION_PRIORITY.map((candidateExt) =>
+      path.posix.join(parsed.dir, `${parsed.name}${candidateExt}`),
+    );
+  }
+
+  if (!WEBP_SOURCE_EXTENSIONS.has(ext)) {
+    return [normalizedAssetPath];
+  }
+
+  return [
+    path.posix.join(parsed.dir, `${parsed.name}.webp`),
+    normalizedAssetPath,
+  ];
+}
+
+async function resolveImage(base: string, assetPath: string): Promise<string> {
+  if (!assetPath) return '';
+  if (assetPath.startsWith('http') || assetPath.startsWith('/')) return assetPath;
+
+  const normalizedAssetPath = normalizeRelativeAssetPath(assetPath);
+  const candidates = buildImageCandidates(normalizedAssetPath);
+
+  for (const candidate of candidates) {
+    if (await fileExists(toPublicFilePath(base, candidate))) {
+      return resolveImageUrl(base, candidate);
+    }
+  }
+
+  return resolveImageUrl(base, normalizedAssetPath);
+}
+
 /** Parallelized hero image discovery with limited batch size using fs */
 async function discoverHeroImages(heroBaseUrl: string): Promise<string[]> {
-  const found: string[] = [];
   const heroDir = path.join(PUBLIC_DIR, heroBaseUrl);
 
   try {
     const files = await fs.readdir(heroDir);
-    const heroFiles = files
-      .filter((f) => f.startsWith('hero_') && f.endsWith('.jpg'))
-      .sort();
+    const heroFilesByName = new Map<string, string>();
 
-    // Return URLs relative to public, exactly as the previous code did
-    return heroFiles
+    for (const file of files) {
+      const normalizedFile = normalizeRelativeAssetPath(file);
+      const parsed = path.posix.parse(normalizedFile);
+      const ext = parsed.ext.toLowerCase();
+
+      if (!parsed.name.startsWith('hero_')) continue;
+      if (!IMAGE_EXTENSION_PRIORITY_MAP.has(ext)) continue;
+
+      const current = heroFilesByName.get(parsed.name);
+      const currentPriority = current
+        ? (IMAGE_EXTENSION_PRIORITY_MAP.get(
+            path.posix.extname(current).toLowerCase(),
+          ) ?? Number.MAX_SAFE_INTEGER)
+        : Number.MAX_SAFE_INTEGER;
+      const nextPriority =
+        IMAGE_EXTENSION_PRIORITY_MAP.get(ext) ?? Number.MAX_SAFE_INTEGER;
+
+      if (!current || nextPriority < currentPriority) {
+        heroFilesByName.set(parsed.name, normalizedFile);
+      }
+    }
+
+    return [...heroFilesByName.entries()]
+      .sort(([left], [right]) =>
+        left.localeCompare(right, undefined, { numeric: true }),
+      )
       .slice(0, MAX_HERO_SLIDES)
-      .map((f) => `${heroBaseUrl}/${f}`);
+      .map(([, file]) => resolveImageUrl(heroBaseUrl, file));
   } catch {
     return [];
   }
@@ -109,29 +198,163 @@ function defaultHeroSlideAlt(
   return index === 0 ? baseAlt : `${baseAlt} - slide ${index + 1} of ${total}`;
 }
 
-function normalizeHeroSlides(
+function formatMaterialsOptionLabel(code: string): string {
+  const normalizedCode = code.toUpperCase();
+  if (normalizedCode.startsWith('RAL')) {
+    return `RAL ${normalizedCode.slice(3)}`;
+  }
+
+  return normalizedCode;
+}
+
+function resolveMaterialsAssetType(
+  code: string,
+): 'frame' | 'desktop' | null {
+  if (/^RAL\d+$/i.test(code)) return 'frame';
+  if (/^[UW]\d+$/i.test(code)) return 'desktop';
+  return null;
+}
+
+function compareMaterialsOptions(
+  left: MaterialsConfiguratorOption,
+  right: MaterialsConfiguratorOption,
+): number {
+  return left.code.localeCompare(right.code, undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  });
+}
+
+async function discoverMaterialsConfigurator(
+  materialsBaseUrl: string,
+): Promise<MaterialsConfiguratorData | undefined> {
+  const materialsDir = toPublicFilePath(materialsBaseUrl);
+
+  try {
+    const files = await fs.readdir(materialsDir);
+    const options = new Map<
+      string,
+      {
+        code: string;
+        type: 'frame' | 'desktop';
+        image?: string;
+        thumbnail?: string;
+      }
+    >();
+
+    for (const file of files) {
+      const normalizedFile = normalizeRelativeAssetPath(file);
+      const parsed = path.posix.parse(normalizedFile);
+
+      if (parsed.ext.toLowerCase() !== '.webp') continue;
+
+      const isThumbnail = parsed.name.endsWith('_thumb');
+      const baseName = isThumbnail
+        ? parsed.name.slice(0, -'_thumb'.length)
+        : parsed.name;
+      const codeMatch = baseName.match(/(?:^|_)(RAL\d+|[UW]\d+)$/i);
+      if (!codeMatch) continue;
+
+      const code = codeMatch[1].toUpperCase();
+      const type = resolveMaterialsAssetType(code);
+      if (!type) continue;
+
+      const option = options.get(baseName) ?? { code, type };
+      if (isThumbnail) {
+        option.thumbnail = normalizedFile;
+      } else {
+        option.image = normalizedFile;
+      }
+      options.set(baseName, option);
+    }
+
+    const frameOptions: MaterialsConfiguratorOption[] = [];
+    const desktopOptions: MaterialsConfiguratorOption[] = [];
+
+    for (const [id, option] of options.entries()) {
+      if (!option.image) continue;
+      const thumbnail = option.thumbnail ?? option.image;
+
+      const normalizedOption: MaterialsConfiguratorOption = {
+        id,
+        code: option.code,
+        label: formatMaterialsOptionLabel(option.code),
+        image: resolveImageUrl(materialsBaseUrl, option.image),
+        thumbnail: resolveImageUrl(materialsBaseUrl, thumbnail),
+      };
+
+      if (option.type === 'frame') {
+        frameOptions.push(normalizedOption);
+      } else {
+        desktopOptions.push(normalizedOption);
+      }
+    }
+
+    frameOptions.sort(compareMaterialsOptions);
+    desktopOptions.sort(compareMaterialsOptions);
+
+    if (frameOptions.length === 0 || desktopOptions.length === 0) {
+      return undefined;
+    }
+
+    return {
+      frameOptions,
+      desktopOptions,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+async function discoverFeatureDemoVideo(
+  featuresBaseUrl: string,
+): Promise<string | undefined> {
+  const preferredFiles = ['ani_test.mp4'];
+
+  for (const file of preferredFiles) {
+    if (await fileExists(toPublicFilePath(featuresBaseUrl, file))) {
+      return resolveImageUrl(featuresBaseUrl, file);
+    }
+  }
+
+  try {
+    const files = await fs.readdir(toPublicFilePath(featuresBaseUrl));
+    const fallbackVideo = files.find((file) =>
+      file.toLowerCase().endsWith('.mp4'),
+    );
+
+    return fallbackVideo
+      ? resolveImageUrl(featuresBaseUrl, normalizeRelativeAssetPath(fallbackVideo))
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+async function normalizeHeroSlides(
   slides: HeroSliderFile['slides'] | undefined,
   heroBase: string,
   fallbackAlt: string,
-): HeroSlide[] | undefined {
+): Promise<HeroSlide[] | undefined> {
   if (!slides || slides.length === 0) return undefined;
 
-  const normalized: HeroSlide[] = [];
-  for (let index = 0; index < slides.length; index++) {
-    const slide = slides[index];
-    const src = resolveImage(heroBase, slide.image);
-    if (!src) continue;
+  const normalized = await Promise.all(
+    slides.map(async (slide, index) => {
+      const src = await resolveImage(heroBase, slide.image);
+      if (!src) return null;
 
-    normalized.push({
-      src,
-      alt:
-        slide.alt?.trim() ||
-        defaultHeroSlideAlt(fallbackAlt, index, slides.length),
-      ...(slide.description ? { description: slide.description } : {}),
-    });
-  }
+      return {
+        src,
+        alt:
+          slide.alt?.trim() ||
+          defaultHeroSlideAlt(fallbackAlt, index, slides.length),
+        ...(slide.description ? { description: slide.description } : {}),
+      };
+    }),
+  );
 
-  return normalized.length > 0 ? normalized : undefined;
+  const filtered = normalized.filter((slide): slide is HeroSlide => slide !== null);
+  return filtered.length > 0 ? filtered : undefined;
 }
 
 interface CatalogIndex {
@@ -218,7 +441,7 @@ export async function loadCatalog(
   }
 
   const heroBase = `${base}/hero`;
-  const configuredSlides = normalizeHeroSlides(
+  const configuredSlides = await normalizeHeroSlides(
     heroSliderFile?.slides,
     heroBase,
     hero.heroImageAlt,
@@ -243,6 +466,31 @@ export async function loadCatalog(
     ...(hero.descriptionStyle ?? {}),
     ...(heroSliderFile?.descriptionStyle ?? {}),
   };
+  const materialsBase = `${base}/materials`;
+  const featuresBase = `${base}/features`;
+  const [
+    resolvedHeroImage,
+    resolvedOverviewPackshot,
+    resolvedPreviewImage,
+    resolvedDetailImage,
+    resolvedGalleryImages,
+    materialsConfigurator,
+    featureDemoVideo,
+  ] = await Promise.all([
+    resolveImage(heroBase, hero.heroImage),
+    resolveImage(`${base}/overview`, overview.packshotImage),
+    resolveImage(`${base}/variants`, variants.previewImage),
+    resolveImage(materialsBase, materials.detailImage),
+    Promise.all(
+      (gallery.images ?? []).map(async (img) => ({
+        src: await resolveImage(`${base}/gallery`, img.image),
+        alt: img.alt,
+        category: img.category,
+      })),
+    ),
+    discoverMaterialsConfigurator(materialsBase),
+    discoverFeatureDemoVideo(featuresBase),
+  ]);
 
   return {
     id: catalogId,
@@ -250,7 +498,7 @@ export async function loadCatalog(
     sections,
     hero: {
       ...hero,
-      heroImage: resolveImage(heroBase, hero.heroImage),
+      heroImage: resolvedHeroImage,
       heroSlides,
       heroImages: heroSlides?.map((slide) => slide.src),
       slider: Object.keys(sliderConfig).length > 0 ? sliderConfig : undefined,
@@ -259,26 +507,26 @@ export async function loadCatalog(
     },
     overview: {
       ...overview,
-      packshotImage: resolveImage(`${base}/overview`, overview.packshotImage),
+      packshotImage: resolvedOverviewPackshot,
     },
     gallery: {
       ...gallery,
-      images: (gallery.images ?? []).map((img) => ({
-        src: resolveImage(`${base}/gallery`, img.image),
-        alt: img.alt,
-        category: img.category,
-      })),
+      images: resolvedGalleryImages,
     },
     variants: {
       ...variants,
-      previewImage: resolveImage(`${base}/variants`, variants.previewImage),
+      previewImage: resolvedPreviewImage,
     },
     dimensions,
     materials: {
       ...materials,
-      detailImage: resolveImage(`${base}/materials`, materials.detailImage),
+      detailImage: resolvedDetailImage,
+      ...(materialsConfigurator ? { configurator: materialsConfigurator } : {}),
     },
-    features,
+    features: {
+      ...features,
+      ...(featureDemoVideo ? { demoVideo: featureDemoVideo } : {}),
+    },
     assembly,
     ...(packshots ? { packshots } : {}),
   };

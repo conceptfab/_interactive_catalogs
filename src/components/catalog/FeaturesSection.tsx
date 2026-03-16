@@ -45,30 +45,30 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
             role="tablist"
             aria-label="Product features"
           >
-            {data.items.map((f, i) => {
-              const Icon = getIcon(f.icon);
+            {data.items.map((feature, index) => {
+              const Icon = getIcon(feature.icon);
               return (
                 <button
-                  key={f.title}
+                  key={feature.title}
                   role="tab"
-                  aria-selected={activeFeature === i}
-                  onClick={() => setActiveFeature(i)}
+                  aria-selected={activeFeature === index}
+                  onClick={() => setActiveFeature(index)}
                   className={`feature-tab-button w-full text-left px-6 py-5 flex items-center gap-4 transition-all min-h-[44px] rounded-xl ${
-                    activeFeature === i ? 'is-active' : ''
+                    activeFeature === index ? 'is-active' : ''
                   }`}
                 >
                   <Icon
                     size={24}
                     className={`feature-tab-icon ${
-                      activeFeature === i ? 'is-active' : ''
+                      activeFeature === index ? 'is-active' : ''
                     }`}
                   />
                   <span
                     className={`feature-tab-label font-display text-lg font-bold ${
-                      activeFeature === i ? 'is-active' : ''
+                      activeFeature === index ? 'is-active' : ''
                     }`}
                   >
-                    {renderQxText(f.title)}
+                    {renderQxText(feature.title)}
                   </span>
                 </button>
               );
@@ -84,8 +84,8 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
             className="lg:col-span-2 bg-transparent p-8 lg:p-12 flex flex-col justify-center rounded-xl"
           >
             {(() => {
-              const f = data.items[activeFeature];
-              const Icon = getIcon(f.icon);
+              const feature = data.items[activeFeature];
+              const Icon = getIcon(feature.icon);
               return (
                 <>
                   <div className="flex items-center gap-3 mb-4">
@@ -94,40 +94,58 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                     </div>
                     <div>
                       <h3 className="font-display font-bold text-foreground text-xl">
-                        {renderQxText(f.title)}
+                        {renderQxText(feature.title)}
                       </h3>
                       <span className="text-xs font-medium text-accent bg-warm-light px-2 py-0.5 rounded">
-                        {renderQxText(f.badge)}
+                        {renderQxText(feature.badge)}
                       </span>
                     </div>
                   </div>
                   <p className="text-muted-foreground leading-relaxed text-base">
-                    {renderQxText(f.desc)}
+                    {renderQxText(feature.desc)}
                   </p>
                 </>
               );
             })()}
 
-            <div className="mt-12 p-8 rounded-xl">
-              <div className="flex items-center justify-center h-40">
-                <motion.div
-                  className="w-48 h-3 bg-border rounded-full relative"
-                  aria-hidden="true"
-                >
-                  <motion.div
-                    className="absolute left-0 top-0 h-full rounded-full bg-accent"
-                    animate={{ width: ['20%', '80%', '50%', '20%'] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 4,
-                      ease: 'easeInOut',
-                    }}
+            <div className={data.demoVideo ? 'mt-12' : 'mt-12 p-8 rounded-xl'}>
+              {data.demoVideo ? (
+                <div className="feature-demo-video-shell w-full overflow-hidden rounded-xl">
+                  <video
+                    key={data.demoVideo}
+                    src={data.demoVideo}
+                    className="feature-demo-video h-auto w-full mix-blend-multiply"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls
+                    preload="metadata"
                   />
-                </motion.div>
-              </div>
-              <p className="text-center text-xs text-muted-foreground">
-                Interactive demonstration — animation placeholder
-              </p>
+                </div>
+              ) : (
+                <>
+                  <div className="flex h-40 items-center justify-center">
+                    <motion.div
+                      className="relative h-3 w-48 rounded-full bg-border"
+                      aria-hidden="true"
+                    >
+                      <motion.div
+                        className="absolute left-0 top-0 h-full rounded-full bg-accent"
+                        animate={{ width: ['20%', '80%', '50%', '20%'] }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 4,
+                          ease: 'easeInOut',
+                        }}
+                      />
+                    </motion.div>
+                  </div>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Interactive demonstration - animation placeholder
+                  </p>
+                </>
+              )}
             </div>
           </motion.div>
         </div>

@@ -1,17 +1,118 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import type { MaterialsData } from '@/types/catalog';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import type { MaterialsConfiguratorOption, MaterialsData } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
 
 interface MaterialsSectionProps {
   data: MaterialsData;
 }
 
+interface MaterialsOptionGroupProps {
+  title: string;
+  options: MaterialsConfiguratorOption[];
+  selectedId?: string;
+  onSelect: (id: string) => void;
+}
+
+const EMPTY_MATERIAL_OPTIONS: MaterialsConfiguratorOption[] = [];
+
+function MaterialsOptionGroup({
+  title,
+  options,
+  selectedId,
+  onSelect,
+}: MaterialsOptionGroupProps) {
+  const selectedOption = options.find((option) => option.id === selectedId);
+
+  return (
+    <div className="materials-option-group">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <h3 className="font-display text-lg font-semibold text-foreground">
+          {renderQxText(title)}
+        </h3>
+        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+          {renderQxText(selectedOption?.label ?? '')}
+        </p>
+      </div>
+
+      <div className="materials-configurator-grid flex flex-wrap gap-2.5">
+        {options.map((option) => {
+          const isSelected = option.id === selectedId;
+
+          return (
+            <button
+              key={option.id}
+              type="button"
+              onClick={() => onSelect(option.id)}
+              aria-pressed={isSelected}
+              className={`materials-configurator-option w-[5.25rem] shrink-0 rounded-lg border p-1 text-left transition-all sm:w-[5.75rem] ${
+                isSelected
+                  ? 'border-accent bg-accent/10 shadow-lg shadow-accent/10'
+                  : 'border-border bg-background hover:border-accent/40 hover:bg-accent/5'
+              }`}
+            >
+              <div className="materials-configurator-swatch flex aspect-square items-center justify-center overflow-hidden rounded-md bg-muted/30">
+                <img
+                  src={option.thumbnail}
+                  alt=""
+                  aria-hidden="true"
+                  className="materials-configurator-thumb h-full w-full object-contain transition-transform duration-300 hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <p className="materials-configurator-label mt-1.5 text-[11px] font-medium leading-none text-foreground sm:text-xs">
+                {renderQxText(option.label)}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 const MaterialsSection = ({ data }: MaterialsSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const frameOptions = data.configurator?.frameOptions ?? EMPTY_MATERIAL_OPTIONS;
+  const desktopOptions =
+    data.configurator?.desktopOptions ?? EMPTY_MATERIAL_OPTIONS;
+  const hasConfigurator = frameOptions.length > 0 && desktopOptions.length > 0;
+  const [selectedFrameId, setSelectedFrameId] = useState(
+    frameOptions[0]?.id ?? '',
+  );
+  const [selectedDesktopId, setSelectedDesktopId] = useState(
+    desktopOptions[0]?.id ?? '',
+  );
+
+  useEffect(() => {
+    setSelectedFrameId((current) =>
+      frameOptions.some((option) => option.id === current)
+        ? current
+        : (frameOptions[0]?.id ?? ''),
+    );
+  }, [frameOptions]);
+
+  useEffect(() => {
+    setSelectedDesktopId((current) =>
+      desktopOptions.some((option) => option.id === current)
+        ? current
+        : (desktopOptions[0]?.id ?? ''),
+    );
+  }, [desktopOptions]);
+
+  const selectedFrame =
+    frameOptions.find((option) => option.id === selectedFrameId) ??
+    frameOptions[0];
+  const selectedDesktop =
+    desktopOptions.find((option) => option.id === selectedDesktopId) ??
+    desktopOptions[0];
+  const configuratorAlt =
+    selectedFrame && selectedDesktop
+      ? `Metro desk with desktop ${selectedDesktop.label} and frame ${selectedFrame.label}`
+      : data.detailImageAlt;
 
   return (
     <section
@@ -19,13 +120,13 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
       className="section-padding bg-background"
       aria-labelledby="materials-title"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-12"
+          className="mb-12 text-center"
         >
-          <p className="text-accent font-display font-semibold text-sm uppercase tracking-[0.2em] mb-4">
+          <p className="mb-4 font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {renderQxText(data.sectionLabel)}
           </p>
           <h2
@@ -37,24 +138,78 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid items-start gap-12 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2 }}
             className="flex flex-col"
           >
-            <figure className="overflow-hidden shadow-2xl mb-4 group relative">
-              <img
-                src={data.detailImage}
-                alt={data.detailImageAlt}
-                className="w-full h-auto aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-            </figure>
-            <p className="materials-detail-caption text-sm text-muted-foreground text-center px-4">
-              {renderQxText(data.detailImageCaption)}
-            </p>
+            {hasConfigurator && selectedFrame && selectedDesktop ? (
+              <>
+                <figure className="materials-configurator-figure relative mb-6 overflow-visible">
+                  <div className="pointer-events-none absolute inset-x-[12%] bottom-[8%] h-[14%] rounded-full bg-[hsl(35_26%_74%/0.18)] blur-3xl" />
+                  <div
+                    className="materials-configurator-preview relative mx-auto aspect-square w-full"
+                    role="img"
+                    aria-label={configuratorAlt}
+                  >
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.img
+                        key={`frame-${selectedFrame.image}`}
+                        src={selectedFrame.image}
+                        alt=""
+                        aria-hidden="true"
+                        className="materials-configurator-preview-image absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_18px_38px_rgba(182,171,155,0.2)]"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                      />
+                    </AnimatePresence>
+
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.img
+                        key={`desktop-${selectedDesktop.image}`}
+                        src={selectedDesktop.image}
+                        alt=""
+                        aria-hidden="true"
+                        className="materials-configurator-preview-image absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_26px_48px_rgba(164,154,139,0.16)]"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                      />
+                    </AnimatePresence>
+                  </div>
+                </figure>
+
+                <div className="space-y-1 px-4 text-center">
+                  <p className="materials-detail-caption text-sm leading-relaxed text-muted-foreground">
+                    {renderQxText(data.detailImageCaption)}
+                  </p>
+                  <p className="text-xs font-medium uppercase tracking-[0.26em] text-foreground/90">
+                    {renderQxText(
+                      `Desktop ${selectedDesktop.label} / Frame ${selectedFrame.label}`,
+                    )}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <figure className="group relative mb-4 overflow-hidden shadow-2xl">
+                  <img
+                    src={data.detailImage}
+                    alt={data.detailImageAlt}
+                    className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </figure>
+                <p className="materials-detail-caption px-4 text-center text-sm text-muted-foreground">
+                  {renderQxText(data.detailImageCaption)}
+                </p>
+              </>
+            )}
           </motion.div>
 
           <motion.div
@@ -63,40 +218,57 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
             transition={{ delay: 0.3 }}
             className="space-y-8"
           >
-            {data.materials.map((m) => (
-              <div key={m.name} className="border-l-2 border-accent pl-6">
-                <h3 className="font-display font-semibold text-foreground text-lg">
-                  {renderQxText(m.name)}
+            {data.materials.map((material) => (
+              <div key={material.name} className="border-l-2 border-accent pl-6">
+                <h3 className="font-display text-lg font-semibold text-foreground">
+                  {renderQxText(material.name)}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mt-1">
-                  {renderQxText(m.desc)}
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  {renderQxText(material.desc)}
                 </p>
-                <p className="text-xs text-accent font-medium mt-2">
-                  {renderQxText(m.specs)}
+                <p className="mt-2 text-xs font-medium text-accent">
+                  {renderQxText(material.specs)}
                 </p>
               </div>
             ))}
 
-            <div>
-              <h3 className="font-display font-semibold text-foreground mb-4">
-                Colour & Décor Palette
-              </h3>
-              <div className="grid grid-cols-4 gap-3">
-                {data.swatches.map((s) => (
-                  <div key={s.name} className="text-center group">
-                    <div
-                      className="w-full aspect-square group-hover:scale-110 transition-transform shadow-md"
-                      style={{ backgroundColor: s.hex }}
-                      role="img"
-                      aria-label={`${s.name} colour swatch`}
-                    />
-                    <p className="text-xs text-muted-foreground mt-2">
-                      {renderQxText(s.name)}
-                    </p>
-                  </div>
-                ))}
+            {hasConfigurator ? (
+              <div className="space-y-6">
+                <MaterialsOptionGroup
+                  title="Frame Colours"
+                  options={frameOptions}
+                  selectedId={selectedFrame?.id}
+                  onSelect={setSelectedFrameId}
+                />
+                <MaterialsOptionGroup
+                  title="Desktop Colours"
+                  options={desktopOptions}
+                  selectedId={selectedDesktop?.id}
+                  onSelect={setSelectedDesktopId}
+                />
               </div>
-            </div>
+            ) : (
+              <div>
+                <h3 className="mb-4 font-display font-semibold text-foreground">
+                  Colour & Decor Palette
+                </h3>
+                <div className="grid grid-cols-4 gap-3">
+                  {data.swatches.map((swatch) => (
+                    <div key={swatch.name} className="text-center">
+                      <div
+                        className="aspect-square w-full shadow-md transition-transform hover:scale-110"
+                        style={{ backgroundColor: swatch.hex }}
+                        role="img"
+                        aria-label={`${swatch.name} colour swatch`}
+                      />
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        {renderQxText(swatch.name)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

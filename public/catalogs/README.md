@@ -23,25 +23,25 @@ catalogs/
     hero/
       content.json
       slider.json           <- nowy plik: ustawienia slidera + opisy slajdow
-      hero_00.jpg
-      hero_01.jpg
+      hero_00.webp
+      hero_01.webp
       ...
     overview/
       content.json
-      packshot.jpg
+      packshot.webp
     gallery/
       content.json
-      packshot.jpg
-      hero-office.jpg
+      packshot.webp
+      hero-office.webp
       ...
     variants/
       content.json
-      packshot.jpg
+      packshot.webp
     dimensions/
       content.json
     materials/
       content.json
-      detail.jpg
+      detail.webp
     features/
       content.json
     assembly/
@@ -55,6 +55,9 @@ catalogs/
 3. Edytuj pliki `content.json` w kazdej sekcji.
 4. Podmien obrazy w podfolderach (nazwy plikow zgodne z `content.json`).
 5. Dodaj nowy identyfikator do tablicy `catalogs` w `index.json`.
+
+Preferowany format obrazow to `webp`.
+Jesli obok siebie istnieja pliki o tym samym basename, np. `packshot.webp` i `packshot.jpg`, aplikacja wybierze `webp`.
 
 ## Hero - nowy model slidera per katalog
 
@@ -71,7 +74,7 @@ Trzyma tylko tresci sekcji hero (bez ustawien slidera):
   "tagline": "Modular desk system engineered for the modern workspace.",
   "taglineLine2": "Where precision meets flexibility.",
   "ctaLabel": "Explore Collection",
-  "heroImage": "hero-office.jpg",
+  "heroImage": "hero_00.webp",
   "heroImageAlt": "QX desk system in a modern open-space office with people working"
 }
 ```
@@ -93,12 +96,12 @@ Trzyma ustawienia slidera, definicje slajdow (kolejnosc + opisy) oraz styl opisu
   },
   "slides": [
     {
-      "image": "hero_00.jpg",
+      "image": "hero_00.webp",
       "alt": "Accessible alt text",
       "description": "Visible description/caption for this slide"
     },
     {
-      "image": "hero_01.jpg"
+      "image": "hero_01.webp"
     }
   ],
   "descriptionStyle": {
@@ -125,12 +128,27 @@ Trzyma ustawienia slidera, definicje slajdow (kolejnosc + opisy) oraz styl opisu
 - `alt` jest opcjonalny (fallback do `heroImageAlt`).
 - `description` jest opcjonalny i moze byc wyswietlany na hero.
 - `descriptionStyle` dziala per katalog `QX-*` (zmiana w jednym `slider.json` nie zmienia innych).
-- Jesli `slider.json` nie istnieje, aplikacja fallbackuje do auto-detekcji `hero_00.jpg`, `hero_01.jpg`, itd.
+- Jesli `slider.json` nie istnieje, aplikacja fallbackuje do auto-detekcji `hero_00.webp`, `hero_01.webp`, itd. Jesli `webp` nie ma, uzyje `jpg/jpeg/png`.
 
 ## Sciezki do obrazow
 
 W `content.json` uzywaj nazw plikow wzglednych do folderu sekcji:
 
-- `hero/hero-office.jpg` -> w `hero/content.json`: `"heroImage": "hero-office.jpg"`
-- `hero/hero_00.jpg`, `hero_01.jpg`, ... -> automatycznie wykrywane fallbackowo
-- `gallery/packshot.jpg` -> w `gallery/content.json`: `"image": "packshot.jpg"` (w obiekcie images)
+- `hero/hero-office.webp` -> w `hero/content.json`: `"heroImage": "hero-office.webp"`
+- `hero/hero_00.webp`, `hero_01.webp`, ... -> automatycznie wykrywane fallbackowo
+- `gallery/packshot.webp` -> w `gallery/content.json`: `"image": "packshot.webp"` (w obiekcie images)
+
+## Materials - konfigurator warstwowy
+
+Jesli w folderze `materials/` istnieja odpowiednio nazwane pliki `webp`, sekcja Materials automatycznie wlaczy konfigurator.
+
+- kolory stelaza: pliki z `RAL` w nazwie, np. `metro_RAL9006.webp`
+- kolory blatow: pliki z `U` lub `W` i numerem, np. `metro_U110.webp`, `metro_W240.webp`
+- miniatury: ten sam basename z dopiskiem `_thumb`, np. `metro_RAL9006_thumb.webp`, `metro_U110_thumb.webp`
+- glowna ilustracja sklada sie z dwoch warstw alpha `webp`: jednej dla stelarza i jednej dla blatu
+- po kliknieciu miniatury aplikacja bierze odpowiadajacy jej plik bez `_thumb`
+
+Przyklad:
+
+- `metro_RAL9006_thumb.webp` -> wybiera warstwe `metro_RAL9006.webp`
+- `metro_U110_thumb.webp` -> wybiera warstwe `metro_U110.webp`
