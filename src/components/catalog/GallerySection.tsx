@@ -5,6 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { GalleryData } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
 
 interface GallerySectionProps {
   data: GalleryData;
@@ -70,6 +71,7 @@ const GallerySection = ({ data, catalogId }: GallerySectionProps) => {
             >
               <img
                 src={img.src}
+                {...responsiveImg(img.src, 'gallery', i === 0 ? '(min-width: 1024px) 66vw, 100vw' : undefined)}
                 alt={img.alt}
                 className="w-full h-full object-cover aspect-[4/3] group-hover:scale-110 transition-transform duration-700"
                 loading="lazy"

@@ -10,6 +10,7 @@ import type {
   HeroDescriptionStyleConfig,
 } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
 
 interface HeroSectionProps {
   data: HeroData;
@@ -201,6 +202,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
             <motion.img
               key={`${displaySlides[currentIndex].src}-${currentIndex}`}
               src={displaySlides[currentIndex].src}
+              {...responsiveImg(displaySlides[currentIndex].src, 'hero')}
               alt={displaySlides[currentIndex].alt}
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ x: '100%' }}
@@ -218,6 +220,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
             <img
               key={`${slide.src}-${i}`}
               src={slide.src}
+              {...responsiveImg(slide.src, 'hero')}
               alt={slide.alt}
               className="absolute inset-0 w-full h-full object-cover transition-opacity ease-out"
               style={{

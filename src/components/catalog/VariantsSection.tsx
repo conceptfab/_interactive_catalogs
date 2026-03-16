@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { VariantsData } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
 
 interface VariantsSectionProps {
   data: VariantsData;
@@ -61,6 +62,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
             >
               <img
                 src={data.previewImage}
+                {...responsiveImg(data.previewImage, 'variants')}
                 alt={`Desk in ${data.desktopColors[selectedColor].name} finish with ${data.frameColors[selectedFrame].name} frame`}
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"

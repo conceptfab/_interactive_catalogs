@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import type { OverviewData } from '@/types/catalog';
 import { getIcon } from '@/lib/icon-map';
 import { renderQxText } from './renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
 
 interface OverviewSectionProps {
   data: OverviewData;
@@ -77,6 +78,7 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
               <div className="relative aspect-square w-full overflow-hidden">
                 <img
                   src={data.packshotImage}
+                  {...responsiveImg(data.packshotImage, 'overview')}
                   alt={data.packshotImageAlt}
                   className="absolute inset-0 h-full w-full object-cover"
                   loading="lazy"

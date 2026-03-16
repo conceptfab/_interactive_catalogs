@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import type { HeroData, HeroSlide } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
 
 interface MosaicHeroSectionProps {
   data: HeroData;
@@ -150,6 +151,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
               <motion.img
                 key={`main-qx3-${mainIndex}`}
                 src={mainSlide.src}
+                {...responsiveImg(mainSlide.src, 'hero')}
                 alt={mainSlide.alt}
                 className="absolute inset-0 h-full w-full object-cover"
                 initial={{ opacity: 0, scale: 1.02 }}
@@ -213,6 +215,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
                 <img
                   key={`qx3-preview-image-${slot}-${keyIndex}`}
                   src={slide.src}
+                  {...responsiveImg(slide.src, 'gallery')}
                   alt={slide.alt}
                   className="absolute inset-0 h-full w-full object-cover opacity-55"
                 />
@@ -253,6 +256,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
             <motion.img
               key={`main-${mainIndex}`}
               src={mainSlide.src}
+              {...responsiveImg(mainSlide.src, 'hero')}
               alt={mainSlide.alt}
               className="absolute inset-0 h-full w-full object-cover"
               initial={{ opacity: 0 }}
@@ -310,6 +314,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
                 <motion.img
                   key={`thumb-${slot}-${qx4ThumbIndices[slot]}`}
                   src={slide.src}
+                  {...responsiveImg(slide.src, 'gallery')}
                   alt={slide.alt}
                   className={`absolute inset-0 h-full w-full object-cover hero-thumb-image hero-thumb-image-${
                     slot + 1

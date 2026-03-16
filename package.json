@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
+    "thumbnails": "node scripts/generate-thumbnails.mjs",
+    "thumbnails:force": "node scripts/generate-thumbnails.mjs --force",
+    "thumbnails:clean": "node scripts/generate-thumbnails.mjs --clean",
+    "prebuild": "node scripts/generate-thumbnails.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."
@@ -72,6 +76,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.12",
     "postcss": "^8.5.6",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
     "typescript": "5.9.3"
   },

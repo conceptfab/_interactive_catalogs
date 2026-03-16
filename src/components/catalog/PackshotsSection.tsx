@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import type { PackshotsData, PackshotGroup, PackshotItem } from '@/types/catalog';
 import { renderQxText } from './renderQxText';
+import { responsiveImg } from '@/lib/responsive-image';
 
 interface PackshotsSectionProps {
   data: PackshotsData;
@@ -49,6 +50,7 @@ function DefaultCard({ item }: { item: PackshotItem }) {
       <div className="bg-surface/30 mix-blend-multiply p-0 flex items-end justify-center aspect-[3/2] overflow-hidden">
         <img
           src={item.image}
+          {...responsiveImg(item.image, 'packshot')}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           loading="lazy"
@@ -80,6 +82,7 @@ function FunctionalCard({ item }: { item: PackshotItem }) {
       <div className="bg-surface/20 p-0 flex items-end justify-center aspect-[16/9] overflow-hidden">
         <img
           src={item.image}
+          {...responsiveImg(item.image, 'packshot')}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_82%]"
           loading="lazy"
@@ -107,6 +110,7 @@ function PremiumCard({ item }: { item: PackshotItem }) {
       <div className="bg-surface/20 mix-blend-multiply p-0 flex items-end justify-center aspect-[16/9] overflow-hidden relative">
         <img
           src={item.image}
+          {...responsiveImg(item.image, 'packshot')}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_82%]"
           loading="lazy"
@@ -136,6 +140,7 @@ function DarkCard({ item }: { item: PackshotItem }) {
       <div className="flex-1 flex items-center justify-center aspect-square">
         <img
           src={item.image}
+          {...responsiveImg(item.image, 'packshot')}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-contain opacity-85 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-300"
           loading="lazy"
@@ -162,6 +167,7 @@ function WarmCard({ item }: { item: PackshotItem }) {
       <div className="p-5 sm:p-7 flex items-center justify-center aspect-square">
         <img
           src={item.image}
+          {...responsiveImg(item.image, 'packshot')}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
           loading="lazy"
@@ -186,6 +192,7 @@ function LinearCard({ item }: { item: PackshotItem }) {
       <div className="packshot-linear-media p-0 flex items-end justify-center aspect-[4/3]">
         <img
           src={item.image}
+          {...responsiveImg(item.image, 'packshot')}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 group-hover:scale-[1.015]"
           loading="lazy"
