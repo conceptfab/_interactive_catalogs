@@ -37,7 +37,7 @@ function MaterialsOptionGroup({
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="flex flex-wrap gap-2.5">
         {options.map((option) => {
           const isSelected = option.id === selectedId;
 
@@ -47,13 +47,13 @@ function MaterialsOptionGroup({
               type="button"
               onClick={() => onSelect(option.id)}
               aria-pressed={isSelected}
-              className={`rounded-2xl border p-2 text-left transition-all ${
+              className={`w-[5.25rem] shrink-0 rounded-lg border p-1 text-left transition-all sm:w-[5.75rem] ${
                 isSelected
                   ? 'border-accent bg-accent/10 shadow-lg shadow-accent/10'
                   : 'border-border bg-background hover:border-accent/40 hover:bg-accent/5'
               }`}
             >
-              <div className="aspect-square overflow-hidden rounded-xl bg-muted/40">
+              <div className="flex aspect-square items-center justify-center overflow-hidden rounded-md bg-muted/30">
                 <img
                   src={option.thumbnail}
                   alt=""
@@ -62,7 +62,7 @@ function MaterialsOptionGroup({
                   loading="lazy"
                 />
               </div>
-              <p className="mt-3 text-sm font-medium text-foreground">
+              <p className="mt-1.5 text-[11px] font-medium leading-none text-foreground sm:text-xs">
                 {renderQxText(option.label)}
               </p>
             </button>
@@ -147,21 +147,20 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
           >
             {hasConfigurator && selectedFrame && selectedDesktop ? (
               <>
-                <figure className="relative mb-4 overflow-hidden rounded-[2rem] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,238,230,0.9))] shadow-2xl">
+                <figure className="relative mb-6 overflow-visible">
+                  <div className="pointer-events-none absolute inset-x-[12%] bottom-[8%] h-[14%] rounded-full bg-[hsl(35_26%_74%/0.18)] blur-3xl" />
                   <div
                     className="relative aspect-square"
                     role="img"
                     aria-label={configuratorAlt}
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.96),rgba(232,224,211,0.52)_55%,rgba(216,207,191,0.18)_100%)]" />
-
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.img
                         key={`frame-${selectedFrame.image}`}
                         src={selectedFrame.image}
                         alt=""
                         aria-hidden="true"
-                        className="absolute inset-0 h-full w-full object-contain p-5 sm:p-8"
+                        className="absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_18px_38px_rgba(182,171,155,0.2)]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -175,7 +174,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                         src={selectedDesktop.image}
                         alt=""
                         aria-hidden="true"
-                        className="absolute inset-0 h-full w-full object-contain p-5 sm:p-8"
+                        className="absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_26px_48px_rgba(164,154,139,0.16)]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -186,10 +185,10 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                 </figure>
 
                 <div className="space-y-1 px-4 text-center">
-                  <p className="materials-detail-caption text-sm text-muted-foreground">
+                  <p className="materials-detail-caption text-sm leading-relaxed text-muted-foreground">
                     {renderQxText(data.detailImageCaption)}
                   </p>
-                  <p className="text-xs font-medium uppercase tracking-[0.18em] text-accent">
+                  <p className="text-xs font-medium uppercase tracking-[0.26em] text-foreground/90">
                     {renderQxText(
                       `Desktop ${selectedDesktop.label} / Frame ${selectedFrame.label}`,
                     )}

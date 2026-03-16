@@ -272,14 +272,15 @@ async function discoverMaterialsConfigurator(
     const desktopOptions: MaterialsConfiguratorOption[] = [];
 
     for (const [id, option] of options.entries()) {
-      if (!option.image || !option.thumbnail) continue;
+      if (!option.image) continue;
+      const thumbnail = option.thumbnail ?? option.image;
 
       const normalizedOption: MaterialsConfiguratorOption = {
         id,
         code: option.code,
         label: formatMaterialsOptionLabel(option.code),
         image: resolveImageUrl(materialsBaseUrl, option.image),
-        thumbnail: resolveImageUrl(materialsBaseUrl, option.thumbnail),
+        thumbnail: resolveImageUrl(materialsBaseUrl, thumbnail),
       };
 
       if (option.type === 'frame') {
@@ -300,6 +301,31 @@ async function discoverMaterialsConfigurator(
       frameOptions,
       desktopOptions,
     };
+  } catch {
+    return undefined;
+  }
+}
+
+async function discoverFeatureDemoVideo(
+  featuresBaseUrl: string,
+): Promise<string | undefined> {
+  const preferredFiles = ['ani_test.mp4'];
+
+  for (const file of preferredFiles) {
+    if (await fileExists(toPublicFilePath(featuresBaseUrl, file))) {
+      return resolveImageUrl(featuresBaseUrl, file);
+    }
+  }
+
+  try {
+    const files = await fs.readdir(toPublicFilePath(featuresBaseUrl));
+    const fallbackVideo = files.find((file) =>
+      file.toLowerCase().endsWith('.mp4'),
+    );
+
+    return fallbackVideo
+      ? resolveImageUrl(featuresBaseUrl, normalizeRelativeAssetPath(fallbackVideo))
+      : undefined;
   } catch {
     return undefined;
   }
@@ -441,6 +467,7 @@ export async function loadCatalog(
     ...(heroSliderFile?.descriptionStyle ?? {}),
   };
   const materialsBase = `${base}/materials`;
+  const featuresBase = `${base}/features`;
   const [
     resolvedHeroImage,
     resolvedOverviewPackshot,
@@ -448,6 +475,7 @@ export async function loadCatalog(
     resolvedDetailImage,
     resolvedGalleryImages,
     materialsConfigurator,
+    featureDemoVideo,
   ] = await Promise.all([
     resolveImage(heroBase, hero.heroImage),
     resolveImage(`${base}/overview`, overview.packshotImage),
@@ -461,6 +489,7 @@ export async function loadCatalog(
       })),
     ),
     discoverMaterialsConfigurator(materialsBase),
+    discoverFeatureDemoVideo(featuresBase),
   ]);
 
   return {
@@ -494,7 +523,10 @@ export async function loadCatalog(
       detailImage: resolvedDetailImage,
       ...(materialsConfigurator ? { configurator: materialsConfigurator } : {}),
     },
-    features,
+    features: {
+      ...features,
+      ...(featureDemoVideo ? { demoVideo: featureDemoVideo } : {}),
+    },
     assembly,
     ...(packshots ? { packshots } : {}),
   };

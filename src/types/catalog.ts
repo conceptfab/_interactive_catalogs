@@ -248,6 +248,7 @@ export interface FeaturesData {
   sectionLabel: string;
   title: string;
   items: FeatureItem[];
+  demoVideo?: string;
 }
 
 export interface AssemblyStep {
