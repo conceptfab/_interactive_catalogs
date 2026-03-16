@@ -48,6 +48,9 @@ const blendTransition = {
   ease: 'easeInOut' as const,
 };
 
+const QX3_PREVIEW_SIZES = '(min-width: 1024px) 32vw, 100vw';
+const QX4_THUMB_SIZES = '(min-width: 1024px) 38vw, 100vw';
+
 const thumbIndex = (slidesLength: number, mainIndex: number, slot: number) =>
   (mainIndex + slot + 1) % slidesLength;
 
@@ -152,6 +155,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
                 key={`main-qx3-${mainIndex}`}
                 src={mainSlide.src}
                 {...responsiveImg(mainSlide.src, 'hero')}
+                draggable={true}
                 alt={mainSlide.alt}
                 className="absolute inset-0 h-full w-full object-cover"
                 initial={{ opacity: 0, scale: 1.02 }}
@@ -215,7 +219,8 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
                 <img
                   key={`qx3-preview-image-${slot}-${keyIndex}`}
                   src={slide.src}
-                  {...responsiveImg(slide.src, 'gallery')}
+                  {...responsiveImg(slide.src, 'hero', QX3_PREVIEW_SIZES)}
+                  draggable={true}
                   alt={slide.alt}
                   className="absolute inset-0 h-full w-full object-cover opacity-55"
                 />
@@ -257,6 +262,7 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
               key={`main-${mainIndex}`}
               src={mainSlide.src}
               {...responsiveImg(mainSlide.src, 'hero')}
+              draggable={true}
               alt={mainSlide.alt}
               className="absolute inset-0 h-full w-full object-cover"
               initial={{ opacity: 0 }}
@@ -314,7 +320,8 @@ const MosaicHeroSection = ({ data, variant }: MosaicHeroSectionProps) => {
                 <motion.img
                   key={`thumb-${slot}-${qx4ThumbIndices[slot]}`}
                   src={slide.src}
-                  {...responsiveImg(slide.src, 'gallery')}
+                  {...responsiveImg(slide.src, 'hero', QX4_THUMB_SIZES)}
+                  draggable={true}
                   alt={slide.alt}
                   className={`absolute inset-0 h-full w-full object-cover hero-thumb-image hero-thumb-image-${
                     slot + 1

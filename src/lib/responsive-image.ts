@@ -5,6 +5,8 @@
  * Generated files follow the pattern: `{name}-{width}w.{ext}`
  */
 
+import responsiveImageManifest from '@/generated/responsive-image-manifest.json';
+
 // ---------------------------------------------------------------------------
 // Size presets matching the generation script
 // ---------------------------------------------------------------------------
@@ -42,6 +44,25 @@ const PRESET_SIZES: Record<ImagePreset, string> = {
   'materials-thumb': '96px',
 };
 
+const MANAGED_PUBLIC_PREFIXES = ['/catalogs/', '/shared/'] as const;
+const GENERATED_WIDTHS_BY_SRC = responsiveImageManifest as Record<
+  string,
+  number[]
+>;
+
+function isManagedPublicAsset(src: string): boolean {
+  return MANAGED_PUBLIC_PREFIXES.some((prefix) => src.startsWith(prefix));
+}
+
+function getGeneratedWidths(src: string): number[] | undefined {
+  const widths = GENERATED_WIDTHS_BY_SRC[src];
+  if (!Array.isArray(widths)) return undefined;
+
+  return widths
+    .filter((width): width is number => Number.isFinite(width) && width > 0)
+    .sort((left, right) => left - right);
+}
+
 // ---------------------------------------------------------------------------
 // srcset builder
 // ---------------------------------------------------------------------------
@@ -78,7 +99,11 @@ export function responsiveProps(
   // Skip already-generated thumbnails
   if (/-\d+w\.\w+$/.test(src)) return undefined;
 
-  const widths = PRESET_WIDTHS[preset];
+  const widths =
+    getGeneratedWidths(src) ??
+    (isManagedPublicAsset(src) ? [] : PRESET_WIDTHS[preset]);
+  if (widths.length === 0) return undefined;
+
   const candidates = widths.map((w) => `${thumbnailUrl(src, w)} ${w}w`);
   // Always include the original as the largest candidate
   candidates.push(`${src} 4000w`);

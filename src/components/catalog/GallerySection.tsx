@@ -72,6 +72,7 @@ const GallerySection = ({ data, catalogId }: GallerySectionProps) => {
               <img
                 src={img.src}
                 {...responsiveImg(img.src, 'gallery', i === 0 ? '(min-width: 1024px) 66vw, 100vw' : undefined)}
+                draggable={true}
                 alt={img.alt}
                 className="w-full h-full object-cover aspect-[4/3] group-hover:scale-110 transition-transform duration-700"
                 loading="lazy"
@@ -132,6 +133,7 @@ const GallerySection = ({ data, catalogId }: GallerySectionProps) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               src={data.images[lightboxIndex].src}
+              draggable={true}
               alt={data.images[lightboxIndex].alt}
               className="max-w-full max-h-[85vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}

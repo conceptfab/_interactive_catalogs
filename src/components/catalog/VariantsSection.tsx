@@ -63,6 +63,7 @@ const VariantsSection = ({ data }: VariantsSectionProps) => {
               <img
                 src={data.previewImage}
                 {...responsiveImg(data.previewImage, 'variants')}
+                draggable={true}
                 alt={`Desk in ${data.desktopColors[selectedColor].name} finish with ${data.frameColors[selectedFrame].name} frame`}
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"

@@ -51,6 +51,7 @@ function DefaultCard({ item }: { item: PackshotItem }) {
         <img
           src={item.image}
           {...responsiveImg(item.image, 'packshot')}
+          draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           loading="lazy"
@@ -83,6 +84,7 @@ function FunctionalCard({ item }: { item: PackshotItem }) {
         <img
           src={item.image}
           {...responsiveImg(item.image, 'packshot')}
+          draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_82%]"
           loading="lazy"
@@ -111,6 +113,7 @@ function PremiumCard({ item }: { item: PackshotItem }) {
         <img
           src={item.image}
           {...responsiveImg(item.image, 'packshot')}
+          draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_82%]"
           loading="lazy"
@@ -141,6 +144,7 @@ function DarkCard({ item }: { item: PackshotItem }) {
         <img
           src={item.image}
           {...responsiveImg(item.image, 'packshot')}
+          draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-contain opacity-85 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-300"
           loading="lazy"
@@ -168,6 +172,7 @@ function WarmCard({ item }: { item: PackshotItem }) {
         <img
           src={item.image}
           {...responsiveImg(item.image, 'packshot')}
+          draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
           loading="lazy"
@@ -193,6 +198,7 @@ function LinearCard({ item }: { item: PackshotItem }) {
         <img
           src={item.image}
           {...responsiveImg(item.image, 'packshot')}
+          draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 group-hover:scale-[1.015]"
           loading="lazy"

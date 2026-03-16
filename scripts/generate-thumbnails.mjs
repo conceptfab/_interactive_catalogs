@@ -22,6 +22,12 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
+const MANIFEST_OUTPUT = path.join(
+  ROOT,
+  'src',
+  'generated',
+  'responsive-image-manifest.json',
+);
 
 // ---------------------------------------------------------------------------
 // Size presets per section
@@ -68,6 +74,14 @@ function isGeneratedThumbnail(fileName) {
 function thumbnailName(originalName, width) {
   const parsed = path.parse(originalName);
   return `${parsed.name}-${width}w${parsed.ext}`;
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function toPublicUrl(filePath) {
+  return `/${path.relative(PUBLIC, filePath).replace(/\\/g, '/')}`;
 }
 
 async function dirExists(dirPath) {
@@ -246,6 +260,58 @@ async function cleanAll() {
 }
 
 // ---------------------------------------------------------------------------
+// Manifest of actually generated responsive variants
+// ---------------------------------------------------------------------------
+
+async function collectResponsiveManifestEntries(dirPath, manifest) {
+  if (!(await dirExists(dirPath))) return;
+
+  const entries = await fs.readdir(dirPath, { withFileTypes: true });
+  const siblingFiles = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name);
+
+  for (const entry of entries) {
+    const fullPath = path.join(dirPath, entry.name);
+
+    if (entry.isDirectory()) {
+      await collectResponsiveManifestEntries(fullPath, manifest);
+      continue;
+    }
+
+    if (!isImageFile(entry.name)) continue;
+    if (isGeneratedThumbnail(entry.name)) continue;
+
+    const parsed = path.parse(entry.name);
+    const thumbnailPattern = new RegExp(
+      `^${escapeRegExp(parsed.name)}-(\\d+)w${escapeRegExp(parsed.ext)}$`,
+      'i',
+    );
+    const widths = siblingFiles
+      .map((fileName) => {
+        const match = fileName.match(thumbnailPattern);
+        return match ? Number(match[1]) : null;
+      })
+      .filter((width) => Number.isFinite(width))
+      .sort((left, right) => left - right);
+
+    manifest[toPublicUrl(fullPath)] = widths;
+  }
+}
+
+async function writeResponsiveManifest() {
+  const manifest = {};
+
+  await collectResponsiveManifestEntries(path.join(PUBLIC, 'catalogs'), manifest);
+  await collectResponsiveManifestEntries(path.join(PUBLIC, 'shared'), manifest);
+
+  await fs.mkdir(path.dirname(MANIFEST_OUTPUT), { recursive: true });
+  await fs.writeFile(MANIFEST_OUTPUT, `${JSON.stringify(manifest, null, 2)}\n`);
+
+  return Object.keys(manifest).length;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -322,6 +388,9 @@ async function main() {
     if (packshotsCount) console.log(`    packshots: ${packshotsCount} thumbnails`);
     totalGenerated += packshotsCount;
   }
+
+  const manifestEntries = await writeResponsiveManifest();
+  console.log(`\nUpdated responsive image manifest for ${manifestEntries} assets.`);
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
   console.log(`\nDone. Generated ${totalGenerated} thumbnails in ${elapsed}s.`);

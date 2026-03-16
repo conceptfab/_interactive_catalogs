@@ -58,6 +58,7 @@ function MaterialsOptionGroup({
                 <img
                   src={option.thumbnail}
                   {...responsiveImg(option.thumbnail, 'materials-thumb')}
+                  draggable={true}
                   alt=""
                   aria-hidden="true"
                   className="materials-configurator-thumb h-full w-full object-contain transition-transform duration-300 hover:scale-105"
@@ -161,6 +162,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                         key={`frame-${selectedFrame.image}`}
                         src={selectedFrame.image}
                         {...responsiveImg(selectedFrame.image, 'materials-full')}
+                        draggable={true}
                         alt=""
                         aria-hidden="true"
                         className="materials-configurator-preview-image absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_18px_38px_rgba(182,171,155,0.2)]"
@@ -176,6 +178,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                         key={`desktop-${selectedDesktop.image}`}
                         src={selectedDesktop.image}
                         {...responsiveImg(selectedDesktop.image, 'materials-full')}
+                        draggable={true}
                         alt=""
                         aria-hidden="true"
                         className="materials-configurator-preview-image absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_26px_48px_rgba(164,154,139,0.16)]"
@@ -205,6 +208,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                   <img
                     src={data.detailImage}
                     {...responsiveImg(data.detailImage, 'materials-full')}
+                    draggable={true}
                     alt={data.detailImageAlt}
                     className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, type CSSProperties } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import type {
   HeroData,
@@ -113,9 +113,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
       ? { top: `${descriptionStyle.offsetPx}px` }
       : { bottom: `${descriptionStyle.offsetPx}px` }),
   };
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = useReducedMotion();
 
   const goTo = useCallback(
     (index: number) => {
@@ -203,6 +201,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
               key={`${displaySlides[currentIndex].src}-${currentIndex}`}
               src={displaySlides[currentIndex].src}
               {...responsiveImg(displaySlides[currentIndex].src, 'hero')}
+              draggable={true}
               alt={displaySlides[currentIndex].alt}
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ x: '100%' }}
@@ -221,6 +220,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
               key={`${slide.src}-${i}`}
               src={slide.src}
               {...responsiveImg(slide.src, 'hero')}
+              draggable={true}
               alt={slide.alt}
               className="absolute inset-0 w-full h-full object-cover transition-opacity ease-out"
               style={{

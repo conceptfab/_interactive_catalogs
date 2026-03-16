@@ -1,0 +1,1120 @@
+{
+  "/catalogs/QX-0/gallery/desk-detail.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/gallery/hero-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-0/gallery/home-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-0/gallery/office-arrangement.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-0/gallery/office-lifestyle.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-0/gallery/packshot.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-0/hero/hero_00.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-0/hero/hero_01.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-0/hero/hero_02.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-0/hero/hero_03.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-0/materials/metro_RAL7021.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_RAL7021_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_RAL9003.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_RAL9003_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_RAL9005.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_RAL9005_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_RAL9006.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_RAL9006_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_U100.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_U100_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_U110.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_U110_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_U120.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_U120_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_U130.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_U130_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W200.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W200_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W210.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W210_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W220.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W220_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W240.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W240_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W250.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W250_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W310.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W310_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/materials/metro_W330.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/materials/metro_W330_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-0/overview/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-0/variants/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/gallery/desk-detail.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/gallery/hero-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-1/gallery/home-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-1/gallery/office-arrangement.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-1/gallery/office-lifestyle.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-1/gallery/packshot.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-1/hero/hero_00.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-1/hero/hero_01.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-1/hero/hero_02.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-1/hero/hero_03.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-1/materials/metro_RAL7021.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_RAL7021_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_RAL9003.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_RAL9003_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_RAL9005.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_RAL9005_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_RAL9006.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_RAL9006_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_U100.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_U100_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_U110.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_U110_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_U120.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_U120_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_U130.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_U130_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W200.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W200_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W210.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W210_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W220.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W220_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W240.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W240_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W250.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W250_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W310.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W310_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/materials/metro_W330.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/materials/metro_W330_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-1/overview/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-1/variants/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/gallery/desk-detail.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/gallery/hero-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-2/gallery/home-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-2/gallery/office-arrangement.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-2/gallery/office-lifestyle.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-2/gallery/packshot.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-2/hero/hero_00.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-2/hero/hero_01.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-2/hero/hero_02.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-2/hero/hero_03.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-2/materials/metro_RAL7021.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_RAL7021_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_RAL9003.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_RAL9003_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_RAL9005.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_RAL9005_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_RAL9006.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_RAL9006_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_U100.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_U100_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_U110.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_U110_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_U120.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_U120_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_U130.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_U130_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W200.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W200_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W210.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W210_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W220.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W220_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W240.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W240_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W250.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W250_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W310.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W310_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/materials/metro_W330.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/materials/metro_W330_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-2/overview/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-2/variants/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/gallery/desk-detail.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/gallery/hero-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-3/gallery/home-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-3/gallery/office-arrangement.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-3/gallery/office-lifestyle.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-3/gallery/packshot.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-3/hero/hero_00.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-3/hero/hero_01.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-3/hero/hero_02.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-3/hero/hero_03.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-3/materials/metro_RAL7021.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_RAL7021_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_RAL9003.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_RAL9003_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_RAL9005.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_RAL9005_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_RAL9006.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_RAL9006_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_U100.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_U100_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_U110.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_U110_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_U120.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_U120_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_U130.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_U130_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W200.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W200_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W210.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W210_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W220.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W220_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W240.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W240_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W250.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W250_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W310.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W310_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/materials/metro_W330.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/materials/metro_W330_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-3/overview/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-3/variants/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/gallery/desk-detail.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/gallery/hero-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-4/gallery/home-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-4/gallery/office-arrangement.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-4/gallery/office-lifestyle.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-4/gallery/packshot.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-4/hero/hero_00.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-4/hero/hero_01.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-4/hero/hero_02.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-4/hero/hero_03.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-4/materials/metro_RAL7021.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_RAL7021_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_RAL9003.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_RAL9003_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_RAL9005.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_RAL9005_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_RAL9006.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_RAL9006_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_U100.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_U100_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_U110.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_U110_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_U120.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_U120_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_U130.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_U130_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W200.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W200_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W210.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W210_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W220.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W220_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W240.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W240_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W250.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W250_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W310.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W310_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/materials/metro_W330.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/materials/metro_W330_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-4/overview/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-4/variants/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/gallery/desk-detail.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/gallery/hero-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-5/gallery/home-office.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-5/gallery/office-arrangement.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-5/gallery/office-lifestyle.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-5/gallery/packshot.webp": [
+    400,
+    800,
+    1200
+  ],
+  "/catalogs/QX-5/hero/hero_00.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-5/hero/hero_01.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-5/hero/hero_02.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-5/hero/hero_03.webp": [
+    640,
+    1280,
+    1920
+  ],
+  "/catalogs/QX-5/materials/metro_RAL7021.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_RAL7021_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_RAL9003.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_RAL9003_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_RAL9005.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_RAL9005_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_RAL9006.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_RAL9006_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_U100.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_U100_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_U110.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_U110_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_U120.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_U120_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_U130.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_U130_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W200.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W200_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W210.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W210_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W220.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W220_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W240.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W240_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W250.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W250_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W310.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W310_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/materials/metro_W330.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/materials/metro_W330_thumb.webp": [
+    96,
+    192
+  ],
+  "/catalogs/QX-5/overview/packshot.webp": [
+    400,
+    800
+  ],
+  "/catalogs/QX-5/variants/packshot.webp": [
+    400,
+    800
+  ],
+  "/shared/packshots/QX10R_U120_white__Shot_A__4K_R8.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX10R_W210_grey__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX10R_W240_black__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX10_U120_white__Shot_A__4K_R8.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX10_W210_grey__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX10_W240_black__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX15R_U120_white__Shot_A__4K_R8.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX15R_W210_grey__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX15R_W240_black__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX15_U120_white__Shot_A__4K_R8.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX15_W210_grey__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX15_W240_black__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX1R_W210_grey__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ],
+  "/shared/packshots/QX1R_W240_black__Shot_A__4K_R9.webp": [
+    300,
+    600
+  ]
+}

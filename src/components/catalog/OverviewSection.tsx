@@ -79,6 +79,7 @@ const OverviewSection = ({ data }: OverviewSectionProps) => {
                 <img
                   src={data.packshotImage}
                   {...responsiveImg(data.packshotImage, 'overview')}
+                  draggable={true}
                   alt={data.packshotImageAlt}
                   className="absolute inset-0 h-full w-full object-cover"
                   loading="lazy"
