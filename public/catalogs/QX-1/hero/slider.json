@@ -1,49 +1,49 @@
 {
     "settings": {
         "autoAdvance": true,
-        "interval": 5000,
+        "interval": 6500,
         "pauseOnHover": true,
-        "transitionMs": 900,
-        "showArrows": true,
+        "transitionMs": 700,
+        "showArrows": false,
         "showDots": true,
         "initialSlide": 0
     },
     "slides": [
         {
-            "image": "hero_00.jpg",
+            "image": "hero_00.webp",
             "alt": "QX desk system in a modern open-space office with people working",
-            "description": "Open-space layout with collaborative desks."
+            "description": "Slide 01: Open-space layout with collaborative desks."
         },
         {
-            "image": "hero_01.jpg",
+            "image": "hero_01.webp",
             "alt": "QX desk with ergonomic chairs in a bright office interior",
-            "description": "Focus zone optimized for ergonomic work."
+            "description": "Slide 02: Focus zone optimized for ergonomic work."
         },
         {
-            "image": "hero_02.jpg",
+            "image": "hero_02.webp",
             "alt": "QX modular desks arranged in a contemporary workspace",
-            "description": "Modular arrangement for team scalability."
+            "description": "Slide 03: Modular arrangement for team scalability."
         },
         {
-            "image": "hero_03.jpg",
+            "image": "hero_03.webp",
             "alt": "QX workstation detail in modern office environment",
-            "description": "Product detail highlighting finishes and precision."
+            "description": "Slide 04: Product detail highlighting finishes and precision."
         }
     ],
     "descriptionStyle": {
-        "enabled": true,
+        "enabled": false,
         "position": "bottom-left",
-        "offsetPx": 34,
-        "textColor": "#F4ECE4",
-        "backgroundColor": "transparent",
+        "offsetPx": 40,
+        "textColor": "rgba(17,17,17,0.82)",
+        "backgroundColor": "rgba(255,255,255,0.0)",
         "backdropBlurPx": 0,
         "paddingX": 0,
         "paddingY": 0,
         "borderRadiusPx": 0,
-        "fontSizePx": 42,
-        "fontWeight": 200,
-        "letterSpacingEm": 0.02,
-        "maxWidth": "720px",
+        "fontSizePx": 12,
+        "fontWeight": 500,
+        "letterSpacingEm": 0.08,
+        "maxWidth": "560px",
         "textAlign": "left",
         "uppercase": false
     }

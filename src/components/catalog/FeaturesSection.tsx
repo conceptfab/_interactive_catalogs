@@ -110,11 +110,11 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
 
             <div className={data.demoVideo ? 'mt-12' : 'mt-12 p-8 rounded-xl'}>
               {data.demoVideo ? (
-                <div className="w-full overflow-hidden rounded-xl">
+                <div className="feature-demo-video-shell w-full overflow-hidden rounded-xl">
                   <video
                     key={data.demoVideo}
                     src={data.demoVideo}
-                    className="h-auto w-full mix-blend-multiply"
+                    className="feature-demo-video h-auto w-full mix-blend-multiply"
                     autoPlay
                     loop
                     muted

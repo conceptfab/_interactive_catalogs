@@ -27,7 +27,7 @@ function MaterialsOptionGroup({
   const selectedOption = options.find((option) => option.id === selectedId);
 
   return (
-    <div>
+    <div className="materials-option-group">
       <div className="mb-4 flex items-center justify-between gap-4">
         <h3 className="font-display text-lg font-semibold text-foreground">
           {renderQxText(title)}
@@ -37,7 +37,7 @@ function MaterialsOptionGroup({
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2.5">
+      <div className="materials-configurator-grid flex flex-wrap gap-2.5">
         {options.map((option) => {
           const isSelected = option.id === selectedId;
 
@@ -47,22 +47,22 @@ function MaterialsOptionGroup({
               type="button"
               onClick={() => onSelect(option.id)}
               aria-pressed={isSelected}
-              className={`w-[5.25rem] shrink-0 rounded-lg border p-1 text-left transition-all sm:w-[5.75rem] ${
+              className={`materials-configurator-option w-[5.25rem] shrink-0 rounded-lg border p-1 text-left transition-all sm:w-[5.75rem] ${
                 isSelected
                   ? 'border-accent bg-accent/10 shadow-lg shadow-accent/10'
                   : 'border-border bg-background hover:border-accent/40 hover:bg-accent/5'
               }`}
             >
-              <div className="flex aspect-square items-center justify-center overflow-hidden rounded-md bg-muted/30">
+              <div className="materials-configurator-swatch flex aspect-square items-center justify-center overflow-hidden rounded-md bg-muted/30">
                 <img
                   src={option.thumbnail}
                   alt=""
                   aria-hidden="true"
-                  className="h-full w-full object-contain transition-transform duration-300 hover:scale-105"
+                  className="materials-configurator-thumb h-full w-full object-contain transition-transform duration-300 hover:scale-105"
                   loading="lazy"
                 />
               </div>
-              <p className="mt-1.5 text-[11px] font-medium leading-none text-foreground sm:text-xs">
+              <p className="materials-configurator-label mt-1.5 text-[11px] font-medium leading-none text-foreground sm:text-xs">
                 {renderQxText(option.label)}
               </p>
             </button>
@@ -147,10 +147,10 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
           >
             {hasConfigurator && selectedFrame && selectedDesktop ? (
               <>
-                <figure className="relative mb-6 overflow-visible">
+                <figure className="materials-configurator-figure relative mb-6 overflow-visible">
                   <div className="pointer-events-none absolute inset-x-[12%] bottom-[8%] h-[14%] rounded-full bg-[hsl(35_26%_74%/0.18)] blur-3xl" />
                   <div
-                    className="relative aspect-square"
+                    className="materials-configurator-preview relative mx-auto aspect-square w-full"
                     role="img"
                     aria-label={configuratorAlt}
                   >
@@ -160,7 +160,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                         src={selectedFrame.image}
                         alt=""
                         aria-hidden="true"
-                        className="absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_18px_38px_rgba(182,171,155,0.2)]"
+                        className="materials-configurator-preview-image absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_18px_38px_rgba(182,171,155,0.2)]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -174,7 +174,7 @@ const MaterialsSection = ({ data }: MaterialsSectionProps) => {
                         src={selectedDesktop.image}
                         alt=""
                         aria-hidden="true"
-                        className="absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_26px_48px_rgba(164,154,139,0.16)]"
+                        className="materials-configurator-preview-image absolute inset-0 h-full w-full object-contain px-2 py-4 sm:px-4 sm:py-6 drop-shadow-[0_26px_48px_rgba(164,154,139,0.16)]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
