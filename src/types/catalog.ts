@@ -213,6 +213,19 @@ export interface ColorSwatch {
   hex: string;
 }
 
+export interface MaterialsConfiguratorOption {
+  id: string;
+  code: string;
+  label: string;
+  image: string;
+  thumbnail: string;
+}
+
+export interface MaterialsConfiguratorData {
+  frameOptions: MaterialsConfiguratorOption[];
+  desktopOptions: MaterialsConfiguratorOption[];
+}
+
 export interface MaterialsData {
   sectionLabel: string;
   title: string;
@@ -221,6 +234,7 @@ export interface MaterialsData {
   detailImage: string;
   detailImageAlt: string;
   detailImageCaption: string;
+  configurator?: MaterialsConfiguratorData;
 }
 
 export interface FeatureItem {

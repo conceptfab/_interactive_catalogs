@@ -8,6 +8,8 @@ import type {
   VariantsData,
   DimensionsData,
   MaterialsData,
+  MaterialsConfiguratorData,
+  MaterialsConfiguratorOption,
   FeaturesData,
   AssemblyData,
   PackshotsData,
@@ -196,6 +198,113 @@ function defaultHeroSlideAlt(
   return index === 0 ? baseAlt : `${baseAlt} - slide ${index + 1} of ${total}`;
 }
 
+function formatMaterialsOptionLabel(code: string): string {
+  const normalizedCode = code.toUpperCase();
+  if (normalizedCode.startsWith('RAL')) {
+    return `RAL ${normalizedCode.slice(3)}`;
+  }
+
+  return normalizedCode;
+}
+
+function resolveMaterialsAssetType(
+  code: string,
+): 'frame' | 'desktop' | null {
+  if (/^RAL\d+$/i.test(code)) return 'frame';
+  if (/^[UW]\d+$/i.test(code)) return 'desktop';
+  return null;
+}
+
+function compareMaterialsOptions(
+  left: MaterialsConfiguratorOption,
+  right: MaterialsConfiguratorOption,
+): number {
+  return left.code.localeCompare(right.code, undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  });
+}
+
+async function discoverMaterialsConfigurator(
+  materialsBaseUrl: string,
+): Promise<MaterialsConfiguratorData | undefined> {
+  const materialsDir = toPublicFilePath(materialsBaseUrl);
+
+  try {
+    const files = await fs.readdir(materialsDir);
+    const options = new Map<
+      string,
+      {
+        code: string;
+        type: 'frame' | 'desktop';
+        image?: string;
+        thumbnail?: string;
+      }
+    >();
+
+    for (const file of files) {
+      const normalizedFile = normalizeRelativeAssetPath(file);
+      const parsed = path.posix.parse(normalizedFile);
+
+      if (parsed.ext.toLowerCase() !== '.webp') continue;
+
+      const isThumbnail = parsed.name.endsWith('_thumb');
+      const baseName = isThumbnail
+        ? parsed.name.slice(0, -'_thumb'.length)
+        : parsed.name;
+      const codeMatch = baseName.match(/(?:^|_)(RAL\d+|[UW]\d+)$/i);
+      if (!codeMatch) continue;
+
+      const code = codeMatch[1].toUpperCase();
+      const type = resolveMaterialsAssetType(code);
+      if (!type) continue;
+
+      const option = options.get(baseName) ?? { code, type };
+      if (isThumbnail) {
+        option.thumbnail = normalizedFile;
+      } else {
+        option.image = normalizedFile;
+      }
+      options.set(baseName, option);
+    }
+
+    const frameOptions: MaterialsConfiguratorOption[] = [];
+    const desktopOptions: MaterialsConfiguratorOption[] = [];
+
+    for (const [id, option] of options.entries()) {
+      if (!option.image || !option.thumbnail) continue;
+
+      const normalizedOption: MaterialsConfiguratorOption = {
+        id,
+        code: option.code,
+        label: formatMaterialsOptionLabel(option.code),
+        image: resolveImageUrl(materialsBaseUrl, option.image),
+        thumbnail: resolveImageUrl(materialsBaseUrl, option.thumbnail),
+      };
+
+      if (option.type === 'frame') {
+        frameOptions.push(normalizedOption);
+      } else {
+        desktopOptions.push(normalizedOption);
+      }
+    }
+
+    frameOptions.sort(compareMaterialsOptions);
+    desktopOptions.sort(compareMaterialsOptions);
+
+    if (frameOptions.length === 0 || desktopOptions.length === 0) {
+      return undefined;
+    }
+
+    return {
+      frameOptions,
+      desktopOptions,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
 async function normalizeHeroSlides(
   slides: HeroSliderFile['slides'] | undefined,
   heroBase: string,
@@ -331,17 +440,19 @@ export async function loadCatalog(
     ...(hero.descriptionStyle ?? {}),
     ...(heroSliderFile?.descriptionStyle ?? {}),
   };
+  const materialsBase = `${base}/materials`;
   const [
     resolvedHeroImage,
     resolvedOverviewPackshot,
     resolvedPreviewImage,
     resolvedDetailImage,
     resolvedGalleryImages,
+    materialsConfigurator,
   ] = await Promise.all([
     resolveImage(heroBase, hero.heroImage),
     resolveImage(`${base}/overview`, overview.packshotImage),
     resolveImage(`${base}/variants`, variants.previewImage),
-    resolveImage(`${base}/materials`, materials.detailImage),
+    resolveImage(materialsBase, materials.detailImage),
     Promise.all(
       (gallery.images ?? []).map(async (img) => ({
         src: await resolveImage(`${base}/gallery`, img.image),
@@ -349,6 +460,7 @@ export async function loadCatalog(
         category: img.category,
       })),
     ),
+    discoverMaterialsConfigurator(materialsBase),
   ]);
 
   return {
@@ -380,6 +492,7 @@ export async function loadCatalog(
     materials: {
       ...materials,
       detailImage: resolvedDetailImage,
+      ...(materialsConfigurator ? { configurator: materialsConfigurator } : {}),
     },
     features,
     assembly,

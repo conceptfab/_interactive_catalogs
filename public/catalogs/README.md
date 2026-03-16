@@ -137,3 +137,18 @@ W `content.json` uzywaj nazw plikow wzglednych do folderu sekcji:
 - `hero/hero-office.webp` -> w `hero/content.json`: `"heroImage": "hero-office.webp"`
 - `hero/hero_00.webp`, `hero_01.webp`, ... -> automatycznie wykrywane fallbackowo
 - `gallery/packshot.webp` -> w `gallery/content.json`: `"image": "packshot.webp"` (w obiekcie images)
+
+## Materials - konfigurator warstwowy
+
+Jesli w folderze `materials/` istnieja odpowiednio nazwane pliki `webp`, sekcja Materials automatycznie wlaczy konfigurator.
+
+- kolory stelaza: pliki z `RAL` w nazwie, np. `metro_RAL9006.webp`
+- kolory blatow: pliki z `U` lub `W` i numerem, np. `metro_U110.webp`, `metro_W240.webp`
+- miniatury: ten sam basename z dopiskiem `_thumb`, np. `metro_RAL9006_thumb.webp`, `metro_U110_thumb.webp`
+- glowna ilustracja sklada sie z dwoch warstw alpha `webp`: jednej dla stelarza i jednej dla blatu
+- po kliknieciu miniatury aplikacja bierze odpowiadajacy jej plik bez `_thumb`
+
+Przyklad:
+
+- `metro_RAL9006_thumb.webp` -> wybiera warstwe `metro_RAL9006.webp`
+- `metro_U110_thumb.webp` -> wybiera warstwe `metro_U110.webp`
