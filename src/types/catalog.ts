@@ -91,7 +91,7 @@ export interface HeroSlide {
 }
 
 export interface HeroSlideDefinition {
-  /** Relative path inside hero folder, e.g. hero_00.jpg */
+  /** Relative path inside hero folder, e.g. hero_00.webp */
   image: string;
   /** Optional alt override for the slide */
   alt?: string;
@@ -118,7 +118,7 @@ export interface HeroData {
   heroImageAlt: string;
   /** Explicit hero slides resolved from hero/slider.json */
   heroSlides?: HeroSlide[];
-  /** Auto-discovered hero_NN.jpg images for slider */
+  /** Auto-discovered hero_NN.webp images for slider, with jpg/jpeg/png fallback */
   heroImages?: string[];
   /** Slider options loaded from hero/slider.json (or legacy hero content) */
   slider?: HeroSliderConfig;
