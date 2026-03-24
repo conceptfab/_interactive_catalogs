@@ -13,21 +13,21 @@
           "colorName": "White",
           "colorCode": "U120",
           "colorHex": "#f0efe9",
-          "image": "/shared/packshots/QX10_U120_white__Shot_A__4K_R8.webp"
+          "image": "QX10_U120_white__Shot_A__4K_R8.webp"
         },
         {
           "code": "QX10-W210",
           "colorName": "Grey",
           "colorCode": "W210",
           "colorHex": "#878880",
-          "image": "/shared/packshots/QX10_W210_grey__Shot_A__4K_R9.webp"
+          "image": "QX10_W210_grey__Shot_A__4K_R9.webp"
         },
         {
           "code": "QX10-W240",
           "colorName": "Black",
           "colorCode": "W240",
           "colorHex": "#1a1a1a",
-          "image": "/shared/packshots/QX10_W240_black__Shot_A__4K_R9.webp"
+          "image": "QX10_W240_black__Shot_A__4K_R9.webp"
         }
       ]
     },
@@ -41,21 +41,21 @@
           "colorName": "White",
           "colorCode": "U120",
           "colorHex": "#f0efe9",
-          "image": "/shared/packshots/QX10R_U120_white__Shot_A__4K_R8.webp"
+          "image": "QX10R_U120_white__Shot_A__4K_R8.webp"
         },
         {
           "code": "QX10R-W210",
           "colorName": "Grey",
           "colorCode": "W210",
           "colorHex": "#878880",
-          "image": "/shared/packshots/QX10R_W210_grey__Shot_A__4K_R9.webp"
+          "image": "QX10R_W210_grey__Shot_A__4K_R9.webp"
         },
         {
           "code": "QX10R-W240",
           "colorName": "Black",
           "colorCode": "W240",
           "colorHex": "#1a1a1a",
-          "image": "/shared/packshots/QX10R_W240_black__Shot_A__4K_R9.webp"
+          "image": "QX10R_W240_black__Shot_A__4K_R9.webp"
         }
       ]
     },
@@ -69,21 +69,21 @@
           "colorName": "White",
           "colorCode": "U120",
           "colorHex": "#f0efe9",
-          "image": "/shared/packshots/QX15_U120_white__Shot_A__4K_R8.webp"
+          "image": "QX15_U120_white__Shot_A__4K_R8.webp"
         },
         {
           "code": "QX15-W210",
           "colorName": "Grey",
           "colorCode": "W210",
           "colorHex": "#878880",
-          "image": "/shared/packshots/QX15_W210_grey__Shot_A__4K_R9.webp"
+          "image": "QX15_W210_grey__Shot_A__4K_R9.webp"
         },
         {
           "code": "QX15-W240",
           "colorName": "Black",
           "colorCode": "W240",
           "colorHex": "#1a1a1a",
-          "image": "/shared/packshots/QX15_W240_black__Shot_A__4K_R9.webp"
+          "image": "QX15_W240_black__Shot_A__4K_R9.webp"
         }
       ]
     },
@@ -97,21 +97,21 @@
           "colorName": "White",
           "colorCode": "U120",
           "colorHex": "#f0efe9",
-          "image": "/shared/packshots/QX15R_U120_white__Shot_A__4K_R8.webp"
+          "image": "QX15R_U120_white__Shot_A__4K_R8.webp"
         },
         {
           "code": "QX15R-W210",
           "colorName": "Grey",
           "colorCode": "W210",
           "colorHex": "#878880",
-          "image": "/shared/packshots/QX15R_W210_grey__Shot_A__4K_R9.webp"
+          "image": "QX15R_W210_grey__Shot_A__4K_R9.webp"
         },
         {
           "code": "QX15R-W240",
           "colorName": "Black",
           "colorCode": "W240",
           "colorHex": "#1a1a1a",
-          "image": "/shared/packshots/QX15R_W240_black__Shot_A__4K_R9.webp"
+          "image": "QX15R_W240_black__Shot_A__4K_R9.webp"
         }
       ]
     },
@@ -125,14 +125,14 @@
           "colorName": "Grey",
           "colorCode": "W210",
           "colorHex": "#878880",
-          "image": "/shared/packshots/QX1R_W210_grey__Shot_A__4K_R9.webp"
+          "image": "QX1R_W210_grey__Shot_A__4K_R9.webp"
         },
         {
           "code": "QX1R-W240",
           "colorName": "Black",
           "colorCode": "W240",
           "colorHex": "#1a1a1a",
-          "image": "/shared/packshots/QX1R_W240_black__Shot_A__4K_R9.webp"
+          "image": "QX1R_W240_black__Shot_A__4K_R9.webp"
         }
       ]
     }

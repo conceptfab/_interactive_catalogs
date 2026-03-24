@@ -81,7 +81,7 @@ export interface ResponsiveImageProps {
 /**
  * Build `srcSet` and `sizes` attributes for a given image source and preset.
  *
- * @param src - The original image URL (e.g. `/catalogs/QX-0/hero/hero_00.webp`)
+ * @param src - The original image URL (e.g. `/catalogs/QX/hero/hero_00.webp`)
  * @param preset - The layout preset to use
  * @param sizesOverride - Optional custom `sizes` attribute
  * @returns Object with `srcSet` and `sizes` strings, or `undefined` if src is empty

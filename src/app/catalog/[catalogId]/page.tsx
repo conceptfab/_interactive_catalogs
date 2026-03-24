@@ -75,7 +75,7 @@ export default async function CatalogPage({
                 ? 'qx0'
                 : 'default';
   const normalizedCatalogId = catalogId?.toUpperCase();
-  const isQx0 = normalizedCatalogId === 'QX-0';
+  const isQx0 = normalizedCatalogId === 'QX';
   const isQx1 = normalizedCatalogId === 'QX-1';
   const isQx2 = normalizedCatalogId === 'QX-2';
   const isQx3 = normalizedCatalogId === 'QX-3';
@@ -97,7 +97,7 @@ export default async function CatalogPage({
         ).toUpperCase()}
         brandLogoSrc={
           isQx0
-            ? '/catalogs/QX-0/metro_logo.svg'
+            ? '/catalogs/QX/metro_logo.svg'
             : isQx1
               ? '/catalogs/QX-1/metro_logo.svg'
               : isQx2
@@ -110,7 +110,6 @@ export default async function CatalogPage({
                       ? '/catalogs/QX-5/metro_logo.svg'
                       : undefined
         }
-        backToCatalogListHref="/"
         variant={navVariant}
       />
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300..700&family=Inter:wght@100..900&family=Manrope:wght@200..800&family=Sora:wght@300..800&family=Outfit:wght@300..800&family=Roboto+Mono:wght@300..700&family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Sora:wght@300..800&display=swap');
 
 @font-face {
   font-family: 'Calibre';
@@ -67,8 +67,8 @@
     --success: 0 0% 45%;
     --info: 0 0% 55%;
 
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Calibre', 'Inter', sans-serif;
+    --font-display: 'Roboto', sans-serif;
+    --font-body: 'Roboto', sans-serif;
     --font-qx: 'Sora', sans-serif;
 
     --section-padding: clamp(3rem, 6vw, 6rem);
@@ -155,9 +155,9 @@
     text-wrap: balance;
   }
 
-  .catalog-qx1 .qx-word {
-    font-family: var(--font-qx);
-    font-weight: 600;
+  .qx-word {
+    font-family: var(--font-qx) !important;
+    font-weight: 600 !important;
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -165,7 +165,7 @@
 
 .variant-list-page,
 .variant-list-page * {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 .variant-list-page .variant-tile {
@@ -234,13 +234,13 @@
 }
 
 .variant-list-page .variant-tile-qx1 .variant-tile-title {
-  font-family: 'Outfit', 'Inter', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #4d372c;
   letter-spacing: 0.05em;
 }
 
 .variant-list-page .variant-tile-qx1 .variant-tile-meta {
-  font-family: 'Manrope', 'Inter', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #7f6551;
 }
 
@@ -261,7 +261,7 @@
 .variant-list-page .variant-tile-qx2 .variant-tile-title,
 .variant-list-page .variant-tile-qx2 .variant-tile-meta,
 .variant-list-page .variant-tile-qx2 .variant-tile-cta {
-  font-family: 'Roboto Mono', monospace !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #1f2329;
 }
 
@@ -279,7 +279,7 @@
 }
 
 .variant-list-page .variant-tile-qx3 .variant-tile-title {
-  font-family: 'Sora', 'Inter', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #ecf0f6;
   letter-spacing: 0.07em;
 }
@@ -302,7 +302,7 @@
 }
 
 .variant-list-page .variant-tile-qx4 .variant-tile-title {
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #4c3a2e;
   font-size: 1.3rem;
   letter-spacing: 0.08em;
@@ -327,7 +327,7 @@
 }
 
 .variant-list-page .variant-tile-qx5 .variant-tile-title {
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: 'Roboto', sans-serif !important;
   color: #191919;
   letter-spacing: 0.09em;
   font-size: 1.25rem;
@@ -396,7 +396,7 @@ html {
   border-radius: 3px;
 }
 
-/* QX-0: no rounding for controls */
+/* QX (theme qx0): no rounding for controls */
 .catalog-qx0 {
   --radius: 0;
 }
@@ -436,8 +436,8 @@ html {
   --hero-overlay: 220 16% 11%;
   --warm-light: 38 36% 87%;
   --success: 145 24% 38%;
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'Manrope', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --radius: 1.1rem;
   position: relative;
   overflow: clip;
@@ -499,7 +499,7 @@ html {
 .catalog-qx1 h3,
 .catalog-qx1 h4,
 .catalog-qx1 nav .font-display {
-  font-family: 'Outfit', var(--font-display);
+  font-family: var(--font-display);
   letter-spacing: -0.02em;
 }
 
@@ -509,7 +509,7 @@ html {
 .catalog-qx1 dt,
 .catalog-qx1 dd,
 .catalog-qx1 span {
-  font-family: 'Manrope', var(--font-body);
+  font-family: var(--font-body);
 }
 
 .catalog-qx1 .section-padding {
@@ -651,8 +651,8 @@ html {
   --accent: 220 7% 23%;
   --accent-foreground: 0 0% 98%;
   --hero-overlay: 220 12% 9%;
-  --font-display: 'Roboto Mono', monospace;
-  --font-body: 'Roboto Mono', monospace;
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --radius: 1rem;
   position: relative;
   overflow: clip;
@@ -677,7 +677,7 @@ html {
 
 /* Preserve METRO brand styling */
 .catalog-qx2 .brand-logo {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   font-weight: 800 !important;
   letter-spacing: -0.05em !important;
   text-transform: none;
@@ -713,14 +713,14 @@ html {
 }
 
 .catalog-qx2 #cover h1 {
-  font-family: 'Sora', var(--font-display);
+  font-family: var(--font-display);
   letter-spacing: -0.03em;
   text-transform: uppercase;
 }
 
 .catalog-qx2 #cover p,
 .catalog-qx2 #cover button {
-  font-family: 'Inter', var(--font-body);
+  font-family: var(--font-body);
 }
 
 .catalog-qx2 .section-padding {
@@ -790,10 +790,10 @@ html {
   box-shadow: 0 10px 24px hsl(224 28% 15% / 0.07);
 }
 
-/* Specific branding for QX-2: "QX" text in Roboto Bold 700 */
-.catalog-qx2 .qx-word {
-  font-family: 'Roboto', sans-serif !important;
-  font-weight: 700 !important;
+/* Specific branding for QX-2: "QX" text in Sora */
+.catalog-qx2 span.qx-word {
+  font-family: var(--font-qx) !important;
+  font-weight: 600 !important;
   font-style: normal !important;
 }
 
@@ -1073,7 +1073,7 @@ html {
 .catalog-qx2 nav button.nav-button.qx2-nav-link,
 .catalog-qx2 nav button.nav-button.qx2-nav-link .font-display,
 .catalog-qx2 nav button.nav-button.qx2-nav-link .font-mono {
-  font-family: 'Roboto Mono', monospace !important;
+  font-family: var(--font-display) !important;
 }
 
 .catalog-qx2 nav button.nav-button.qx2-nav-link .font-mono {
@@ -1166,8 +1166,8 @@ html {
   --hero-overlay: 220 18% 4%;
   --warm-light: 220 12% 14%;
   --success: 160 54% 45%;
-  --font-display: 'Sora', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --radius: 0.2rem;
   position: relative;
   overflow-x: clip;
@@ -1260,7 +1260,7 @@ html {
   position: absolute;
   top: 0.9rem;
   right: clamp(1rem, 3vw, 3rem);
-  font-family: 'Sora', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(0.7rem, 0.9vw, 0.82rem);
   letter-spacing: 0.24em;
   color: hsl(var(--on-dark-subtle));
@@ -1456,8 +1456,8 @@ html {
   --accent-foreground: 0 0% 100%;
   --hero-overlay: 25 30% 16%;
   --warm-light: 30 40% 90%;
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --radius: 1.25rem;
   position: relative;
   overflow-x: clip;
@@ -1504,8 +1504,8 @@ html {
 }
 
 .catalog-qx4 {
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Outfit', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
 }
 
 .catalog-qx4 section {
@@ -1649,8 +1649,8 @@ html {
   --accent: 0 0% 7%;
   --accent-foreground: 0 0% 100%;
   --hero-overlay: 0 0% 0%;
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Calibre', 'Inter', sans-serif;
+  --font-display: 'Roboto', sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --qx5-nav-bg: #fbfaf6;
   --radius: 0;
   position: relative;
@@ -2154,15 +2154,17 @@ html {
 
 .catalog-qx0,
 .catalog-qx1,
+.catalog-qx2,
 .catalog-qx3,
 .catalog-qx4,
 .catalog-qx5 {
-  --font-body: 'Calibre', 'Inter', sans-serif;
-  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-display: 'Roboto', sans-serif;
 }
 
 .catalog-qx0 .font-body,
 .catalog-qx1 .font-body,
+.catalog-qx2 .font-body,
 .catalog-qx3 .font-body,
 .catalog-qx4 .font-body,
 .catalog-qx5 .font-body {
@@ -2171,6 +2173,7 @@ html {
 
 .catalog-qx0 .font-display,
 .catalog-qx1 .font-display,
+.catalog-qx2 .font-display,
 .catalog-qx3 .font-display,
 .catalog-qx4 .font-display,
 .catalog-qx5 .font-display {

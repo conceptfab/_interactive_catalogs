@@ -37,6 +37,11 @@ catalogs/
     variants/
       content.json
       packshot.webp
+    packshots/
+      content.json
+      model-a.webp
+      model-b.webp
+      ...
     dimensions/
       content.json
     materials/
@@ -61,7 +66,7 @@ Jesli obok siebie istnieja pliki o tym samym basename, np. `packshot.webp` i `pa
 
 ## Hero - nowy model slidera per katalog
 
-W kazdym folderze `QX-*/hero/` konfigurujesz slider osobno przez `slider.json`.
+W kazdym folderze `<KATALOG>/hero/` konfigurujesz slider osobno przez `slider.json`.
 
 ### `hero/content.json`
 
@@ -70,7 +75,7 @@ Trzyma tylko tresci sekcji hero (bez ustawien slidera):
 ```json
 {
   "brandLabel": "",
-  "collectionName": "QX Series",
+  "collectionName": "QX",
   "tagline": "Modular desk system engineered for the modern workspace.",
   "taglineLine2": "Where precision meets flexibility.",
   "ctaLabel": "Explore Collection",
@@ -137,6 +142,7 @@ W `content.json` uzywaj nazw plikow wzglednych do folderu sekcji:
 - `hero/hero-office.webp` -> w `hero/content.json`: `"heroImage": "hero-office.webp"`
 - `hero/hero_00.webp`, `hero_01.webp`, ... -> automatycznie wykrywane fallbackowo
 - `gallery/packshot.webp` -> w `gallery/content.json`: `"image": "packshot.webp"` (w obiekcie images)
+- `packshots/model-a.webp` -> w `packshots/content.json`: `"image": "model-a.webp"`
 
 ## Materials - konfigurator warstwowy
 

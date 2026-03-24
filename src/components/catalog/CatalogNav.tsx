@@ -12,6 +12,7 @@ const DEFAULT_SECTIONS: SectionConfig[] = [
   { id: 'overview', label: 'Overview' },
   { id: 'gallery', label: 'Looks' },
   { id: 'variants', label: 'Config' },
+  { id: 'packshots', label: 'Models' },
   { id: 'dimensions', label: 'Specs' },
   { id: 'materials', label: 'Build' },
   { id: 'features', label: 'Tech' },

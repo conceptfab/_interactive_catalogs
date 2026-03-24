@@ -80,6 +80,7 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
     ? configuredSlides
     : [{ src: data.heroImage, alt: data.heroImageAlt }];
   const normalizedCatalogId = catalogId?.toUpperCase();
+  const isQx = normalizedCatalogId === 'QX';
   const isQx5 = normalizedCatalogId === 'QX-5';
   const isQx2 = normalizedCatalogId === 'QX-2';
   const initialIdx = Math.min(
@@ -233,7 +234,9 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
             />
           ))
         )}
-        <div className="hero-overlay-layer absolute inset-0 bg-[hsl(var(--hero-overlay)/0.65)] z-[2]" />
+        {!isQx && (
+          <div className="hero-overlay-layer absolute inset-0 bg-[hsl(var(--hero-overlay)/0.65)] z-[2]" />
+        )}
       </div>
 
       {hasSlider && displaySlides.length > 1 && (
@@ -338,20 +341,16 @@ const HeroSection = ({ data, catalogId }: HeroSectionProps) => {
             isQx2 || isQx5 ? 'items-start' : 'items-center'
           }`}
         >
-          {normalizedCatalogId === 'QX-0' &&
-          data.collectionName.toLowerCase().includes('qx series') ? (
+          {normalizedCatalogId === 'QX' ? (
             <span
-              className="flex items-baseline gap-[0.15em] text-[clamp(5.6rem,17.5vw,15.4rem)] tracking-tighter qx-giant py-4"
+              className="text-[clamp(5.6rem,17.5vw,15.4rem)] tracking-tighter qx-giant py-4"
               style={{
                 lineHeight: '0.9',
                 fontFamily: "'Sora', sans-serif",
                 fontWeight: 200,
               }}
             >
-              QX
-              <span className="text-[0.22em] uppercase tracking-[0.5em] opacity-90 font-semibold">
-                Series
-              </span>
+              {renderQxText(data.collectionName)}
             </span>
           ) : isQx2 ? (
             <span className="flex items-baseline gap-[0.2em] uppercase">

@@ -22,6 +22,21 @@ interface RawGalleryData extends Omit<GalleryData, 'images'> {
   images: Array<{ image: string; alt: string; category: string }>;
 }
 
+interface RawPackshotsData extends Omit<PackshotsData, 'groups'> {
+  groups: Array<{
+    model: string;
+    label: string;
+    desc?: string;
+    items: Array<{
+      code: string;
+      colorName: string;
+      colorCode?: string;
+      colorHex?: string;
+      image: string;
+    }>;
+  }>;
+}
+
 export interface GlobalConfig {
   brandName: string;
   siteTitle: string;
@@ -49,6 +64,7 @@ const SECTION_ORDER = [
   'overview',
   'gallery',
   'variants',
+  'packshots',
   'dimensions',
   'materials',
   'features',
@@ -424,7 +440,7 @@ export async function loadCatalog(
     readPublicJson<MaterialsData>(`${base}/materials/content.json`),
     readPublicJson<FeaturesData>(`${base}/features/content.json`),
     readPublicJson<AssemblyData>(`${base}/assembly/content.json`),
-    readPublicJson<PackshotsData>('/shared/packshots/content.json'),
+    readPublicJson<RawPackshotsData>(`${base}/packshots/content.json`),
   ]);
 
   if (
@@ -468,12 +484,14 @@ export async function loadCatalog(
   };
   const materialsBase = `${base}/materials`;
   const featuresBase = `${base}/features`;
+  const packshotsBase = `${base}/packshots`;
   const [
     resolvedHeroImage,
     resolvedOverviewPackshot,
     resolvedPreviewImage,
     resolvedDetailImage,
     resolvedGalleryImages,
+    resolvedPackshots,
     materialsConfigurator,
     featureDemoVideo,
   ] = await Promise.all([
@@ -488,6 +506,22 @@ export async function loadCatalog(
         category: img.category,
       })),
     ),
+    packshots
+      ? Promise.all(
+          packshots.groups.map(async (group) => ({
+            ...group,
+            items: await Promise.all(
+              group.items.map(async (item) => ({
+                ...item,
+                image: await resolveImage(packshotsBase, item.image),
+              })),
+            ),
+          })),
+        ).then((groups) => ({
+          ...packshots,
+          groups,
+        }))
+      : undefined,
     discoverMaterialsConfigurator(materialsBase),
     discoverFeatureDemoVideo(featuresBase),
   ]);
@@ -528,6 +562,6 @@ export async function loadCatalog(
       ...(featureDemoVideo ? { demoVideo: featureDemoVideo } : {}),
     },
     assembly,
-    ...(packshots ? { packshots } : {}),
+    ...(resolvedPackshots ? { packshots: resolvedPackshots } : {}),
   };
 }

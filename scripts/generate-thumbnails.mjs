@@ -3,7 +3,7 @@
 /**
  * generate-thumbnails.mjs
  *
- * Scans /public/catalogs/ and /public/shared/ for images and generates
+ * Scans /public/catalogs/ for images and generates
  * responsive thumbnail variants appropriate for each view/layout.
  *
  * Generated files are placed next to the originals with a `-{width}w` suffix:
@@ -252,9 +252,6 @@ async function cleanAll() {
     }
   }
 
-  const sharedPackshots = path.join(PUBLIC, 'shared', 'packshots');
-  total += await cleanDirectory(sharedPackshots);
-
   console.log(`Removed ${total} generated thumbnails.`);
   return total;
 }
@@ -303,7 +300,6 @@ async function writeResponsiveManifest() {
   const manifest = {};
 
   await collectResponsiveManifestEntries(path.join(PUBLIC, 'catalogs'), manifest);
-  await collectResponsiveManifestEntries(path.join(PUBLIC, 'shared'), manifest);
 
   await fs.mkdir(path.dirname(MANIFEST_OUTPUT), { recursive: true });
   await fs.writeFile(MANIFEST_OUTPUT, `${JSON.stringify(manifest, null, 2)}\n`);
@@ -368,25 +364,27 @@ async function main() {
     const variantsCount = await processDirectory(variantsDir, SECTION_WIDTHS.variants, force);
     if (variantsCount) console.log(`    variants: ${variantsCount} thumbnails`);
 
+    // Packshots
+    const packshotsDir = path.join(catalogPath, 'packshots');
+    const packshotsCount = await processDirectory(
+      packshotsDir,
+      SECTION_WIDTHS.packshots,
+      force,
+    );
+    if (packshotsCount) console.log(`    packshots: ${packshotsCount} thumbnails`);
+
     // Materials (split logic)
     const materialsDir = path.join(catalogPath, 'materials');
     const materialsCount = await processMaterialsDirectory(materialsDir, force);
     if (materialsCount) console.log(`    materials: ${materialsCount} thumbnails`);
 
-    totalGenerated += heroCount + galleryCount + overviewCount + variantsCount + materialsCount;
-  }
-
-  // Shared packshots
-  const sharedPackshots = path.join(PUBLIC, 'shared', 'packshots');
-  if (await dirExists(sharedPackshots)) {
-    console.log(`\n  shared/packshots/`);
-    const packshotsCount = await processDirectory(
-      sharedPackshots,
-      SECTION_WIDTHS.packshots,
-      force,
-    );
-    if (packshotsCount) console.log(`    packshots: ${packshotsCount} thumbnails`);
-    totalGenerated += packshotsCount;
+    totalGenerated +=
+      heroCount +
+      galleryCount +
+      overviewCount +
+      variantsCount +
+      packshotsCount +
+      materialsCount;
   }
 
   const manifestEntries = await writeResponsiveManifest();

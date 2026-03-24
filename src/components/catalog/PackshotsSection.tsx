@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import type { PackshotsData, PackshotGroup, PackshotItem } from '@/types/catalog';
-import { renderQxText } from './renderQxText';
-import { responsiveImg } from '@/lib/responsive-image';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import type {
+  PackshotsData,
+  PackshotGroup,
+  PackshotItem,
+} from "@/types/catalog";
+import { renderQxText } from "./renderQxText";
+import { responsiveImg } from "@/lib/responsive-image";
 
 interface PackshotsSectionProps {
   data: PackshotsData;
@@ -12,16 +16,14 @@ interface PackshotsSectionProps {
   catalogId?: string;
 }
 
-const ADJUSTABLE_DESK_LABEL = 'Height-adjustable desk';
+const ADJUSTABLE_DESK_LABEL = "Height-adjustable desk";
 
 function hasAdjustableMarker(value?: string): boolean {
   if (!value) return false;
 
-  const modelToken = value
-    .toUpperCase()
-    .split(/[\\/_-]/)[0];
+  const modelToken = value.toUpperCase().split(/[\\/_-]/)[0];
 
-  return modelToken.includes('R');
+  return modelToken.includes("R");
 }
 
 function isAdjustableGroup(group: PackshotGroup): boolean {
@@ -46,18 +48,16 @@ function resolveGroupDescription(
 // ── qx0: Clean catalog grid ───────────────────────────────────────
 function DefaultCard({ item }: { item: PackshotItem }) {
   return (
-    <div className="group border border-border bg-background overflow-hidden">
-      <div className="bg-surface/30 mix-blend-multiply p-0 flex items-end justify-center aspect-[3/2] overflow-hidden">
-        <img
-          src={item.image}
-          {...responsiveImg(item.image, 'packshot')}
-          draggable={true}
-          alt={`${item.code} – ${item.colorName}`}
-          className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-          loading="lazy"
-        />
-      </div>
-      <div className="p-3 border-t border-border">
+    <div className="group bg-background overflow-hidden">
+      <img
+        src={item.image}
+        {...responsiveImg(item.image, "packshot")}
+        draggable={true}
+        alt={`${item.code} – ${item.colorName}`}
+        className="block w-full aspect-[3/2] object-cover object-[center_84%] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+      <div className="p-3">
         <p className="font-mono text-xs font-semibold text-foreground tracking-wide">
           {item.code}
         </p>
@@ -83,7 +83,7 @@ function FunctionalCard({ item }: { item: PackshotItem }) {
       <div className="bg-surface/20 p-0 flex items-end justify-center aspect-[16/9] overflow-hidden">
         <img
           src={item.image}
-          {...responsiveImg(item.image, 'packshot')}
+          {...responsiveImg(item.image, "packshot")}
           draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_82%]"
@@ -97,7 +97,10 @@ function FunctionalCard({ item }: { item: PackshotItem }) {
         <p className="text-[11px] text-muted-foreground leading-tight mt-0.5">
           {item.colorName}
           {item.colorCode && (
-            <span className="text-muted-foreground/50"> · {item.colorCode}</span>
+            <span className="text-muted-foreground/50">
+              {" "}
+              · {item.colorCode}
+            </span>
           )}
         </p>
       </div>
@@ -112,7 +115,7 @@ function PremiumCard({ item }: { item: PackshotItem }) {
       <div className="bg-surface/20 mix-blend-multiply p-0 flex items-end justify-center aspect-[16/9] overflow-hidden relative">
         <img
           src={item.image}
-          {...responsiveImg(item.image, 'packshot')}
+          {...responsiveImg(item.image, "packshot")}
           draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_82%]"
@@ -143,7 +146,7 @@ function DarkCard({ item }: { item: PackshotItem }) {
       <div className="flex-1 flex items-center justify-center aspect-square">
         <img
           src={item.image}
-          {...responsiveImg(item.image, 'packshot')}
+          {...responsiveImg(item.image, "packshot")}
           draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-contain opacity-85 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-300"
@@ -171,7 +174,7 @@ function WarmCard({ item }: { item: PackshotItem }) {
       <div className="p-5 sm:p-7 flex items-center justify-center aspect-square">
         <img
           src={item.image}
-          {...responsiveImg(item.image, 'packshot')}
+          {...responsiveImg(item.image, "packshot")}
           draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
@@ -197,7 +200,7 @@ function LinearCard({ item }: { item: PackshotItem }) {
       <div className="packshot-linear-media p-0 flex items-end justify-center aspect-[4/3]">
         <img
           src={item.image}
-          {...responsiveImg(item.image, 'packshot')}
+          {...responsiveImg(item.image, "packshot")}
           draggable={true}
           alt={`${item.code} – ${item.colorName}`}
           className="w-full h-full object-cover object-[center_84%] transition-transform duration-500 group-hover:scale-[1.015]"
@@ -219,32 +222,30 @@ function LinearCard({ item }: { item: PackshotItem }) {
 // ── Main component ────────────────────────────────────────────────
 const PackshotsSection = ({
   data,
-  theme = 'qx0',
+  theme = "qx0",
   catalogId,
 }: PackshotsSectionProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const normalizedTheme = theme.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normalizedTheme = theme.toLowerCase().replace(/[^a-z0-9]/g, "");
   const normalizedCatalogId = catalogId?.toUpperCase();
-  const isQxCatalog = normalizedCatalogId?.startsWith('QX') ?? false;
+  const isQxCatalog = normalizedCatalogId?.startsWith("QX") ?? false;
 
-  const isDark = normalizedTheme === 'qx3' || normalizedCatalogId === 'QX-3';
-  const isLinear = normalizedTheme === 'qx5' || normalizedCatalogId === 'QX-5';
-  const isWarm =
-    normalizedTheme === 'qx4' ||
-    normalizedCatalogId === 'QX-4';
-  const isPremium = normalizedTheme === 'qx2' || normalizedCatalogId === 'QX-2';
+  const isDark = normalizedTheme === "qx3" || normalizedCatalogId === "QX-3";
+  const isLinear = normalizedTheme === "qx5" || normalizedCatalogId === "QX-5";
+  const isWarm = normalizedTheme === "qx4" || normalizedCatalogId === "QX-4";
+  const isPremium = normalizedTheme === "qx2" || normalizedCatalogId === "QX-2";
   const isFunctional =
-    normalizedTheme === 'qx1' || normalizedCatalogId === 'QX-1';
+    normalizedTheme === "qx1" || normalizedCatalogId === "QX-1";
 
   const sectionBg = isDark
-    ? 'bg-[#060606] text-white'
+    ? "bg-[#060606] text-white"
     : isLinear
-      ? 'bg-[#f2f2f2]'
-    : isWarm
-      ? 'bg-[#fdf8f2]'
-      : 'bg-background';
+      ? "bg-[#f2f2f2]"
+      : isWarm
+        ? "bg-[#fdf8f2]"
+        : "bg-background";
 
   return (
     <section
@@ -257,26 +258,28 @@ const PackshotsSection = ({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className={`mb-12 ${isWarm ? 'text-center' : ''}`}
+          className={`mb-12 ${isWarm ? "text-center" : ""}`}
         >
           <p
             className={`font-display font-semibold text-sm uppercase mb-4 ${
               isDark
-                ? 'font-mono tracking-[0.3em] text-white/30'
-                : 'tracking-[0.2em] text-accent'
+                ? "font-mono tracking-[0.3em] text-white/30"
+                : "tracking-[0.2em] text-accent"
             }`}
           >
             {renderQxText(data.sectionLabel)}
           </p>
           <h2
             id="packshots-title"
-            className={`font-display font-bold ${isDark ? 'text-white' : 'text-foreground'}`}
-            style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}
+            className={`font-display font-bold ${isDark ? "text-white" : "text-foreground"}`}
+            style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
           >
             {renderQxText(data.title)}
           </h2>
           {data.subtitle && (
-            <p className={`mt-3 text-sm ${isDark ? 'text-white/40' : 'text-muted-foreground'}`}>
+            <p
+              className={`mt-3 text-sm ${isDark ? "text-white/40" : "text-muted-foreground"}`}
+            >
               {data.subtitle}
             </p>
           )}
@@ -286,21 +289,29 @@ const PackshotsSection = ({
         <div
           className={
             isDark
-              ? 'divide-y divide-white/[0.04]'
+              ? "divide-y divide-white/[0.04]"
               : isFunctional
-                ? 'space-y-8'
-                : 'space-y-14'
+                ? "space-y-8"
+                : "space-y-14"
           }
         >
           {data.groups.map((group, gi) => {
-            const groupDescription = resolveGroupDescription(group, isQxCatalog);
+            const groupDescription = resolveGroupDescription(
+              group,
+              isQxCatalog,
+            );
             const gridCols = (() => {
-              if (isFunctional)  return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3';
-              if (isPremium)     return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
-              if (isDark)        return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-px';
-              if (isLinear)      return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0';
-              if (isWarm)        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5';
-              return             'grid-cols-2 sm:grid-cols-3 gap-4';
+              if (isFunctional)
+                return "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3";
+              if (isPremium)
+                return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+              if (isDark)
+                return "grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-px";
+              if (isLinear)
+                return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0";
+              if (isWarm)
+                return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5";
+              return "grid-cols-2 sm:grid-cols-3 gap-4";
             })();
 
             return (
@@ -309,29 +320,29 @@ const PackshotsSection = ({
                 initial={{ opacity: 0, y: isDark ? 0 : 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.06 + gi * 0.07 }}
-                className={isDark ? 'py-8' : ''}
+                className={isDark ? "py-8" : ""}
               >
                 {/* Group header */}
                 <div
                   className={`flex items-center gap-3 mb-5 pb-3 border-b ${
                     isDark
-                      ? 'border-white/[0.06]'
+                      ? "border-white/[0.06]"
                       : isLinear
-                        ? 'border-[#555]'
-                      : isWarm
-                        ? 'border-[#e6ddd4]'
-                        : 'border-border'
+                        ? "border-[#555]"
+                        : isWarm
+                          ? "border-[#e6ddd4]"
+                          : "border-border"
                   }`}
                 >
                   <h3
                     className={`font-display font-bold ${
                       isDark
-                        ? 'font-mono text-xs uppercase tracking-[0.25em] text-white/60'
+                        ? "font-mono text-xs uppercase tracking-[0.25em] text-white/60"
                         : isLinear
-                          ? 'text-base uppercase tracking-[0.14em] text-[#111]'
-                        : isFunctional
-                          ? 'text-base text-foreground'
-                          : 'text-lg text-foreground'
+                          ? "text-base uppercase tracking-[0.14em] text-[#111]"
+                          : isFunctional
+                            ? "text-base text-foreground"
+                            : "text-lg text-foreground"
                     }`}
                   >
                     {renderQxText(group.label)}
@@ -340,28 +351,32 @@ const PackshotsSection = ({
                     <span
                       className={`text-sm ${
                         isDark
-                          ? 'font-mono text-white/25'
+                          ? "font-mono text-white/25"
                           : isLinear
-                            ? 'text-[#555]'
-                            : 'text-muted-foreground'
+                            ? "text-[#555]"
+                            : "text-muted-foreground"
                       }`}
                     >
-                      {isDark ? '// ' : ''}{groupDescription}
+                      {isDark ? "// " : ""}
+                      {groupDescription}
                     </span>
                   )}
                 </div>
 
                 {/* Cards */}
                 <div
-                  className={`grid ${gridCols} ${isDark ? 'bg-white/[0.02]' : ''}`}
+                  className={`grid ${gridCols} ${isDark ? "bg-white/[0.02]" : ""}`}
                 >
                   {group.items.map((item: PackshotItem) => {
-                    if (isDark)       return <DarkCard      key={item.code} item={item} />;
-                    if (isLinear)     return <LinearCard    key={item.code} item={item} />;
-                    if (isWarm)       return <WarmCard      key={item.code} item={item} />;
-                    if (isPremium)    return <PremiumCard   key={item.code} item={item} />;
-                    if (isFunctional) return <FunctionalCard key={item.code} item={item} />;
-                    return                   <DefaultCard   key={item.code} item={item} />;
+                    if (isDark) return <DarkCard key={item.code} item={item} />;
+                    if (isLinear)
+                      return <LinearCard key={item.code} item={item} />;
+                    if (isWarm) return <WarmCard key={item.code} item={item} />;
+                    if (isPremium)
+                      return <PremiumCard key={item.code} item={item} />;
+                    if (isFunctional)
+                      return <FunctionalCard key={item.code} item={item} />;
+                    return <DefaultCard key={item.code} item={item} />;
                   })}
                 </div>
               </motion.div>
